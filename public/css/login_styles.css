@@ -1,0 +1,68 @@
+@media screen and (min-width: 1366px){
+    :root {
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width:768px) { 
+    :root {
+        font-size:18px;
+    } 
+}
+
+@media screen and (min-width:360px) { 
+    :root {
+        font-size:16px
+    } 
+}
+
+.login-container {
+    width: 400px;
+    margin: 200px auto 0px;
+    padding: 15px;
+    border: 1px solid #e3e3e3;
+    border-radius: 15px;
+}
+@media screen and (max-width:800px) {
+    .login-container {
+        width: 80%;
+        margin: 100px auto 0px;
+    }
+}
+.title, .display-error {
+    padding: 0;
+    display: block;
+    margin: 0px auto;
+    width: 90%;
+}
+.display-error {
+    color: red;
+    font-size: 0.8rem;
+}
+.input-row {
+    display: block;
+    margin: 25px auto 0;
+    padding: 15px;
+    width: 90%;
+    box-sizing: border-box;
+}
+.checkbox-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    padding: 15px 0;
+}
+input[type="checkbox"] {
+    vertical-align:middle ;
+}
+.input-text {
+    border: 1px solid #e3e3e3;
+    border-radius: 5px;
+}
+.login-button {
+    background-color: deepskyblue;
+    border: deepskyblue;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+}
