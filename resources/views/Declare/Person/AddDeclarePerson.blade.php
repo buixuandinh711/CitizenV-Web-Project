@@ -7,11 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="Main">Trang chủ</a>
+    <a href="main">Trang chủ</a>
     <h1>{{session('user')->username}}</h1>
     <h1>Thêm khai báo dân số</h1>
-    <a href="ShowDeclarePerson">Xem khai báo dân số</a> <br>
-    <form action="AddDeclarePerson" method="post">
+    <a href="showdeclareperson">Xem khai báo dân số</a> <br>
+    <form action="adddeclareperson" method="post">
         @csrf
         <input type="text" name="person_id"><br>
         <input type="text" name="person_name"><br>

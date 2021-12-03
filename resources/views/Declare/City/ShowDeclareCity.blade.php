@@ -7,10 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="Main">Trang chủ</a>
+    <a href="main">Trang chủ</a>
     <h1>Khai báo thành phố</h1>
-    <a href="AddDeclareCity">Thêm khai báo thành phố</a><br>
-    <a href="EditDeclareCity">Sửa khai báo thành phố</a> <br>
+    <a href="adddeclarecity">Thêm khai báo thành phố</a><br>
+    <a href="editdeclarecity">Sửa khai báo thành phố</a> <br>
     @if(session('mes'))
         {{session('mes')}}<br>
     @endif
@@ -27,7 +27,7 @@
                 <tr>
                     <td>{{$c->city_id}}</td>
                     <td>{{$c->city_name}}</td>
-                    <td><a href="DeleteDeclareCity/{{ $c->city_id }}">Delete</a></td>
+                    <td><a href="deletedeclarecity/{{ $c->city_id }}">Delete</a></td>
                 </tr>
             @endforeach
         </tbody>

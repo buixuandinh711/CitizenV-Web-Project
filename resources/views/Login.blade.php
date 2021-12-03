@@ -10,7 +10,7 @@
 
 <body>
     <div>
-        <form method="POST" class="form-login" action="Login">
+        <form method="POST" class="form-login" action="login">
             @csrf
             <div class="login-container">
                 <h1 class="title">Log in</h1>

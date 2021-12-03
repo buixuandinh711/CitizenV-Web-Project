@@ -7,13 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="Main">Trang chủ</a>
+    <a href="main">Trang chủ</a>
     <h1>Sửa quyền thành phố</h1>
     @if(session('mes'))
         {{session('mes')}} <br>
     @endif
-    <a href="ShowAccessCity">Xem quyền thành phố</a> <br>
-    <form action="EditAccessCity" method="post">
+    <a href="showaccesscity">Xem quyền thành phố</a> <br>
+    <form action="editaccesscity" method="post">
         @csrf
         <input type="text" name="username"> <br>
         <input type="date" name="start_date"> <br>

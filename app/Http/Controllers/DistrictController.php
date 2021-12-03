@@ -18,7 +18,7 @@ class DistrictController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostAddDeclareDistrict(Request $request) {
@@ -27,10 +27,10 @@ class DistrictController extends Controller
         $city_id = substr($district_id,0,2);
         $district = DB::table('district')->where('district_id', $district_id)->get();
         if ($district_id == "" || $district_name == "" || strlen($district_id) != 4 || count($district) || !is_numeric($district_id) || $city_id != session('user')->username) {
-            return redirect('AddDeclareDistrict')->with('mes','Thêm quận thất bại');
+            return redirect('adddeclaredistrict')->with('mes','Thêm quận thất bại');
         }
         DB::table('district')->insert(['city_id' => $city_id,'district_id' => $district_id,'district_name' => $district_name]);
-        return redirect('AddDeclareDistrict')->with('mes','Thêm quận thành công');
+        return redirect('adddeclaredistrict')->with('mes','Thêm quận thành công');
     }
 
     public function ShowDeclareDistrict() {
@@ -41,7 +41,7 @@ class DistrictController extends Controller
                 return view('Declare/District/ShowDeclareDistrict',['district'=>$district]);
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function DeleteDeclareDistrict(Request $request) {
@@ -51,11 +51,11 @@ class DistrictController extends Controller
                 $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
                 if (count($user)) {
                     DB::table('district')->where('district_id', $request->district_id)->delete();
-                    return redirect('ShowDeclareDistrict')->with('mes','Xóa quận thành công');
+                    return redirect('showdeclaredistrict')->with('mes','Xóa quận thành công');
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function GetEditDeclareDistrict() {
@@ -68,7 +68,7 @@ class DistrictController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostEditDeclareDistrict(Request $request) {
@@ -76,8 +76,8 @@ class DistrictController extends Controller
         $district = DB::table('district')->where('district_id', $request->district_id)->Where('district_id', 'like', $city_id)->get();
         if (count($district) && $request->district_name != "") {
             DB::table('district')->where('district_id', $request->district_id)->update(['district_name' => $request->district_name]);
-            return redirect('EditDeclareDistrict')->with('mes','Sửa quận thành công');
+            return redirect('editdeclaredistrict')->with('mes','Sửa quận thành công');
         }
-        return redirect('EditDeclareDistrict')->with('mes','Sửa quận thất bại');
+        return redirect('editdeclaredistrict')->with('mes','Sửa quận thất bại');
     }
 }

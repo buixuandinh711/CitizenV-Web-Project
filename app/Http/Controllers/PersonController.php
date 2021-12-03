@@ -24,7 +24,7 @@ class PersonController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostAddDeclarePerson(Request $request) {
@@ -38,10 +38,10 @@ class PersonController extends Controller
         $city_id = substr($village_id,0,2);
         $person = DB::table('person')->where('person_id', $person_id)->get();
         if ($person_id == "" || $person_name == "" || $person_gender == "" || $person_date == "" || count($person) || !is_numeric($person_id)) {
-            return redirect('AddDeclarePerson')->with('mes','Thêm dân số thất bại');
+            return redirect('adddeclareperson')->with('mes','Thêm dân số thất bại');
         }
         DB::table('person')->insert(['city_id' => $city_id,'district_id' => $district_id,'ward_id' => $ward_id,'village_id' => $village_id,'person_id' => $person_id,'person_name' => $person_name, 'person_date' => $person_date, 'person_gender' => $person_gender]);
-        return redirect('AddDeclarePerson')->with('mes','Thêm dân số thành công');
+        return redirect('adddeclareperson')->with('mes','Thêm dân số thành công');
     }
 
     public function ShowDeclarePerson() {
@@ -52,7 +52,7 @@ class PersonController extends Controller
                 return view('Declare/Person/ShowDeclarePerson',['person'=>$person]);
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function DeleteDeclarePerson(Request $request) {
@@ -68,11 +68,11 @@ class PersonController extends Controller
                 $user_village = DB::table('access')->where('username',$village_username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
                 if (count($user) && count($user_district) && count($user_ward) && count($user_village)) {
                     DB::table('person')->where('person_id', $request->person_id)->delete();
-                    return redirect('ShowDeclarePerson')->with('mes','Xóa dân số thành công');
+                    return redirect('showdeclareperson')->with('mes','Xóa dân số thành công');
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function GetEditDeclarePerson() {
@@ -91,15 +91,15 @@ class PersonController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostEditDeclarePerson(Request $request) {
         $person = DB::table('person')->where('person_id', $request->person_id)->get();
         if (count($person) && $request->person_name != "" && $request->person_date != "" && $request->person_gender != "") {
             DB::table('person')->where('person_id', $request->person_id)->update(['person_name' => $request->person_name,'person_date' => $request->person_date,'person_gender' => $request->person_gender]);
-            return redirect('EditDeclarePerson')->with('mes','Sửa dân số thành công');
+            return redirect('editdeclareperson')->with('mes','Sửa dân số thành công');
         }
-        return redirect('EditDeclarePerson')->with('mes','Sửa dân số thất bại');
+        return redirect('editdeclareperson')->with('mes','Sửa dân số thất bại');
     }
 }

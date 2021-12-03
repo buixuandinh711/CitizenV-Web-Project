@@ -7,10 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="Main">Trang chủ</a>
+    <a href="main">Trang chủ</a>
     <h1>Tài khoản thôn</h1>
-    <a href="AddUserVillage">Thêm tài khoản thôn</a><br>
-    <a href="EditUserVillage">Sửa tài khoản thôn</a> <br>
+    <a href="adduservillage">Thêm tài khoản thôn</a><br>
+    <a href="edituservillage">Sửa tài khoản thôn</a> <br>
     @if(session('mes'))
         {{session('mes')}}<br>
     @endif
@@ -27,7 +27,7 @@
                 <tr>
                     <td>{{$u->username}}</td>
                     <td>{{$u->password}}</td>
-                    <td><a href="DeleteUserVillage/{{ $u->username }}">Delete</a></td>
+                    <td><a href="deleteuservillage/{{ $u->username }}">Delete</a></td>
                 </tr>
             @endforeach
         </tbody>
