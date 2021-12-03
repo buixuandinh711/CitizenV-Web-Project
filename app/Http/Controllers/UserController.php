@@ -9,7 +9,7 @@ use Carbon\Carbon;
 class UserController extends Controller
 {
     public function ShowLogin() {
-        return view('Login');
+        return view('login');
     }
 
     public function CheckLogin(Request $request) {
@@ -18,16 +18,16 @@ class UserController extends Controller
         $user = DB::table('users')->where('username', $username)->where('password', $password)->get();
         if (count($user)) {
             $request->session()->put('user', $user[0]);
-            return redirect('Main');
+            return redirect('main');
         } else {
-            return view('Login',['err'=>"Đăng nhập thất bại"]);
+            return view('login',['err'=>"Đăng nhập thất bại"]);
         }
     }
 
-    public function Logout(Request $request)
+    public function logout(Request $request)
     {
         $request->session()->forget('user');
-        return redirect('Login');
+        return redirect('login');
     }
 
     //City User 
@@ -37,7 +37,7 @@ class UserController extends Controller
                 return view('User/City/AddUserCity');
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostAddUSerCity(Request $request) {
@@ -45,10 +45,10 @@ class UserController extends Controller
         $password = $request->password;
         $user = DB::table('users')->where('username', $username)->get();
         if ($username == "" || $password == "" || strlen($username) != 2 || count($user) || !is_numeric($username)) {
-            return redirect('AddUserCity')->with('mes','Thêm tài khoản thất bại');
+            return redirect('addusercity')->with('mes','Thêm tài khoản thất bại');
         }
         DB::table('users')->insert(['username' => $username,'password' => $password]);
-        return redirect('AddUserCity')->with('mes','Thêm tài khoản thành công');
+        return redirect('addusercity')->with('mes','Thêm tài khoản thành công');
     }
 
     public function ShowUSerCity() {
@@ -58,17 +58,17 @@ class UserController extends Controller
                 return view('User/City/ShowUserCity',['user'=>$user]);
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function DeleteUserCity(Request $request) {
         if (session('user')) {
             if (session('user')->username == 'admin') {
                 DB::table('users')->where('username', $request->username)->delete();
-                return redirect('ShowUserCity')->with('mes','Xóa tài khoản thành công');
+                return redirect('showusercity')->with('mes','Xóa tài khoản thành công');
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function GetEditUserCity() {
@@ -77,16 +77,16 @@ class UserController extends Controller
                 return view('User/City/EditUserCity');
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostEditUserCity(Request $request) {
         $user = DB::table('users')->where('username', $request->username)->get();
         if (count($user) && strlen($request->username) == 2 && $request->password != "") {
             DB::table('users')->where('username', $request->username)->update(['password' => $request->password]);
-            return redirect('EditUserCity')->with('mes','Sửa tài khoản thành công');
+            return redirect('editusercity')->with('mes','Sửa tài khoản thành công');
         }
-        return redirect('EditUserCity')->with('mes','Sửa tài khoản thất bại');
+        return redirect('editusercity')->with('mes','Sửa tài khoản thất bại');
     }
 
     //District User 
@@ -100,7 +100,7 @@ class UserController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostAddUSerDistrict(Request $request) {
@@ -109,10 +109,10 @@ class UserController extends Controller
         $city_id = substr($username,0,2);
         $user = DB::table('users')->where('username', $username)->get();
         if ($username == "" || $password == "" || strlen($username) != 4 || count($user) || !is_numeric($username) || $city_id != session('user')->username) {
-            return redirect('AddUserDistrict')->with('mes','Thêm tài khoản thất bại');
+            return redirect('adduserdistrict')->with('mes','Thêm tài khoản thất bại');
         }
         DB::table('users')->insert(['username' => $username,'password' => $password]);
-        return redirect('AddUserDistrict')->with('mes','Thêm tài khoản thành công');
+        return redirect('adduserdistrict')->with('mes','Thêm tài khoản thành công');
     }
 
     public function ShowUSerDistrict() {
@@ -123,7 +123,7 @@ class UserController extends Controller
                 return view('User/District/ShowUserDistrict',['user'=>$user]);
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function DeleteUserDistrict(Request $request) {
@@ -133,11 +133,11 @@ class UserController extends Controller
                 $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
                 if (count($user)) {
                     DB::table('users')->where('username', $request->username)->delete();
-                    return redirect('ShowUserDistrict')->with('mes','Xóa tài khoản thành công');
+                    return redirect('showuserdistrict')->with('mes','Xóa tài khoản thành công');
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function GetEditUserDistrict() {
@@ -150,7 +150,7 @@ class UserController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostEditUserDistrict(Request $request) {
@@ -158,9 +158,9 @@ class UserController extends Controller
         $user = DB::table('users')->where('username', $request->username)->Where('username', 'like', $city_id)->get();
         if (count($user) && strlen($request->username) == 4 && $request->password != "") {
             DB::table('users')->where('username', $request->username)->update(['password' => $request->password]);
-            return redirect('EditUserDistrict')->with('mes','Sửa tài khoản thành công');
+            return redirect('edituserdistrict')->with('mes','Sửa tài khoản thành công');
         }
-        return redirect('EditUserDistrict')->with('mes','Sửa tài khoản thất bại');
+        return redirect('edituserdistrict')->with('mes','Sửa tài khoản thất bại');
     }
 
     //Ward User 
@@ -176,7 +176,7 @@ class UserController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostAddUSerWard(Request $request) {
@@ -185,10 +185,10 @@ class UserController extends Controller
         $district_id = substr($username,0,4);
         $user = DB::table('users')->where('username', $username)->get();
         if ($username == "" || $password == "" || strlen($username) != 6 || count($user) || !is_numeric($username) || $district_id != session('user')->username) {
-            return redirect('AddUserWard')->with('mes','Thêm tài khoản thất bại');
+            return redirect('adduserward')->with('mes','Thêm tài khoản thất bại');
         }
         DB::table('users')->insert(['username' => $username,'password' => $password]);
-        return redirect('AddUserWard')->with('mes','Thêm tài khoản thành công');
+        return redirect('adduserward')->with('mes','Thêm tài khoản thành công');
     }
 
     public function ShowUSerWard() {
@@ -199,7 +199,7 @@ class UserController extends Controller
                 return view('User/Ward/ShowUserWard',['user'=>$user]);
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function DeleteUserWard(Request $request) {
@@ -211,11 +211,11 @@ class UserController extends Controller
                 $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
                 if (count($user) && count($user_district)) {
                     DB::table('users')->where('username', $request->username)->delete();
-                    return redirect('ShowUserWard')->with('mes','Xóa tài khoản thành công');
+                    return redirect('showuserward')->with('mes','Xóa tài khoản thành công');
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function GetEditUserWard() {
@@ -230,7 +230,7 @@ class UserController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostEditUserWard(Request $request) {
@@ -238,9 +238,9 @@ class UserController extends Controller
         $user = DB::table('users')->where('username', $request->username)->Where('username', 'like', $district_id)->get();
         if (count($user) && strlen($request->username) == 6 && $request->password != "") {
             DB::table('users')->where('username', $request->username)->update(['password' => $request->password]);
-            return redirect('EditUserWard')->with('mes','Sửa tài khoản thành công');
+            return redirect('edituserward')->with('mes','Sửa tài khoản thành công');
         }
-        return redirect('EditUserWard')->with('mes','Sửa tài khoản thất bại');
+        return redirect('edituserward')->with('mes','Sửa tài khoản thất bại');
     }
 
     //Village User 
@@ -258,7 +258,7 @@ class UserController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostAddUSerVillage(Request $request) {
@@ -267,10 +267,10 @@ class UserController extends Controller
         $ward_id = substr($username,0,6);
         $user = DB::table('users')->where('username', $username)->get();
         if ($username == "" || $password == "" || strlen($username) != 8 || count($user) || !is_numeric($username) || $ward_id != session('user')->username) {
-            return redirect('AddUserVillage')->with('mes','Thêm tài khoản thất bại');
+            return redirect('adduservillage')->with('mes','Thêm tài khoản thất bại');
         }
         DB::table('users')->insert(['username' => $username,'password' => $password]);
-        return redirect('AddUserVillage')->with('mes','Thêm tài khoản thành công');
+        return redirect('adduservillage')->with('mes','Thêm tài khoản thành công');
     }
 
     public function ShowUSerVillage() {
@@ -281,7 +281,7 @@ class UserController extends Controller
                 return view('User/Village/ShowUserVillage',['user'=>$user]);
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function DeleteUserVillage(Request $request) {
@@ -295,11 +295,11 @@ class UserController extends Controller
                 $user_ward = DB::table('access')->where('username',$ward_username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
                 if (count($user) && count($user_district) && count($user_ward)) {
                     DB::table('users')->where('username', $request->username)->delete();
-                    return redirect('ShowUserVillage')->with('mes','Xóa tài khoản thành công');
+                    return redirect('showuservillage')->with('mes','Xóa tài khoản thành công');
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function GetEditUserVillage() {
@@ -316,7 +316,7 @@ class UserController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostEditUserVillage(Request $request) {
@@ -324,8 +324,8 @@ class UserController extends Controller
         $user = DB::table('users')->where('username', $request->username)->Where('username', 'like', $ward_id)->get();
         if (count($user) && strlen($request->username) == 8 && $request->password != "") {
             DB::table('users')->where('username', $request->username)->update(['password' => $request->password]);
-            return redirect('EditUserVillage')->with('mes','Sửa tài khoản thành công');
+            return redirect('edituservillage')->with('mes','Sửa tài khoản thành công');
         }
-        return redirect('EditUserVillage')->with('mes','Sửa tài khoản thất bại');
+        return redirect('edituservillage')->with('mes','Sửa tài khoản thất bại');
     }
 }

@@ -16,196 +16,196 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::get('Login','App\Http\Controllers\UserController@ShowLogin');
+Route::get('login','App\Http\Controllers\UserController@ShowLogin');
 
-Route::post('Login','App\Http\Controllers\UserController@CheckLogin');
+Route::post('login','App\Http\Controllers\UserController@CheckLogin');
 
-Route::get('Main',function() {
+Route::get('main',function() {
     if (session('user')) {
         return view('Main');
     }
 });
 
-Route::get('Logout','App\Http\Controllers\UserController@Logout');
+Route::get('logout','App\Http\Controllers\UserController@Logout');
 
 //User City
 
-Route::get('AddUserCity','App\Http\Controllers\UserController@GetAddUserCity');
+Route::get('addusercity','App\Http\Controllers\UserController@GetAddUserCity');
 
-Route::post('AddUserCity','App\Http\Controllers\UserController@PostAddUserCity');
+Route::post('addusercity','App\Http\Controllers\UserController@PostAddUserCity');
 
-Route::get('ShowUserCity','App\Http\Controllers\UserController@ShowUserCity');
+Route::get('showusercity','App\Http\Controllers\UserController@ShowUserCity');
 
-Route::get('DeleteUserCity/{username}','App\Http\Controllers\UserController@DeleteUSerCity');
+Route::get('deleteusercity/{username}','App\Http\Controllers\UserController@DeleteUSerCity');
 
-Route::get('EditUserCity','App\Http\Controllers\UserController@GetEditUserCity');
+Route::get('editusercity','App\Http\Controllers\UserController@GetEditUserCity');
 
-Route::post('EditUserCity','App\Http\Controllers\UserController@PostEditUserCity');
+Route::post('editusercity','App\Http\Controllers\UserController@PostEditUserCity');
 
 //User District
 
-Route::get('AddUserDistrict','App\Http\Controllers\UserController@GetAddUserDistrict');
+Route::get('adduserdistrict','App\Http\Controllers\UserController@GetAddUserDistrict');
 
-Route::post('AddUserDistrict','App\Http\Controllers\UserController@PostAddUserDistrict');
+Route::post('adduserdistrict','App\Http\Controllers\UserController@PostAddUserDistrict');
 
-Route::get('ShowUserDistrict','App\Http\Controllers\UserController@ShowUserDistrict');
+Route::get('showuserdistrict','App\Http\Controllers\UserController@ShowUserDistrict');
 
-Route::get('DeleteUserDistrict/{username}','App\Http\Controllers\UserController@DeleteUSerDistrict');
+Route::get('deleteuserdistrict/{username}','App\Http\Controllers\UserController@DeleteUSerDistrict');
 
-Route::get('EditUserDistrict','App\Http\Controllers\UserController@GetEditUserDistrict');
+Route::get('edituserdistrict','App\Http\Controllers\UserController@GetEditUserDistrict');
 
-Route::post('EditUserDistrict','App\Http\Controllers\UserController@PostEditUserDistrict');
+Route::post('edituserdistrict','App\Http\Controllers\UserController@PostEditUserDistrict');
 
 //User Ward
 
-Route::get('AddUserWard','App\Http\Controllers\UserController@GetAddUserWard');
+Route::get('adduserward','App\Http\Controllers\UserController@GetAddUserWard');
 
-Route::post('AddUserWard','App\Http\Controllers\UserController@PostAddUserWard');
+Route::post('adduserward','App\Http\Controllers\UserController@PostAddUserWard');
 
-Route::get('ShowUserWard','App\Http\Controllers\UserController@ShowUserWard');
+Route::get('showuserward','App\Http\Controllers\UserController@ShowUserWard');
 
-Route::get('DeleteUserWard/{username}','App\Http\Controllers\UserController@DeleteUSerWard');
+Route::get('deleteuserward/{username}','App\Http\Controllers\UserController@DeleteUSerWard');
 
-Route::get('EditUserWard','App\Http\Controllers\UserController@GetEditUserWard');
+Route::get('edituserward','App\Http\Controllers\UserController@GetEditUserWard');
 
-Route::post('EditUserWard','App\Http\Controllers\UserController@PostEditUserWard');
+Route::post('edituserward','App\Http\Controllers\UserController@PostEditUserWard');
 
 //User Village
 
-Route::get('AddUserVillage','App\Http\Controllers\UserController@GetAddUserVillage');
+Route::get('adduservillage','App\Http\Controllers\UserController@GetAddUserVillage');
 
-Route::post('AddUserVillage','App\Http\Controllers\UserController@PostAddUserVillage');
+Route::post('adduservillage','App\Http\Controllers\UserController@PostAddUserVillage');
 
-Route::get('ShowUserVillage','App\Http\Controllers\UserController@ShowUserVillage');
+Route::get('showuservillage','App\Http\Controllers\UserController@ShowUserVillage');
 
-Route::get('DeleteUserVillage/{username}','App\Http\Controllers\UserController@DeleteUSerVillage');
+Route::get('deleteuservillage/{username}','App\Http\Controllers\UserController@DeleteUSerVillage');
 
-Route::get('EditUserVillage','App\Http\Controllers\UserController@GetEditUserVillage');
+Route::get('edituservillage','App\Http\Controllers\UserController@GetEditUserVillage');
 
-Route::post('EditUserVillage','App\Http\Controllers\UserController@PostEditUserVillage');
+Route::post('edituservillage','App\Http\Controllers\UserController@PostEditUserVillage');
 
 //Declare City
 
-Route::get('AddDeclareCity','App\Http\Controllers\CityController@GetAddDeclareCity');
+Route::get('adddeclarecity','App\Http\Controllers\CityController@GetAddDeclareCity');
 
-Route::post('AddDeclareCity','App\Http\Controllers\CityController@PostAddDeclareCity');
+Route::post('adddeclarecity','App\Http\Controllers\CityController@PostAddDeclareCity');
 
-Route::get('ShowDeclareCity','App\Http\Controllers\CityController@ShowDeclareCity');
+Route::get('showdeclarecity','App\Http\Controllers\CityController@ShowDeclareCity');
 
-Route::get('DeleteDeclareCity/{city_id}','App\Http\Controllers\CityController@DeleteDeclareCity');
+Route::get('deletedeclarecity/{city_id}','App\Http\Controllers\CityController@DeleteDeclareCity');
 
-Route::get('EditDeclareCity','App\Http\Controllers\CityController@GetEditDeclareCity');
+Route::get('editdeclarecity','App\Http\Controllers\CityController@GetEditDeclareCity');
 
-Route::post('EditDeclareCity','App\Http\Controllers\CityController@PostEditDeclareCity');
+Route::post('editdeclarecity','App\Http\Controllers\CityController@PostEditDeclareCity');
 
 //Declare District
 
-Route::get('AddDeclareDistrict','App\Http\Controllers\DistrictController@GetAddDeclareDistrict');
+Route::get('adddeclaredistrict','App\Http\Controllers\DistrictController@GetAddDeclareDistrict');
 
-Route::post('AddDeclareDistrict','App\Http\Controllers\DistrictController@PostAddDeclareDistrict');
+Route::post('adddeclaredistrict','App\Http\Controllers\DistrictController@PostAddDeclareDistrict');
 
-Route::get('ShowDeclareDistrict','App\Http\Controllers\DistrictController@ShowDeclareDistrict');
+Route::get('showdeclaredistrict','App\Http\Controllers\DistrictController@ShowDeclareDistrict');
 
-Route::get('DeleteDeclareDistrict/{district_id}','App\Http\Controllers\DistrictController@DeleteDeclareDistrict');
+Route::get('deletedeclaredistrict/{district_id}','App\Http\Controllers\DistrictController@DeleteDeclareDistrict');
 
-Route::get('EditDeclareDistrict','App\Http\Controllers\DistrictController@GetEditDeclareDistrict');
+Route::get('editdeclaredistrict','App\Http\Controllers\DistrictController@GetEditDeclareDistrict');
 
-Route::post('EditDeclareDistrict','App\Http\Controllers\DistrictController@PostEditDeclareDistrict');
+Route::post('editdeclaredistrict','App\Http\Controllers\DistrictController@PostEditDeclareDistrict');
 
 //Declare Ward
 
-Route::get('AddDeclareWard','App\Http\Controllers\WardController@GetAddDeclareWard');
+Route::get('adddeclareward','App\Http\Controllers\WardController@GetAddDeclareWard');
 
-Route::post('AddDeclareWard','App\Http\Controllers\WardController@PostAddDeclareWard');
+Route::post('adddeclareward','App\Http\Controllers\WardController@PostAddDeclareWard');
 
-Route::get('ShowDeclareWard','App\Http\Controllers\WardController@ShowDeclareWard');
+Route::get('showdeclareward','App\Http\Controllers\WardController@ShowDeclareWard');
 
-Route::get('DeleteDeclareWard/{ward_id}','App\Http\Controllers\WardController@DeleteDeclareWard');
+Route::get('deletedeclareward/{ward_id}','App\Http\Controllers\WardController@DeleteDeclareWard');
 
-Route::get('EditDeclareWard','App\Http\Controllers\WardController@GetEditDeclareWard');
+Route::get('editdeclareward','App\Http\Controllers\WardController@GetEditDeclareWard');
 
-Route::post('EditDeclareWard','App\Http\Controllers\WardController@PostEditDeclareWard');
+Route::post('editdeclareward','App\Http\Controllers\WardController@PostEditDeclareWard');
 
 //Declare Village
 
-Route::get('AddDeclareVillage','App\Http\Controllers\VillageController@GetAddDeclareVillage');
+Route::get('adddeclarevillage','App\Http\Controllers\VillageController@GetAddDeclareVillage');
 
-Route::post('AddDeclareVillage','App\Http\Controllers\VillageController@PostAddDeclareVillage');
+Route::post('adddeclarevillage','App\Http\Controllers\VillageController@PostAddDeclareVillage');
 
-Route::get('ShowDeclareVillage','App\Http\Controllers\VillageController@ShowDeclareVillage');
+Route::get('showdeclarevillage','App\Http\Controllers\VillageController@ShowDeclareVillage');
 
-Route::get('DeleteDeclareVillage/{village_id}','App\Http\Controllers\VillageController@DeleteDeclareVillage');
+Route::get('deletedeclarevillage/{village_id}','App\Http\Controllers\VillageController@DeleteDeclareVillage');
 
-Route::get('EditDeclareVillage','App\Http\Controllers\VillageController@GetEditDeclareVillage');
+Route::get('editdeclarevillage','App\Http\Controllers\VillageController@GetEditDeclareVillage');
 
-Route::post('EditDeclareVillage','App\Http\Controllers\VillageController@PostEditDeclareVillage');
+Route::post('editdeclarevillage','App\Http\Controllers\VillageController@PostEditDeclareVillage');
 
 //Declare Person
 
-Route::get('AddDeclarePerson','App\Http\Controllers\PersonController@GetAddDeclarePerson');
+Route::get('adddeclareperson','App\Http\Controllers\PersonController@GetAddDeclarePerson');
 
-Route::post('AddDeclarePerson','App\Http\Controllers\PersonController@PostAddDeclarePerson');
+Route::post('adddeclareperson','App\Http\Controllers\PersonController@PostAddDeclarePerson');
 
-Route::get('ShowDeclarePerson','App\Http\Controllers\PersonController@ShowDeclarePerson');
+Route::get('showdeclareperson','App\Http\Controllers\PersonController@ShowDeclarePerson');
 
-Route::get('DeleteDeclarePerson/{person_id}','App\Http\Controllers\PersonController@DeleteDeclarePerson');
+Route::get('deletedeclareperson/{person_id}','App\Http\Controllers\PersonController@DeleteDeclarePerson');
 
-Route::get('EditDeclarePerson','App\Http\Controllers\PersonController@GetEditDeclarePerson');
+Route::get('editdeclareperson','App\Http\Controllers\PersonController@GetEditDeclarePerson');
 
-Route::post('EditDeclarePerson','App\Http\Controllers\PersonController@PostEditDeclarePerson');
+Route::post('editdeclareperson','App\Http\Controllers\PersonController@PostEditDeclarePerson');
 
 //Access City
 
-Route::get('AddAccessCity','App\Http\Controllers\AccessController@GetAddAccessCity');
+Route::get('addaccesscity','App\Http\Controllers\AccessController@GetAddAccessCity');
 
-Route::post('AddAccessCity','App\Http\Controllers\AccessController@PostAddAccessCity');
+Route::post('addaccesscity','App\Http\Controllers\AccessController@PostAddAccessCity');
 
-Route::get('ShowAccessCity','App\Http\Controllers\AccessController@ShowAccessCity');
+Route::get('showaccesscity','App\Http\Controllers\AccessController@ShowAccessCity');
 
-Route::get('DeleteAccessCity/{username}','App\Http\Controllers\AccessController@DeleteAccessCity');
+Route::get('deleteaccesscity/{username}','App\Http\Controllers\AccessController@DeleteAccessCity');
 
-Route::get('EditAccessCity','App\Http\Controllers\AccessController@GetEditAccessCity');
+Route::get('editaccesscity','App\Http\Controllers\AccessController@GetEditAccessCity');
 
-Route::post('EditAccessCity','App\Http\Controllers\AccessController@PostEditAccessCity');
+Route::post('editaccesscity','App\Http\Controllers\AccessController@PostEditAccessCity');
 
 //Access District
 
-Route::get('AddAccessDistrict','App\Http\Controllers\AccessController@GetAddAccessDistrict');
+Route::get('addaccessdistrict','App\Http\Controllers\AccessController@GetAddAccessDistrict');
 
-Route::post('AddAccessDistrict','App\Http\Controllers\AccessController@PostAddAccessDistrict');
+Route::post('addaccessdistrict','App\Http\Controllers\AccessController@PostAddAccessDistrict');
 
-Route::get('ShowAccessDistrict','App\Http\Controllers\AccessController@ShowAccessDistrict');
+Route::get('showaccessdistrict','App\Http\Controllers\AccessController@ShowAccessDistrict');
 
-Route::get('DeleteAccessDistrict/{username}','App\Http\Controllers\AccessController@DeleteAccessDistrict');
+Route::get('deleteaccessdistrict/{username}','App\Http\Controllers\AccessController@DeleteAccessDistrict');
 
-Route::get('EditAccessDistrict','App\Http\Controllers\AccessController@GetEditAccessDistrict');
+Route::get('editaccessdistrict','App\Http\Controllers\AccessController@GetEditAccessDistrict');
 
-Route::post('EditAccessDistrict','App\Http\Controllers\AccessController@PostEditAccessDistrict');
+Route::post('editaccessdistrict','App\Http\Controllers\AccessController@PostEditAccessDistrict');
 
 //Access Ward
 
-Route::get('AddAccessWard','App\Http\Controllers\AccessController@GetAddAccessWard');
+Route::get('addaccessward','App\Http\Controllers\AccessController@GetAddAccessWard');
 
-Route::post('AddAccessWard','App\Http\Controllers\AccessController@PostAddAccessWard');
+Route::post('addaccessward','App\Http\Controllers\AccessController@PostAddAccessWard');
 
-Route::get('ShowAccessWard','App\Http\Controllers\AccessController@ShowAccessWard');
+Route::get('showaccessward','App\Http\Controllers\AccessController@ShowAccessWard');
 
-Route::get('DeleteAccessWard/{username}','App\Http\Controllers\AccessController@DeleteAccessWard');
+Route::get('deleteaccessward/{username}','App\Http\Controllers\AccessController@DeleteAccessWard');
 
-Route::get('EditAccessWard','App\Http\Controllers\AccessController@GetEditAccessWard');
+Route::get('editaccessward','App\Http\Controllers\AccessController@GetEditAccessWard');
 
-Route::post('EditAccessWard','App\Http\Controllers\AccessController@PostEditAccessWard');
+Route::post('editaccessward','App\Http\Controllers\AccessController@PostEditAccessWard');
 
 //Access Village
 
-Route::get('AddAccessVillage','App\Http\Controllers\AccessController@GetAddAccessVillage');
+Route::get('addaccessvillage','App\Http\Controllers\AccessController@GetAddAccessVillage');
 
-Route::post('AddAccessVillage','App\Http\Controllers\AccessController@PostAddAccessVillage');
+Route::post('addaccessvillage','App\Http\Controllers\AccessController@PostAddAccessVillage');
 
-Route::get('ShowAccessVillage','App\Http\Controllers\AccessController@ShowAccessVillage');
+Route::get('showaccessvillage','App\Http\Controllers\AccessController@ShowAccessVillage');
 
-Route::get('DeleteAccessVillage/{username}','App\Http\Controllers\AccessController@DeleteAccessVillage');
+Route::get('deleteaccessvillage/{username}','App\Http\Controllers\AccessController@DeleteAccessVillage');
 
-Route::get('EditAccessVillage','App\Http\Controllers\AccessController@GetEditAccessVillage');
+Route::get('editaccessvillage','App\Http\Controllers\AccessController@GetEditAccessVillage');
 
-Route::post('EditAccessVillage','App\Http\Controllers\AccessController@PostEditAccessVillage');
+Route::post('editaccessvillage','App\Http\Controllers\AccessController@PostEditAccessVillage');

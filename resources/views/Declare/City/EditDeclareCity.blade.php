@@ -7,13 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="Main">Trang chủ</a>
+    <a href="main">Trang chủ</a>
     <h1>Sửa khai báo thành phố</h1>
     @if(session('mes'))
         {{session('mes')}} <br>
     @endif
-    <a href="ShowDeclareCity">Xem khai báo thành phố</a> <br>
-    <form action="EditDeclareCity" method="post">
+    <a href="showdeclarecity">Xem khai báo thành phố</a> <br>
+    <form action="editdeclarecity" method="post">
         @csrf
         <input type="text" name="city_id"> <br>
         <input type="text" name="city_name"> <br>

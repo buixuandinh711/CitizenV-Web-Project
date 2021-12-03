@@ -20,7 +20,7 @@ class WardController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostAddDeclareWard(Request $request) {
@@ -30,10 +30,10 @@ class WardController extends Controller
         $city_id = substr($ward_id,0,2);
         $ward = DB::table('ward')->where('ward_id', $ward_id)->get();
         if ($ward_id == "" || $ward_name == "" || strlen($ward_id) != 6 || count($ward) || !is_numeric($ward_id) || $district_id != session('user')->username) {
-            return redirect('AddDeclareWard')->with('mes','Thêm phường thất bại');
+            return redirect('adddeclareward')->with('mes','Thêm phường thất bại');
         }
         DB::table('ward')->insert(['city_id' => $city_id,'district_id' => $district_id,'ward_id' => $ward_id,'ward_name' => $ward_name]);
-        return redirect('AddDeclareWard')->with('mes','Thêm phường thành công');
+        return redirect('adddeclareward')->with('mes','Thêm phường thành công');
     }
 
     public function ShowDeclareWard() {
@@ -44,7 +44,7 @@ class WardController extends Controller
                 return view('Declare/Ward/ShowDeclareWard',['ward'=>$ward]);
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function DeleteDeclareWard(Request $request) {
@@ -56,11 +56,11 @@ class WardController extends Controller
                 $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
                 if (count($user) && count($user_district)) {
                     DB::table('ward')->where('ward_id', $request->ward_id)->delete();
-                    return redirect('ShowDeclareWard')->with('mes','Xóa phường thành công');
+                    return redirect('showdeclareward')->with('mes','Xóa phường thành công');
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function GetEditDeclareWard() {
@@ -75,7 +75,7 @@ class WardController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostEditDeclareWard(Request $request) {
@@ -83,8 +83,8 @@ class WardController extends Controller
         $ward = DB::table('ward')->where('ward_id', $request->ward_id)->Where('ward_id', 'like', $district_id)->get();
         if (count($ward) && $request->ward_name != "") {
             DB::table('ward')->where('ward_id', $request->ward_id)->update(['ward_name' => $request->ward_name]);
-            return redirect('EditDeclareWard')->with('mes','Sửa phường thành công');
+            return redirect('editdeclareward')->with('mes','Sửa phường thành công');
         }
-        return redirect('EditDeclareWard')->with('mes','Sửa phường thất bại');
+        return redirect('editdeclareward')->with('mes','Sửa phường thất bại');
     }
 }

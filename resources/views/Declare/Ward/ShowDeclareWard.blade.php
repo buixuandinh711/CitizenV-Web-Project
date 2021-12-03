@@ -7,10 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="Main">Trang chủ</a>
+    <a href="main">Trang chủ</a>
     <h1>Khai báo phường</h1>
-    <a href="AddDeclareWard">Thêm khai báo phường</a><br>
-    <a href="EditDeclareWard">Sửa khai báo phường</a> <br>
+    <a href="adddeclareward">Thêm khai báo phường</a><br>
+    <a href="editdeclareward">Sửa khai báo phường</a> <br>
     @if(session('mes'))
         {{session('mes')}}<br>
     @endif
@@ -27,7 +27,7 @@
                 <tr>
                     <td>{{$w->ward_id}}</td>
                     <td>{{$w->ward_name}}</td>
-                    <td><a href="DeleteDeclareWard/{{ $w->ward_id }}">Delete</a></td>
+                    <td><a href="deletedeclareward/{{ $w->ward_id }}">Delete</a></td>
                 </tr>
             @endforeach
         </tbody>

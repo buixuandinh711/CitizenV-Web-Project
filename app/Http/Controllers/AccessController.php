@@ -15,7 +15,7 @@ class AccessController extends Controller
                 return view('Access/City/AddAccessCity');
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('nain')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostAddAccessCity(Request $request) {
@@ -24,10 +24,10 @@ class AccessController extends Controller
         $end_date = $request->end_date;
         $access = DB::table('access')->where('username', $username)->get();
         if ($username == "" || $start_date == "" || $end_date == "" || strlen($username) != 2 || count($access) || !is_numeric($username)) {
-            return redirect('AddAccessCity')->with('mes','Thêm quyền thất bại');
+            return redirect('addaccesscity')->with('mes','Thêm quyền thất bại');
         }
         DB::table('access')->insert(['username' => $username,'start_date' => $start_date, 'end_date' => $end_date]);
-        return redirect('AddAccessCity')->with('mes','Thêm quyền thành công');
+        return redirect('addaccesscity')->with('mes','Thêm quyền thành công');
     }
 
     public function ShowAccessCity() {
@@ -37,17 +37,17 @@ class AccessController extends Controller
                 return view('Access/City/ShowAccessCity',['access'=>$access]);
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function DeleteAccessCity(Request $request) {
         if (session('user')) {
             if (session('user')->username == 'admin') {
                 DB::table('access')->where('username', $request->username)->delete();
-                return redirect('ShowAccessCity')->with('mes','Xóa quyền thành công');
+                return redirect('showaccesscity')->with('mes','Xóa quyền thành công');
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function GetEditAccessCity() {
@@ -56,16 +56,16 @@ class AccessController extends Controller
                 return view('Access/City/EditAccessCity');
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostEditAccessCity(Request $request) {
         $access = DB::table('access')->where('username', $request->username)->get();
         if (count($access) && strlen($request->username) == 2 && $request->start_date != "" && $request->end_date != "") {
             DB::table('access')->where('username', $request->username)->update(['start_date' => $request->start_date, 'end_date' => $request->end_date]);
-            return redirect('EditAccessCity')->with('mes','Sửa quyền thành công');
+            return redirect('editaccesscity')->with('mes','Sửa quyền thành công');
         }
-        return redirect('EditAccessCity')->with('mes','Sửa quyền thất bại');
+        return redirect('editaccesscity')->with('mes','Sửa quyền thất bại');
     }
 
     //District Access 
@@ -79,7 +79,7 @@ class AccessController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostAddAccessDistrict(Request $request) {
@@ -89,10 +89,10 @@ class AccessController extends Controller
         $city_id = substr($username,0,2);
         $access = DB::table('access')->where('username', $username)->get();
         if ($username == "" || $start_date == "" && $end_date == "" || strlen($username) != 4 || count($access) || !is_numeric($username) || $city_id != session('user')->username) {
-            return redirect('AddAccessDistrict')->with('mes','Thêm quyền thất bại');
+            return redirect('addaccessdistrict')->with('mes','Thêm quyền thất bại');
         }
         DB::table('access')->insert(['username' => $username,'start_date' => $start_date, 'end_date' => $end_date]);
-        return redirect('AddAccessDistrict')->with('mes','Thêm quyền thành công');
+        return redirect('addaccessdistrict')->with('mes','Thêm quyền thành công');
     }
 
     public function ShowAccessDistrict() {
@@ -103,7 +103,7 @@ class AccessController extends Controller
                 return view('Access/District/ShowAccessDistrict',['access'=>$access]);
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function DeleteAccessDistrict(Request $request) {
@@ -113,11 +113,11 @@ class AccessController extends Controller
                 $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
                 if (count($user)) {
                     DB::table('access')->where('username', $request->username)->delete();
-                    return redirect('ShowAccessDistrict')->with('mes','Xóa quyền thành công');
+                    return redirect('showaccessdistrict')->with('mes','Xóa quyền thành công');
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function GetEditAccessDistrict() {
@@ -130,7 +130,7 @@ class AccessController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostEditAccessDistrict(Request $request) {
@@ -138,9 +138,9 @@ class AccessController extends Controller
         $access = DB::table('access')->where('username', $request->username)->Where('username', 'like', $city_id)->get();
         if (count($access) && strlen($request->username) == 4 && $request->start_date != "" && $request->end_date != "") {
             DB::table('access')->where('username', $request->username)->update(['start_date' => $request->start_date, 'end_date' => $request->end_date]);
-            return redirect('EditAccessDistrict')->with('mes','Sửa quyền thành công');
+            return redirect('editaccessdistrict')->with('mes','Sửa quyền thành công');
         }
-        return redirect('EditAccessDistrict')->with('mes','Sửa quyền thất bại');
+        return redirect('editaccessdistrict')->with('mes','Sửa quyền thất bại');
     }
 
     //Ward Access 
@@ -156,7 +156,7 @@ class AccessController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostAddAccessWard(Request $request) {
@@ -166,10 +166,10 @@ class AccessController extends Controller
         $district_id = substr($username,0,4);
         $access = DB::table('access')->where('username', $username)->get();
         if ($username == "" || $start_date == "" || $end_date == "" || strlen($username) != 6 || count($access) || !is_numeric($username) || $district_id != session('user')->username) {
-            return redirect('AddAccessWard')->with('mes','Thêm quyền thất bại');
+            return redirect('addaccessward')->with('mes','Thêm quyền thất bại');
         }
         DB::table('access')->insert(['username' => $username,'start_date' => $start_date, 'end_date' => $end_date]);
-        return redirect('AddAccessWard')->with('mes','Thêm quyền thành công');
+        return redirect('addaccessward')->with('mes','Thêm quyền thành công');
     }
 
     public function ShowAccessWard() {
@@ -180,7 +180,7 @@ class AccessController extends Controller
                 return view('Access/Ward/ShowAccessWard',['access'=>$access]);
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function DeleteAccessWard(Request $request) {
@@ -192,11 +192,11 @@ class AccessController extends Controller
                 $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
                 if (count($user) && count($user_district)) {
                     DB::table('access')->where('username', $request->username)->delete();
-                    return redirect('ShowAccessWard')->with('mes','Xóa quyền thành công');
+                    return redirect('showaccessward')->with('mes','Xóa quyền thành công');
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function GetEditAccessWard() {
@@ -211,7 +211,7 @@ class AccessController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostEditAccessWard(Request $request) {
@@ -219,9 +219,9 @@ class AccessController extends Controller
         $access = DB::table('access')->where('username', $request->username)->Where('username', 'like', $district_id)->get();
         if (count($access) && strlen($request->username) == 6 && $request->start_date != "" && $request->end_date != "") {
             DB::table('access')->where('username', $request->username)->update(['start_date' => $request->start_date, 'end_date' => $request->end_date]);
-            return redirect('EditAccessWard')->with('mes','Sửa quyền thành công');
+            return redirect('editaccessward')->with('mes','Sửa quyền thành công');
         }
-        return redirect('EditAccessWard')->with('mes','Sửa quyền thất bại');
+        return redirect('editaccessward')->with('mes','Sửa quyền thất bại');
     }
 
     //Village Access 
@@ -239,7 +239,7 @@ class AccessController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostAddAccessVillage(Request $request) {
@@ -249,10 +249,10 @@ class AccessController extends Controller
         $ward_id = substr($username,0,6);
         $access = DB::table('access')->where('username', $username)->get();
         if ($username == "" || $start_date == "" || $end_date == "" || strlen($username) != 8 || count($access) || !is_numeric($username) || $ward_id != session('user')->username) {
-            return redirect('AddAccessVillage')->with('mes','Thêm quyền thất bại');
+            return redirect('addaccessvillage')->with('mes','Thêm quyền thất bại');
         }
         DB::table('access')->insert(['username' => $username,'start_date' => $start_date, 'end_date' => $end_date]);
-        return redirect('AddAccessVillage')->with('mes','Thêm quyền thành công');
+        return redirect('addaccessvillage')->with('mes','Thêm quyền thành công');
     }
 
     public function ShowAccessVillage() {
@@ -263,7 +263,7 @@ class AccessController extends Controller
                 return view('Access/Village/ShowAccessVillage',['access'=>$access]);
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function DeleteAccessVillage(Request $request) {
@@ -277,11 +277,11 @@ class AccessController extends Controller
                 $user_ward = DB::table('access')->where('username',$ward_username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
                 if (count($user) && count($user_district) && count($user_ward)) {
                     DB::table('access')->where('username', $request->username)->delete();
-                    return redirect('ShowAccessVillage')->with('mes','Xóa quyền thành công');
+                    return redirect('showaccessvillage')->with('mes','Xóa quyền thành công');
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function GetEditAccessVillage() {
@@ -298,7 +298,7 @@ class AccessController extends Controller
                 }
             }
         }
-        return redirect('Main')->with('mes','Bạn không đủ quyền');
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     public function PostEditAccessVillage(Request $request) {
@@ -306,8 +306,8 @@ class AccessController extends Controller
         $access = DB::table('access')->where('username', $request->username)->Where('username', 'like', $ward_id)->get();
         if (count($access) && strlen($request->username) == 8 && $request->start_date != "" && $request->end_date != "") {
             DB::table('access')->where('username', $request->username)->update(['start_date' => $request->start_date, 'end_date' => $request->end_date]);
-            return redirect('EditAccessVillage')->with('mes','Sửa quyền thành công');
+            return redirect('editaccessvillage')->with('mes','Sửa quyền thành công');
         }
-        return redirect('EditAccessVillage')->with('mes','Sửa quyền thất bại');
+        return redirect('editaccessvillage')->with('mes','Sửa quyền thất bại');
     }
 }

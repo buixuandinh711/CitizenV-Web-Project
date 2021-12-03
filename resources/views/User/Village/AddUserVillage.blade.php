@@ -7,11 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="Main">Trang chủ</a>
+    <a href="main">Trang chủ</a>
     <h1>{{session('user')->username}}</h1>
     <h1>Thêm tài khoản thôn</h1>
-    <a href="ShowUserVillage">Xem tài khoản thôn</a> <br>
-    <form action="AddUserVillage" method="post">
+    <a href="showuservillage">Xem tài khoản thôn</a> <br>
+    <form action="adduservillage" method="post">
         @csrf
         <input type="text" name="username"><br>
         <input type="password" name="password"><br>

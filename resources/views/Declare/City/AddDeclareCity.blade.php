@@ -7,11 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="Main">Trang chủ</a>
+    <a href="main">Trang chủ</a>
     <h1>{{session('user')->username}}</h1>
     <h1>Thêm khai báo thành phố</h1>
-    <a href="ShowDeclareCity">Xem khai báo thành phố</a> <br>
-    <form action="AddDeclareCity" method="post">
+    <a href="showdeclarecity">Xem khai báo thành phố</a> <br>
+    <form action="adddeclarecity" method="post">
         @csrf
         <input type="text" name="city_id"><br>
         <input type="text" name="city_name"><br>

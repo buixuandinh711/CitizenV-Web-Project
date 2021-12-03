@@ -7,10 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="Main">Trang chủ</a>
+    <a href="main">Trang chủ</a>
     <h1>Quyền thành phố</h1>
-    <a href="AddAccessCity">Thêm quyền thành phố</a><br>
-    <a href="EditAccessCity">Sửa quyền thành phố</a> <br>
+    <a href="addaccesscity">Thêm quyền thành phố</a><br>
+    <a href="editaccesscity">Sửa quyền thành phố</a> <br>
     @if(session('mes'))
         {{session('mes')}}<br>
     @endif
@@ -29,7 +29,7 @@
                     <td>{{$a->username}}</td>
                     <td>{{$a->start_date}}</td>
                     <td>{{$a->end_date}}</td>
-                    <td><a href="DeleteAccessCity/{{ $a->username }}">Delete</a></td>
+                    <td><a href="deleteaccesscity/{{ $a->username }}">Delete</a></td>
                 </tr>
             @endforeach
         </tbody>

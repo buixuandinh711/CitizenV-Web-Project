@@ -7,10 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="Main">Trang chủ</a>
+    <a href="main">Trang chủ</a>
     <h1>Khai báo dân số</h1>
-    <a href="AddDeclarePerson">Thêm khai báo dân số</a><br>
-    <a href="EditDeclarePerson">Sửa khai báo dân số</a> <br>
+    <a href="adddeclareperson">Thêm khai báo dân số</a><br>
+    <a href="editdeclareperson">Sửa khai báo dân số</a> <br>
     @if(session('mes'))
         {{session('mes')}}<br>
     @endif
@@ -30,7 +30,7 @@
                     <td>{{$p->person_name}}</td>
                     <td>{{$p->person_date}}</td>
                     <td>{{$p->person_gender}}</td>
-                    <td><a href="DeleteDeclarePerson/{{ $p->person_id }}">Delete</a></td>
+                    <td><a href="deletedeclareperson/{{ $p->person_id }}">Delete</a></td>
                 </tr>
             @endforeach
         </tbody>

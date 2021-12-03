@@ -7,11 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="Main">Trang chủ</a>
+    <a href="main">Trang chủ</a>
     <h1>{{session('user')->username}}</h1>
     <h1>Thêm tài khoản phường</h1>
-    <a href="ShowUserWard">Xem tài khoản phường</a> <br>
-    <form action="AddUserWard" method="post">
+    <a href="showuserward">Xem tài khoản phường</a> <br>
+    <form action="adduserward" method="post">
         @csrf
         <input type="text" name="username"><br>
         <input type="password" name="password"><br>
