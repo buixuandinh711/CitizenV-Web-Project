@@ -209,3 +209,55 @@ Route::get('deleteaccessvillage/{username}','App\Http\Controllers\AccessControll
 Route::get('editaccessvillage','App\Http\Controllers\AccessController@GetEditAccessVillage');
 
 Route::post('editaccessvillage','App\Http\Controllers\AccessController@PostEditAccessVillage');
+
+//Person all
+
+Route::get('showlistpersonall','App\Http\Controllers\PersonAreaController@ShowListPersonAll');
+Route::get('showtotalpersonall','App\Http\Controllers\PersonAreaController@ShowTotalPersonAll');
+Route::get('showinfopersonall','App\Http\Controllers\PersonAreaController@GetShowInfoPersonAll');
+Route::post('showinfopersonall','App\Http\Controllers\PersonAreaController@PostShowInfoPersonAll');
+
+//Person city
+
+Route::get('showlistpersoncity','App\Http\Controllers\PersonAreaController@ShowListPersonCity');
+Route::get('showtotalpersoncity','App\Http\Controllers\PersonAreaController@ShowTotalPersonCity');
+Route::get('showinfopersoncity','App\Http\Controllers\PersonAreaController@GetShowInfoPersonCity');
+Route::post('showinfopersoncity','App\Http\Controllers\PersonAreaController@PostShowInfoPersonCity');
+
+//Person district
+
+Route::get('showlistpersondistrict','App\Http\Controllers\PersonAreaController@ShowListPersonDistrict');
+Route::get('showtotalpersondistrict','App\Http\Controllers\PersonAreaController@ShowTotalPersonDistrict');
+Route::get('showinfopersondistrict','App\Http\Controllers\PersonAreaController@GetShowInfoPersonDistrict');
+Route::post('showinfopersondistrict','App\Http\Controllers\PersonAreaController@PostShowInfoPersonDistrict');
+
+//Person ward
+
+Route::get('showlistpersonward','App\Http\Controllers\PersonAreaController@ShowListPersonWard');
+Route::get('showtotalpersonward','App\Http\Controllers\PersonAreaController@ShowTotalPersonWard');
+Route::get('showinfopersonward','App\Http\Controllers\PersonAreaController@GetShowInfoPersonWard');
+Route::post('showinfopersonward','App\Http\Controllers\PersonAreaController@PostShowInfoPersonWard');
+
+//Person Each City
+
+Route::get('showtotalpersoneachcity','App\Http\Controllers\PersonEachAreaController@ShowTotalPersonEachCity');
+Route::get('showlistpersoneachcity','App\Http\Controllers\PersonEachAreaController@GetShowListPersonEachCity');
+Route::post('showlistpersoneachcity','App\Http\Controllers\PersonEachAreaController@PostShowListPersonEachCity');
+
+//Person Each District
+
+Route::get('showtotalpersoneachdistrict','App\Http\Controllers\PersonEachAreaController@ShowTotalPersonEachDistrict');
+Route::get('showlistpersoneachdistrict','App\Http\Controllers\PersonEachAreaController@GetShowListPersonEachDistrict');
+Route::post('showlistpersoneachdistrict','App\Http\Controllers\PersonEachAreaController@PostShowListPersonEachDistrict');
+
+//Person Each Ward
+
+Route::get('showtotalpersoneachward','App\Http\Controllers\PersonEachAreaController@ShowTotalPersonEachWard');
+Route::get('showlistpersoneachward','App\Http\Controllers\PersonEachAreaController@GetShowListPersonEachWard');
+Route::post('showlistpersoneachward','App\Http\Controllers\PersonEachAreaController@PostShowListPersonEachWard');
+
+//Person Each Village
+
+Route::get('showtotalpersoneachvillage','App\Http\Controllers\PersonEachAreaController@ShowTotalPersonEachVillage');
+Route::get('showlistpersoneachvillage','App\Http\Controllers\PersonEachAreaController@GetShowListPersonEachVillage');
+Route::post('showlistpersoneachvillage','App\Http\Controllers\PersonEachAreaController@PostShowListPersonEachVillage');

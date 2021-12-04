@@ -9,21 +9,20 @@
 <body>
     <a href="main">Trang chủ</a>
     <h1>{{session('user')->username}}</h1>
-    <h1>Xem danh sách dân số trong quận</h1>
-    <a href="showinfopersondistrict">Xem thông tin một người trong quận</a> <br>
-    <a href="showtotalpersondistrict">Xem tổng dân số trong quận</a> <br>
+    <h1>Xem tổng dân số từng phường</h1>
+    <a href="showlistpersoneachward">Xem danh sách dân số một phường</a>
     <table>
         <thead>
             <tr>
-                <td>person_id</td>
-                <td>person_name</td>
+                <td>ward_id</td>
+                <td>total</td>
             </tr>
         </thead>
         <tbody>
-            @foreach($person as $p)
+            @foreach($persontotal as $p)
                 <tr>
-                    <td>{{$p->person_id}}</td>
-                    <td>{{$p->person_name}}</td>
+                    <td>{{$p->ward_id}}</td>
+                    <td>{{$p->person_total}}</td>
                 </tr>
             @endforeach
         </tbody>

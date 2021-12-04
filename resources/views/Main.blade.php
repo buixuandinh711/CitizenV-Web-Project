@@ -28,15 +28,15 @@
     <a href="showaccessward">Xem quyền phường</a> <br>
     <a href="showaccessvillage">Xem quyền thôn</a> <br>
     <h2>Xem dân số trong khu vực</h2>
-    <a href="">Xem dân số trong nước</a> <br>
-    <a href="">Xem dân số trong thành phố</a> <br>
-    <a href="">Xem dân số trong quận</a> <br>
-    <a href="">Xem dân số trong phường</a> <br>
+    <a href="showlistpersonall">Xem dân số trong nước</a> <br>
+    <a href="showlistpersoncity">Xem dân số trong thành phố</a> <br>
+    <a href="showlistpersondistrict">Xem dân số trong quận</a> <br>
+    <a href="showlistpersonward">Xem dân số trong phường</a> <br>
     <h2>Xem dân số từng khu vực</h2>
-    <a href="">Xem dân số từng thành phố</a> <br>
-    <a href="">Xem dân số từng quận</a> <br>
-    <a href="">Xem dân số trong từng phường</a> <br>
-    <a href="">Xem dân số từng thôn</a> <br>
+    <a href="showtotalpersoneachcity">Xem dân số từng thành phố</a> <br>
+    <a href="showtotalpersoneachdistrict">Xem dân số từng quận</a> <br>
+    <a href="showtotalpersoneachward">Xem dân số trong từng phường</a> <br>
+    <a href="showtotalpersoneachvillage">Xem dân số từng thôn</a> <br>
     @if (session('mes'))
         <h2>Lỗi</h2>
         {{session('mes')}} <br>

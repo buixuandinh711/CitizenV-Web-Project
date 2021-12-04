@@ -7,10 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Xem Thông Tin Một người</h1>
-    <input type="text" name="person_id"> <br>
-    <input type="submit">
-    @if($person)
+    <a href="main">Trang chủ</a>
+    <h1>{{session('user')->username}}</h1>
+    <a href="showlistpersonward">Xem danh sách dân số trong phường</a>
+    <h1>Xem Thông Tin Một người trong phường</h1>
+    <form action="showinfopersonward" method="post">
+        @csrf
+        <input type="text" name="person_id"> <br>
+        <input type="submit">
+    </form>
+    @if(isset($person))
         <table>
             <thead>
                 <tr>
@@ -22,10 +28,10 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ $person_id }}</td>
-                    <td>{{ $person_name }}</td>
-                    <td>{{ $person_date }}</td>
-                    <td>{{ $person_gender }}</td>
+                    <td>{{ $person->person_id }}</td>
+                    <td>{{ $person->person_name }}</td>
+                    <td>{{ $person->person_date }}</td>
+                    <td>{{ $person->person_gender }}</td>
                 </tr>
             </tbody>
         </table>
