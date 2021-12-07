@@ -12,7 +12,8 @@ class DistrictController extends Controller
         if (session('user')) {
             if (strlen(session('user')->username) == 2) {
                 $currentTime = Carbon::now();
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
                 if (count($user)) {
                     return view('Declare/District/AddDeclareDistrict');
                 }
@@ -26,7 +27,8 @@ class DistrictController extends Controller
         $district_name = $request->district_name;
         $city_id = substr($district_id,0,2);
         $district = DB::table('district')->where('district_id', $district_id)->get();
-        if ($district_id == "" || $district_name == "" || strlen($district_id) != 4 || count($district) || !is_numeric($district_id) || $city_id != session('user')->username) {
+        if ($district_id == "" || $district_name == "" || strlen($district_id) != 4 || count($district) || !ctype_digit($district_id) || 
+            $city_id != session('user')->username) {
             return redirect('adddeclaredistrict')->with('mes','Thêm quận thất bại');
         }
         DB::table('district')->insert(['city_id' => $city_id,'district_id' => $district_id,'district_name' => $district_name]);
@@ -48,7 +50,8 @@ class DistrictController extends Controller
         if (session('user')) {
             if (strlen(session('user')->username) == 2) {
                 $currentTime = Carbon::now();
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
                 if (count($user)) {
                     DB::table('district')->where('district_id', $request->district_id)->delete();
                     return redirect('showdeclaredistrict')->with('mes','Xóa quận thành công');
@@ -62,7 +65,8 @@ class DistrictController extends Controller
         if (session('user')) {
             if (strlen(session('user')->username) == 2) {
                 $currentTime = Carbon::now();
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
                 if (count($user)) {
                     return view('Declare/District/EditDeclareDistrict');
                 }

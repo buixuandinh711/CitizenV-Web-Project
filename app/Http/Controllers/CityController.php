@@ -20,7 +20,7 @@ class CityController extends Controller
         $city_id = $request->city_id;
         $city_name = $request->city_name;
         $city = DB::table('city')->where('city_id', $city_id)->get();
-        if ($city_id == "" || $city_name == "" || strlen($city_id) != 2 || count($city) || !is_numeric($city_id)) {
+        if ($city_id == "" || $city_name == "" || strlen($city_id) != 2 || count($city) || !ctype_digit($city_id)) {
             return redirect('adddeclarecity')->with('mes','Thêm thành phố thất bại');
         }
         DB::table('city')->insert(['city_id' => $city_id,'city_name' => $city_name]);

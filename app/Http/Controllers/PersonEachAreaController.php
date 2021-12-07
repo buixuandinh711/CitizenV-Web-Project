@@ -36,7 +36,12 @@ class PersonEachAreaController extends Controller
     public function ShowTotalPersonEachDistrict() {
         if (session('user')) {
             if (strlen(session('user')->username) == 2) {
-                $persontotal = DB::table('person')->select('district_id', DB::raw('count(*) as person_total'))->where('city_id',session('user')->username)->groupBy('district_id')->get();
+                $persontotal = DB::table('person')->select('district_id', DB::raw('count(*) as person_total'))
+                ->where('city_id',session('user')->username)->groupBy('district_id')->get();
+                return view('PersonEachArea/PersonEachDistrict/ShowTotalPersonEachDistrict',['persontotal'=>$persontotal]);
+            } else if (session('user')->username == 'admin') {
+                $persontotal = DB::table('person')->select('district_id', DB::raw('count(*) as person_total'))
+                ->groupBy('district_id')->get();
                 return view('PersonEachArea/PersonEachDistrict/ShowTotalPersonEachDistrict',['persontotal'=>$persontotal]);
             }
         }
@@ -45,7 +50,7 @@ class PersonEachAreaController extends Controller
 
     public function GetShowListPersonEachDistrict() {
         if (session('user')) {
-            if (strlen(session('user')->username) == 2) {
+            if (strlen(session('user')->username) == 2 || session('user')->username == 'admin') {
                 return view('PersonEachArea/PersonEachDistrict/ShowListPersonEachDistrict');
             }
         }
@@ -53,15 +58,29 @@ class PersonEachAreaController extends Controller
     }
 
     public function PostShowListPersonEachDistrict(Request $request) {
-        $person = DB::table('person')->where('district_id',$request->district_id)->where('city_id',session('user')->username)->get();
-        return view('PersonEachArea/PersonEachDistrict/ShowListPersonEachDistrict',['person'=>$person]);
+        if (strlen(session('user')->username) == 2) {
+            $person = DB::table('person')->where('district_id',$request->district_id)->where('city_id',session('user')->username)->get();
+            return view('PersonEachArea/PersonEachDistrict/ShowListPersonEachDistrict',['person'=>$person]);
+        } else if (session('user')->username == 'admin') {
+            $person = DB::table('person')->where('district_id',$request->district_id)->get();
+            return view('PersonEachArea/PersonEachDistrict/ShowListPersonEachDistrict',['person'=>$person]);
+        }
     }
 
     //Person Each Ward
     public function ShowTotalPersonEachWard() {
         if (session('user')) {
             if (strlen(session('user')->username) == 4) {
-                $persontotal = DB::table('person')->select('ward_id', DB::raw('count(*) as person_total'))->where('district_id',session('user')->username)->groupBy('ward_id')->get();
+                $persontotal = DB::table('person')->select('ward_id', DB::raw('count(*) as person_total'))
+                ->where('district_id',session('user')->username)->groupBy('ward_id')->get();
+                return view('PersonEachArea/PersonEachWard/ShowTotalPersonEachWard',['persontotal'=>$persontotal]);
+            } else if (strlen(session('user')->username) == 2) {
+                $persontotal = DB::table('person')->select('ward_id', DB::raw('count(*) as person_total'))
+                ->where('city_id',session('user')->username)->groupBy('ward_id')->get();
+                return view('PersonEachArea/PersonEachWard/ShowTotalPersonEachWard',['persontotal'=>$persontotal]);
+            } else if (session('user')->username == 'admin') {
+                $persontotal = DB::table('person')->select('ward_id', DB::raw('count(*) as person_total'))
+                ->groupBy('ward_id')->get();
                 return view('PersonEachArea/PersonEachWard/ShowTotalPersonEachWard',['persontotal'=>$persontotal]);
             }
         }
@@ -70,7 +89,7 @@ class PersonEachAreaController extends Controller
 
     public function GetShowListPersonEachWard() {
         if (session('user')) {
-            if (strlen(session('user')->username) == 4) {
+            if (strlen(session('user')->username) == 4 || strlen(session('user')->username) == 2 || session('user')->username == 'admin') {
                 return view('PersonEachArea/PersonEachWard/ShowListPersonEachWard');
             }
         }
@@ -78,15 +97,24 @@ class PersonEachAreaController extends Controller
     }
 
     public function PostShowListPersonEachWard(Request $request) {
-        $person = DB::table('person')->where('ward_id',$request->ward_id)->where('district_id',session('user')->username)->get();
-        return view('PersonEachArea/PersonEachWard/ShowListPersonEachWard',['person'=>$person]);
+        if (strlen(session('user')->username) == 4) {
+            $person = DB::table('person')->where('ward_id',$request->ward_id)->where('district_id',session('user')->username)->get();
+            return view('PersonEachArea/PersonEachWard/ShowListPersonEachWard',['person'=>$person]);
+        } else if (strlen(session('user')->username) == 2) {
+            $person = DB::table('person')->where('ward_id',$request->ward_id)->where('city_id',session('user')->username)->get();
+            return view('PersonEachArea/PersonEachWard/ShowListPersonEachWard',['person'=>$person]);
+        } else if (session('user')->username == 'admin') {
+            $person = DB::table('person')->where('ward_id',$request->ward_id)->get();
+            return view('PersonEachArea/PersonEachWard/ShowListPersonEachWard',['person'=>$person]);
+        }
     }
 
     //Person Each Village
     public function ShowTotalPersonEachVillage() {
         if (session('user')) {
             if (strlen(session('user')->username) == 6) {
-                $persontotal = DB::table('person')->select('village_id', DB::raw('count(*) as person_total'))->where('ward_id',session('user')->username)->groupBy('village_id')->get();
+                $persontotal = DB::table('person')->select('village_id', DB::raw('count(*) as person_total'))
+                ->where('ward_id',session('user')->username)->groupBy('village_id')->get();
                 return view('PersonEachArea/PersonEachVillage/ShowTotalPersonEachVillage',['persontotal'=>$persontotal]);
             }
         }
