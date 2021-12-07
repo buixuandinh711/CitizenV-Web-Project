@@ -24,10 +24,43 @@ class UserController extends Controller
         }
     }
 
-    public function logout(Request $request)
+    public function Logout(Request $request)
     {
         $request->session()->forget('user');
         return redirect('login');
+    }
+
+    public function ShowInfoUser() {
+        if (session('user')) {
+            if (session('user')->username == 'admin') {
+                $user = DB::table('users')->leftjoin('city', 'city.city_id', '=', 'users.username')
+                ->select('users.username')->selectRaw('city.city_name AS local_name')
+                ->where('users.username','admin')->first();
+                $user->local_name = 'Tổng cục';
+                return view('User/ShowInfoUser',['user'=>$user]);
+            } else if (strlen(session('user')->username) == 2) {   
+                $user = DB::table('users')->join('city', 'city.city_id', '=', 'users.username')
+                ->select('users.username')->selectRaw('city.city_name AS local_name')
+                ->where('users.username',session('user')->username)->first();
+                return view('User/ShowInfoUser',['user'=>$user]);
+            } else if (strlen(session('user')->username) == 4) {   
+                $user = DB::table('users')->join('district', 'district.district_id', '=', 'users.username')
+                ->select('users.username')->selectRaw('district.district_name AS local_name')
+                ->where('users.username',session('user')->username)->first();
+                return view('User/ShowInfoUser',['user'=>$user]);
+            } else if (strlen(session('user')->username) == 6) {   
+                $user = DB::table('users')->join('ward', 'ward.ward_id', '=', 'users.username')
+                ->select('users.username')->selectRaw('ward.ward_name AS local_name')
+                ->where('users.username',session('user')->username)->first();
+                return view('User/ShowInfoUser',['user'=>$user]);
+            } else if (strlen(session('user')->username) == 8) {   
+                $user = DB::table('users')->join('village', 'village.village_id', '=', 'users.username')
+                ->select('users.username')->selectRaw('village.village_name AS local_name')
+                ->where('users.username',session('user')->username)->first();
+                return view('User/ShowInfoUser',['user'=>$user]);
+            }
+        }
+        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
     //City User 
@@ -44,7 +77,7 @@ class UserController extends Controller
         $username = $request->username;
         $password = $request->password;
         $user = DB::table('users')->where('username', $username)->get();
-        if ($username == "" || $password == "" || strlen($username) != 2 || count($user) || !is_numeric($username)) {
+        if ($username == "" || $password == "" || strlen($username) != 2 || count($user) || !ctype_digit($username)) {
             return redirect('addusercity')->with('mes','Thêm tài khoản thất bại');
         }
         DB::table('users')->insert(['username' => $username,'password' => $password]);
@@ -94,7 +127,8 @@ class UserController extends Controller
         if (session('user')) {
             if (strlen(session('user')->username) == 2) {
                 $currentTime = Carbon::now();
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
                 if (count($user)) {
                     return view('User/District/AddUserDistrict');
                 }
@@ -108,7 +142,8 @@ class UserController extends Controller
         $password = $request->password;
         $city_id = substr($username,0,2);
         $user = DB::table('users')->where('username', $username)->get();
-        if ($username == "" || $password == "" || strlen($username) != 4 || count($user) || !is_numeric($username) || $city_id != session('user')->username) {
+        if ($username == "" || $password == "" || strlen($username) != 4 || count($user) || !ctype_digit($username) || 
+            $city_id != session('user')->username) {
             return redirect('adduserdistrict')->with('mes','Thêm tài khoản thất bại');
         }
         DB::table('users')->insert(['username' => $username,'password' => $password]);
@@ -130,7 +165,8 @@ class UserController extends Controller
         if (session('user')) {
             if (strlen(session('user')->username) == 2) {
                 $currentTime = Carbon::now();
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
                 if (count($user)) {
                     DB::table('users')->where('username', $request->username)->delete();
                     return redirect('showuserdistrict')->with('mes','Xóa tài khoản thành công');
@@ -144,7 +180,8 @@ class UserController extends Controller
         if (session('user')) {
             if (strlen(session('user')->username) == 2) {
                 $currentTime = Carbon::now();
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
                 if (count($user)) {
                     return view('User/District/EditUserDistrict');
                 }
@@ -169,8 +206,10 @@ class UserController extends Controller
             if (strlen(session('user')->username) == 4) {
                 $currentTime = Carbon::now();
                 $district_username = substr(session('user')->username,0,2);
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
+                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
                 if (count($user) && count($user_district)) {
                     return view('User/Ward/AddUserWard');
                 }
@@ -184,7 +223,8 @@ class UserController extends Controller
         $password = $request->password;
         $district_id = substr($username,0,4);
         $user = DB::table('users')->where('username', $username)->get();
-        if ($username == "" || $password == "" || strlen($username) != 6 || count($user) || !is_numeric($username) || $district_id != session('user')->username) {
+        if ($username == "" || $password == "" || strlen($username) != 6 || count($user) || !ctype_digit($username) || 
+            $district_id != session('user')->username) {
             return redirect('adduserward')->with('mes','Thêm tài khoản thất bại');
         }
         DB::table('users')->insert(['username' => $username,'password' => $password]);
@@ -207,8 +247,10 @@ class UserController extends Controller
             if (strlen(session('user')->username) == 4) {
                 $currentTime = Carbon::now();
                 $district_username = substr(session('user')->username,0,2);
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
+                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
                 if (count($user) && count($user_district)) {
                     DB::table('users')->where('username', $request->username)->delete();
                     return redirect('showuserward')->with('mes','Xóa tài khoản thành công');
@@ -223,8 +265,10 @@ class UserController extends Controller
             if (strlen(session('user')->username) == 4) {
                 $currentTime = Carbon::now();
                 $district_username = substr(session('user')->username,0,2);
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
+                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
                 if (count($user) && count($user_district)) {
                     return view('User/Ward/EditUserWard');
                 }
@@ -250,9 +294,12 @@ class UserController extends Controller
                 $currentTime = Carbon::now();
                 $district_username = substr(session('user')->username,0,2);
                 $ward_username = substr(session('user')->username,0,4);
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $user_ward = DB::table('access')->where('username',$ward_username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
+                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
+                $user_ward = DB::table('access')->where('username',$ward_username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
                 if (count($user) && count($user_district) && count($user_ward)) {
                     return view('User/Village/AddUserVillage');
                 }
@@ -266,7 +313,8 @@ class UserController extends Controller
         $password = $request->password;
         $ward_id = substr($username,0,6);
         $user = DB::table('users')->where('username', $username)->get();
-        if ($username == "" || $password == "" || strlen($username) != 8 || count($user) || !is_numeric($username) || $ward_id != session('user')->username) {
+        if ($username == "" || $password == "" || strlen($username) != 8 || count($user) || !ctype_digit($username) || 
+            $ward_id != session('user')->username) {
             return redirect('adduservillage')->with('mes','Thêm tài khoản thất bại');
         }
         DB::table('users')->insert(['username' => $username,'password' => $password]);
@@ -290,9 +338,12 @@ class UserController extends Controller
                 $currentTime = Carbon::now();
                 $district_username = substr(session('user')->username,0,2);
                 $ward_username = substr(session('user')->username,0,4);
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $user_ward = DB::table('access')->where('username',$ward_username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
+                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
+                $user_ward = DB::table('access')->where('username',$ward_username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
                 if (count($user) && count($user_district) && count($user_ward)) {
                     DB::table('users')->where('username', $request->username)->delete();
                     return redirect('showuservillage')->with('mes','Xóa tài khoản thành công');
@@ -308,9 +359,12 @@ class UserController extends Controller
                 $currentTime = Carbon::now();
                 $district_username = substr(session('user')->username,0,2);
                 $ward_username = substr(session('user')->username,0,4);
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $user_ward = DB::table('access')->where('username',$ward_username)->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
+                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
+                $user_ward = DB::table('access')->where('username',$ward_username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
                 if (count($user) && count($user_district) && count($user_ward)) {
                     return view('User/Village/EditUserVillage');
                 }

@@ -54,17 +54,21 @@
             </div>
         </aside>
         <div class="content-container">
-            <h1>Thêm khai báo thôn</h1>
-            <a href="showdeclarevillage">Xem khai báo thôn</a> <br>
-            <form action="adddeclarevillage" method="post">
-                @csrf
-                <input type="text" name="village_id"><br>
-                <input type="text" name="village_name"><br>
-                <input type="submit">
-            </form>
-            @if(session('mes'))
-                {{session('mes')}}
-            @endif
+            <h1>Thông tin tài khoản</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <td>username</td>
+                        <td>local_name</td>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td>{{$user->username}}</td>
+                            <td>{{$user->local_name}}</td>
+                        </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </body>
@@ -81,17 +85,19 @@
 </head>
 <body>
     <a href="main">Trang chủ</a>
-    <h1>{{session('user')->username}}</h1>
-    <h1>Thêm khai báo thôn</h1>
-    <a href="showdeclarevillage">Xem khai báo thôn</a> <br>
-    <form action="adddeclarevillage" method="post">
-        @csrf
-        <input type="text" name="village_id"><br>
-        <input type="text" name="village_name"><br>
-        <input type="submit">
-    </form>
-    @if(session('mes'))
-        {{session('mes')}}
-     @endif
+    <table>
+        <thead>
+            <tr>
+                <td>username</td>
+                <td>local_name</td>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>{{$user->username}}</td>
+                    <td>{{$user->local_name}}</td>
+                </tr>
+        </tbody>
+    </table>
 </body>
 </html> -->

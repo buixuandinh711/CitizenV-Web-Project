@@ -1,47 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <base href="{{asset('')}}">
-    <link rel="stylesheet" href="css/Main.css">
+    <title>Home page</title>
+    <link rel="StyleSheet" href="css/home_styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/home.js" defer></script>
 </head>
+
 <body>
-    <h1>Trang chủ</h1>
-    <h1>{{session('user')->username}}</h1>
-    <h2>Tài khoản</h2>
-    <a href="showusercity">Xem tài khoản thành phố</a> <br>
-    <a href="showuserdistrict">Xem tài khoản quận</a> <br>
-    <a href="showuserward">Xem tài khoản phường</a> <br>
-    <a href="showuservillage">Xem tài khoản thôn</a> <br>
-    <h2>Khai báo</h2>
-    <a href="showdeclarecity">Xem khai báo thành phố</a> <br>
-    <a href="showdeclaredistrict">Xem khai báo quận</a> <br>
-    <a href="showdeclareward">Xem khai báo phường</a> <br>
-    <a href="showdeclarevillage">Xem khai báo thôn</a> <br>
-    <a href="showdeclareperson">Xem khai báo dân số</a> <br>
-    <h2>Quyền</h2>
-    <a href="showaccesscity">Xem quyền thành phố</a> <br>
-    <a href="showaccessdistrict">Xem quyền quận</a> <br>
-    <a href="showaccessward">Xem quyền phường</a> <br>
-    <a href="showaccessvillage">Xem quyền thôn</a> <br>
-    <h2>Xem dân số trong khu vực</h2>
-    <a href="showlistpersonall">Xem dân số trong nước</a> <br>
-    <a href="showlistpersoncity">Xem dân số trong thành phố</a> <br>
-    <a href="showlistpersondistrict">Xem dân số trong quận</a> <br>
-    <a href="showlistpersonward">Xem dân số trong phường</a> <br>
-    <h2>Xem dân số từng khu vực</h2>
-    <a href="showtotalpersoneachcity">Xem dân số từng thành phố</a> <br>
-    <a href="showtotalpersoneachdistrict">Xem dân số từng quận</a> <br>
-    <a href="showtotalpersoneachward">Xem dân số trong từng phường</a> <br>
-    <a href="showtotalpersoneachvillage">Xem dân số từng thôn</a> <br>
-    @if (session('mes'))
-        <h2>Lỗi</h2>
-        {{session('mes')}} <br>
-    @endif
-    <h2>Đăng xuất</h2>
-    <a href="logout">Logout</a>
+    <div class="container">
+        <header>
+            <a href="main"><span class="page-logo">Citizen V</span><a>
+            <div class="account-dropdown-container">
+                <span class="account-container">
+                    <a class="username">{{session('user')->username}}</a>
+                    <b class="caret" id="account-caret"></b>
+                </span>
+                <div class="account-dropdown">
+                    <a href="showinfouser">Thông tin tài khoản</a>
+                    <a href="logout">Đăng xuất</a>
+                </div>
+            </div>
+        </header>
+        <aside>
+            <div class="sidebar-row" id="management">
+                <a class="sidebar-nav">Quản lý địa phương</a>
+                <b class="caret sidebar-caret"></b>
+            </div>
+            <div class="dropdown-container" id="management-dropdown">
+                <a class="sidebar-nav" href="showdeclare">Khai báo địa phương</a>
+                <a class="sidebar-nav" href="showuser">Cấp tài khoản</a>
+            </div>
+            <div class="sidebar-row" id="declaration">
+                <a class="sidebar-nav">Khai báo dân số</a>
+                <b class="caret sidebar-caret"></b>
+            </div>
+            <div class="dropdown-container" id="declaration-dropdown">
+                <a class="sidebar-nav" href="showaccess">Cấp quyền khai báo</a>
+                <a class="sidebar-nav" href="showfollow">Theo dõi tiến độ</a>
+            </div>
+            <div class="sidebar-row" id="information">
+                <a class="sidebar-nav">Thông tin dân số</a>
+                <b class="caret sidebar-caret"></b>
+            </div>
+            <div class="dropdown-container" id="information-dropdown">
+                <a class="sidebar-nav" href="showtotalpersoneachcity">Tổng hợp dân số từng thành phố</a>
+                <a class="sidebar-nav" href="showtotalpersoneachdistrict">Tổng hợp dân số từng quận</a>
+                <a class="sidebar-nav" href="showtotalpersoneachward">Tổng hợp dân số từng phường</a>
+                <a class="sidebar-nav" href="showtotalpersoneachvillage">Tổng hợp dân số từng thôn</a>
+                <a class="sidebar-nav" href="showlistperson">Danh sách dân số</a>
+            </div>
+        </aside>
+        <div class="content-container">Hello World</div>
+    </div>
 </body>
+
 </html>
