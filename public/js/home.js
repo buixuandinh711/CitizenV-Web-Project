@@ -1,4 +1,4 @@
-$("#management").click(function() {
+$("#management").click(function () {
     let $dropdown = $("#management-dropdown");
     if ($dropdown.css("display") == "none") {
         $dropdown.css("display", "block");
@@ -6,7 +6,7 @@ $("#management").click(function() {
         $dropdown.css("display", "none");
     }
 })
-$("#declaration").click(function() {
+$("#declaration").click(function () {
     let $dropdown = $("#declaration-dropdown");
     if ($dropdown.css("display") == "none") {
         $dropdown.css("display", "block");
@@ -14,7 +14,7 @@ $("#declaration").click(function() {
         $dropdown.css("display", "none");
     }
 })
-$("#information").click(function() {
+$("#information").click(function () {
     let $dropdown = $("#information-dropdown");
     if ($dropdown.css("display") == "none") {
         $dropdown.css("display", "block");
@@ -22,7 +22,7 @@ $("#information").click(function() {
         $dropdown.css("display", "none");
     }
 })
-$("#account-caret").click(function() {
+$("#account-caret").click(function () {
     let $dropdown = $(".account-dropdown");
     if ($dropdown.css("display") == "none") {
         $dropdown.css("display", "block");

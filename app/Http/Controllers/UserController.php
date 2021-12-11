@@ -8,26 +8,60 @@ use Carbon\Carbon;
 
 class UserController extends Controller
 {
-    public function ShowLogin() {
-        return view('login');
-    }
-
-    public function CheckLogin(Request $request) {
-        $username = $request['username'];
-        $password = $request['password'];
-        $user = DB::table('users')->where('username', $username)->where('password', $password)->get();
-        if (count($user)) {
-            $request->session()->put('user', $user[0]);
-            return redirect('main');
-        } else {
-            return view('login',['err'=>"Đăng nhập thất bại"]);
+    public function AddNewUser(Request $request) {
+        if (session('user')) {
+            if (session('user')->username == 'admin') {
+                $success = ['resp' => 'success'];
+                $error = ['resp' => 'error']; 
+                $username = $request->username;
+                $password = $request->password;
+                $user = DB::table('users')->where('username', $username)->get();
+                if ($username == "" || $password == "" || strlen($username) != 2 || count($user) || !ctype_digit($username)) {
+                    return response()->json($error);
+                }
+                DB::table('users')->insert(['username' => $username,'password' => $password]);
+                return response()->json($success);
+            } else if (strlen(session('user')->username) == 2) {   
+                $success = ['resp' => 'success'];
+                $error = ['resp' => 'error']; 
+                $username = $request->username;
+                $password = $request->password;
+                $city_id = substr(session('user')->username,0,2);
+                $user = DB::table('users')->where('username', $username)->get();
+                if ($username == "" || $password == "" || strlen($username) != 4 || count($user) || !ctype_digit($username) || 
+                    session('user')->username != $city_id) {
+                    return response()->json($error);
+                }
+                DB::table('users')->insert(['username' => $username,'password' => $password]);
+                return response()->json($success);
+            } else if (strlen(session('user')->username) == 4) {   
+                $success = ['resp' => 'success'];
+                $error = ['resp' => 'error']; 
+                $username = $request->username;
+                $password = $request->password;
+                $district_id = substr(session('user')->username,0,4);
+                $user = DB::table('users')->where('username', $username)->get();
+                if ($username == "" || $password == "" || strlen($username) != 6 || count($user) || !ctype_digit($username) || 
+                    session('user')->username != $district_id) {
+                    return response()->json($error);
+                }
+                DB::table('users')->insert(['username' => $username,'password' => $password]);
+                return response()->json($success);
+            } else if (strlen(session('user')->username) == 6) {   
+                $success = ['resp' => 'success'];
+                $error = ['resp' => 'error']; 
+                $username = $request->username;
+                $password = $request->password;
+                $ward_id = substr(session('user')->username,0,6);
+                $user = DB::table('users')->where('username', $username)->get();
+                if ($username == "" || $password == "" || strlen($username) != 8 || count($user) || !ctype_digit($username) || 
+                    session('user')->username != $ward_id) {
+                    return response()->json($error);
+                }
+                DB::table('users')->insert(['username' => $username,'password' => $password]);
+                return response()->json($success);
+            }
         }
-    }
-
-    public function Logout(Request $request)
-    {
-        $request->session()->forget('user');
-        return redirect('login');
     }
 
     public function ShowInfoUser() {
