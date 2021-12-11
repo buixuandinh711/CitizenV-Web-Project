@@ -67,7 +67,7 @@ aside {
 .dropdown-container {
     display: none;
 }
-.dropdown-container a{
+.dropdown-container span {
     background-color:white;
     padding: 10px;
     padding-left: 20px;
