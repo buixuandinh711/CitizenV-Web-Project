@@ -6,56 +6,56 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Home page</title>
     <link rel="StyleSheet" href="css/home_styles.css">
+    <link rel="StyleSheet" href="css/declare_location.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/home.js" defer></script>
-    <script src="js/test.js" defer></script>
+    <script src="js/declare_location.js" defer></script>
 </head>
 
 <body>
     <div class="container">
         <header>
             <a href="main"><span class="page-logo">Citizen V</span><a>
-            <div class="account-dropdown-container">
-                <span class="account-container">
-                    <a class="username">{{session('user')->username}}</a>
-                    <b class="caret" id="account-caret"></b>
-                </span>
-                <div class="account-dropdown">
-                    <a href="showinfouser">Thông tin tài khoản</a>
-                    <a href="logout">Đăng xuất</a>
-                </div>
-            </div>
+                    <div class="account-dropdown-container">
+                        <span class="account-container">
+                            <a class="username">{{session('user')->username}}</a>
+                            <b class="caret" id="account-caret"></b>
+                        </span>
+                        <div class="account-dropdown">
+                            <a href="showinfouser">Thông tin tài khoản</a>
+                            <a href="logout">Đăng xuất</a>
+                        </div>
+                    </div>
         </header>
         <aside>
             <div class="sidebar-row" id="management">
-                <a class="sidebar-nav">Quản lý địa phương</a>
+                <span class="sidebar-nav">Quản lý địa phương</span>
                 <b class="caret sidebar-caret"></b>
             </div>
             <div class="dropdown-container" id="management-dropdown">
-                <a class="sidebar-nav" href="showdeclare">Khai báo địa phương</a>
-                <a class="sidebar-nav" href="showuser">Cấp tài khoản</a>
+                <span class="sidebar-nav" id="declare-location-nav">Khai báo địa phương</span>
+                <span class="sidebar-nav">Cấp tài khoản</span>
             </div>
             <div class="sidebar-row" id="declaration">
-                <a class="sidebar-nav">Khai báo dân số</a>
+                <span class="sidebar-nav">Khai báo dân sô</span>
                 <b class="caret sidebar-caret"></b>
             </div>
             <div class="dropdown-container" id="declaration-dropdown">
-                <a class="sidebar-nav" href="showaccess">Cấp quyền khai báo</a>
-                <a class="sidebar-nav" href="showfollow">Theo dõi tiến độ</a>
+                <span class="sidebar-nav">Cấp quyền khai báo</span>
+                <span class="sidebar-nav">Theo dõi tiến độ</span>
             </div>
             <div class="sidebar-row" id="information">
-                <a class="sidebar-nav">Thông tin dân số</a>
+                <span class="sidebar-nav">Thông tin dân số</span>
                 <b class="caret sidebar-caret"></b>
             </div>
             <div class="dropdown-container" id="information-dropdown">
-                <a class="sidebar-nav" href="showtotalpersoneachcity">Tổng hợp dân số từng thành phố</a>
-                <a class="sidebar-nav" href="showtotalpersoneachdistrict">Tổng hợp dân số từng quận</a>
-                <a class="sidebar-nav" href="showtotalpersoneachward">Tổng hợp dân số từng phường</a>
-                <a class="sidebar-nav" href="showtotalpersoneachvillage">Tổng hợp dân số từng thôn</a>
-                <a class="sidebar-nav" href="showlistperson">Danh sách dân số</a>
+                <span class="sidebar-nav">Số liệu dân số</span>
+                <span class="sidebar-nav">Danh sách dân số</span>
             </div>
         </aside>
-        <div class="content-container">Hello World</div>
+        <div class="content-container">
+
+        </div>
     </div>
 </body>
 
