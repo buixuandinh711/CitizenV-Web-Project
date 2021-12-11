@@ -3,6 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Home page</title>
     <link rel="StyleSheet" href="css/home_styles.css">
     <link rel="StyleSheet" href="css/declare_location.css">

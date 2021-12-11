@@ -16,8 +16,8 @@
                 <input type="text" name="username" id = "username" class="input-row input-text" placeholder="Username">
                 <input type="password" name="password" id = "password" class="input-row input-text" placeholder="Password">
                 <span class="display-error">
-                @if(isset($err))
-                    {{$err}}
+                @if(session('mes'))
+                    {{session('mes')}}
                 @endif
                 </span>
                 <button type="submit" class="input-row login-button">Log in</button>
