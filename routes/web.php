@@ -17,6 +17,8 @@ Route::get('current-local-info','App\Http\Controllers\DeclareLocationController@
 
 Route::post('update-new-location','App\Http\Controllers\DeclareLocationController@UpdateNewLocation');
 
+Route::post('add-new-user','App\Http\Controllers\UserController@AddNewUser');
+
 //
 Route::get('login','App\Http\Controllers\Controller@ShowLogin');
 
