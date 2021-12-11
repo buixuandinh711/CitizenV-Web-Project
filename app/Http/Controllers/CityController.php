@@ -32,6 +32,7 @@ class CityController extends Controller
             if (session('user')->username == 'admin') {
                 $city = DB::table('city')->get();
                 return view('Declare/City/ShowDeclareCity',['city'=>$city]);
+                // return response()->json($city);
             }
         }
         return redirect('main')->with('mes','Bạn không đủ quyền');

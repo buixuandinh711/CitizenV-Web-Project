@@ -1,9 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,15 +13,16 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::get('login','App\Http\Controllers\UserController@ShowLogin');
+Route::get('current-local-info','App\Http\Controllers\DeclareLocationController@CurrentLocalInfo');
 
-Route::post('login','App\Http\Controllers\UserController@CheckLogin');
+Route::post('update-new-location','App\Http\Controllers\DeclareLocationController@UpdateNewLocation');
 
-Route::get('main',function() {
-    if (session('user')) {
-        return view('Main');
-    }
-});
+//
+Route::get('login','App\Http\Controllers\Controller@ShowLogin');
+
+Route::post('login','App\Http\Controllers\Controller@CheckLogin');
+
+Route::get('main','App\Http\Controllers\Controller@ShowMain');
 
 Route::get('logout','App\Http\Controllers\UserController@Logout');
 

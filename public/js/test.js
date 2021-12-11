@@ -12,3 +12,7 @@ fetch('update-new-location', {
   }).then(function(data) {
     console.log(data);
   });
+
+fetch('current-local-info')
+.then(response => response.json())
+.then(data => console.log(data));

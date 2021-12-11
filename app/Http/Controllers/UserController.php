@@ -8,28 +8,6 @@ use Carbon\Carbon;
 
 class UserController extends Controller
 {
-    public function ShowLogin() {
-        return view('login');
-    }
-
-    public function CheckLogin(Request $request) {
-        $username = $request['username'];
-        $password = $request['password'];
-        $user = DB::table('users')->where('username', $username)->where('password', $password)->get();
-        if (count($user)) {
-            $request->session()->put('user', $user[0]);
-            return redirect('main');
-        } else {
-            return view('login',['err'=>"Đăng nhập thất bại"]);
-        }
-    }
-
-    public function Logout(Request $request)
-    {
-        $request->session()->forget('user');
-        return redirect('login');
-    }
-
     public function ShowInfoUser() {
         if (session('user')) {
             if (session('user')->username == 'admin') {
