@@ -86,3 +86,7 @@ $('body').on('click', '#submit-location', function () {
 $('body').on('keyup', '#location-code, #location-name', function () {
     $("#location-input-error").empty();
 })
+$('body').on('click', '#cancel-location', function () {
+    $("#location-code").val("");
+    $("#location-name").val("");
+})
