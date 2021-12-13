@@ -97,323 +97,323 @@ class UserController extends Controller
         return redirect('main')->with('mes','Bạn không đủ quyền');
     }
 
-    //City User 
-    public function GetAddUserCity() {
-        if (session('user')) {
-            if (session('user')->username == 'admin') {
-                return view('User/City/AddUserCity');
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // //City User 
+    // public function GetAddUserCity() {
+    //     if (session('user')) {
+    //         if (session('user')->username == 'admin') {
+    //             return view('User/City/AddUserCity');
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function PostAddUSerCity(Request $request) {
-        $username = $request->username;
-        $password = $request->password;
-        $user = DB::table('users')->where('username', $username)->get();
-        if ($username == "" || $password == "" || strlen($username) != 2 || count($user) || !ctype_digit($username)) {
-            return redirect('addusercity')->with('mes','Thêm tài khoản thất bại');
-        }
-        DB::table('users')->insert(['username' => $username,'password' => $password]);
-        return redirect('addusercity')->with('mes','Thêm tài khoản thành công');
-    }
+    // public function PostAddUSerCity(Request $request) {
+    //     $username = $request->username;
+    //     $password = $request->password;
+    //     $user = DB::table('users')->where('username', $username)->get();
+    //     if ($username == "" || $password == "" || strlen($username) != 2 || count($user) || !ctype_digit($username)) {
+    //         return redirect('addusercity')->with('mes','Thêm tài khoản thất bại');
+    //     }
+    //     DB::table('users')->insert(['username' => $username,'password' => $password]);
+    //     return redirect('addusercity')->with('mes','Thêm tài khoản thành công');
+    // }
 
-    public function ShowUSerCity() {
-        if (session('user')) {
-            if (session('user')->username == 'admin') {
-                $user = DB::table('users')->whereRaw('LENGTH(username) = 2')->get();
-                return view('User/City/ShowUserCity',['user'=>$user]);
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // public function ShowUSerCity() {
+    //     if (session('user')) {
+    //         if (session('user')->username == 'admin') {
+    //             $user = DB::table('users')->whereRaw('LENGTH(username) = 2')->get();
+    //             return view('User/City/ShowUserCity',['user'=>$user]);
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function DeleteUserCity(Request $request) {
-        if (session('user')) {
-            if (session('user')->username == 'admin') {
-                DB::table('users')->where('username', $request->username)->delete();
-                return redirect('showusercity')->with('mes','Xóa tài khoản thành công');
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // public function DeleteUserCity(Request $request) {
+    //     if (session('user')) {
+    //         if (session('user')->username == 'admin') {
+    //             DB::table('users')->where('username', $request->username)->delete();
+    //             return redirect('showusercity')->with('mes','Xóa tài khoản thành công');
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function GetEditUserCity() {
-        if (session('user')) {
-            if (session('user')->username == 'admin') {
-                return view('User/City/EditUserCity');
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // public function GetEditUserCity() {
+    //     if (session('user')) {
+    //         if (session('user')->username == 'admin') {
+    //             return view('User/City/EditUserCity');
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function PostEditUserCity(Request $request) {
-        $user = DB::table('users')->where('username', $request->username)->get();
-        if (count($user) && strlen($request->username) == 2 && $request->password != "") {
-            DB::table('users')->where('username', $request->username)->update(['password' => $request->password]);
-            return redirect('editusercity')->with('mes','Sửa tài khoản thành công');
-        }
-        return redirect('editusercity')->with('mes','Sửa tài khoản thất bại');
-    }
+    // public function PostEditUserCity(Request $request) {
+    //     $user = DB::table('users')->where('username', $request->username)->get();
+    //     if (count($user) && strlen($request->username) == 2 && $request->password != "") {
+    //         DB::table('users')->where('username', $request->username)->update(['password' => $request->password]);
+    //         return redirect('editusercity')->with('mes','Sửa tài khoản thành công');
+    //     }
+    //     return redirect('editusercity')->with('mes','Sửa tài khoản thất bại');
+    // }
 
-    //District User 
-    public function GetAddUserDistrict() {
-        if (session('user')) {
-            if (strlen(session('user')->username) == 2) {
-                $currentTime = Carbon::now();
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                if (count($user)) {
-                    return view('User/District/AddUserDistrict');
-                }
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // //District User 
+    // public function GetAddUserDistrict() {
+    //     if (session('user')) {
+    //         if (strlen(session('user')->username) == 2) {
+    //             $currentTime = Carbon::now();
+    //             $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             if (count($user)) {
+    //                 return view('User/District/AddUserDistrict');
+    //             }
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function PostAddUSerDistrict(Request $request) {
-        $username = $request->username;
-        $password = $request->password;
-        $city_id = substr($username,0,2);
-        $user = DB::table('users')->where('username', $username)->get();
-        if ($username == "" || $password == "" || strlen($username) != 4 || count($user) || !ctype_digit($username) || 
-            $city_id != session('user')->username) {
-            return redirect('adduserdistrict')->with('mes','Thêm tài khoản thất bại');
-        }
-        DB::table('users')->insert(['username' => $username,'password' => $password]);
-        return redirect('adduserdistrict')->with('mes','Thêm tài khoản thành công');
-    }
+    // public function PostAddUSerDistrict(Request $request) {
+    //     $username = $request->username;
+    //     $password = $request->password;
+    //     $city_id = substr($username,0,2);
+    //     $user = DB::table('users')->where('username', $username)->get();
+    //     if ($username == "" || $password == "" || strlen($username) != 4 || count($user) || !ctype_digit($username) || 
+    //         $city_id != session('user')->username) {
+    //         return redirect('adduserdistrict')->with('mes','Thêm tài khoản thất bại');
+    //     }
+    //     DB::table('users')->insert(['username' => $username,'password' => $password]);
+    //     return redirect('adduserdistrict')->with('mes','Thêm tài khoản thành công');
+    // }
 
-    public function ShowUSerDistrict() {
-        if (session('user')) {
-            $city_id = session('user')->username.'%';
-            if (strlen(session('user')->username) == 2) {
-                $user = DB::table('users')->whereRaw('LENGTH(username) = 4')->Where('username', 'like', $city_id)->get();
-                return view('User/District/ShowUserDistrict',['user'=>$user]);
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // public function ShowUSerDistrict() {
+    //     if (session('user')) {
+    //         $city_id = session('user')->username.'%';
+    //         if (strlen(session('user')->username) == 2) {
+    //             $user = DB::table('users')->whereRaw('LENGTH(username) = 4')->Where('username', 'like', $city_id)->get();
+    //             return view('User/District/ShowUserDistrict',['user'=>$user]);
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function DeleteUserDistrict(Request $request) {
-        if (session('user')) {
-            if (strlen(session('user')->username) == 2) {
-                $currentTime = Carbon::now();
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                if (count($user)) {
-                    DB::table('users')->where('username', $request->username)->delete();
-                    return redirect('showuserdistrict')->with('mes','Xóa tài khoản thành công');
-                }
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // public function DeleteUserDistrict(Request $request) {
+    //     if (session('user')) {
+    //         if (strlen(session('user')->username) == 2) {
+    //             $currentTime = Carbon::now();
+    //             $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             if (count($user)) {
+    //                 DB::table('users')->where('username', $request->username)->delete();
+    //                 return redirect('showuserdistrict')->with('mes','Xóa tài khoản thành công');
+    //             }
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function GetEditUserDistrict() {
-        if (session('user')) {
-            if (strlen(session('user')->username) == 2) {
-                $currentTime = Carbon::now();
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                if (count($user)) {
-                    return view('User/District/EditUserDistrict');
-                }
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // public function GetEditUserDistrict() {
+    //     if (session('user')) {
+    //         if (strlen(session('user')->username) == 2) {
+    //             $currentTime = Carbon::now();
+    //             $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             if (count($user)) {
+    //                 return view('User/District/EditUserDistrict');
+    //             }
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function PostEditUserDistrict(Request $request) {
-        $city_id = session('user')->username.'%';
-        $user = DB::table('users')->where('username', $request->username)->Where('username', 'like', $city_id)->get();
-        if (count($user) && strlen($request->username) == 4 && $request->password != "") {
-            DB::table('users')->where('username', $request->username)->update(['password' => $request->password]);
-            return redirect('edituserdistrict')->with('mes','Sửa tài khoản thành công');
-        }
-        return redirect('edituserdistrict')->with('mes','Sửa tài khoản thất bại');
-    }
+    // public function PostEditUserDistrict(Request $request) {
+    //     $city_id = session('user')->username.'%';
+    //     $user = DB::table('users')->where('username', $request->username)->Where('username', 'like', $city_id)->get();
+    //     if (count($user) && strlen($request->username) == 4 && $request->password != "") {
+    //         DB::table('users')->where('username', $request->username)->update(['password' => $request->password]);
+    //         return redirect('edituserdistrict')->with('mes','Sửa tài khoản thành công');
+    //     }
+    //     return redirect('edituserdistrict')->with('mes','Sửa tài khoản thất bại');
+    // }
 
-    //Ward User 
-    public function GetAddUserWard() {
-        if (session('user')) {
-            if (strlen(session('user')->username) == 4) {
-                $currentTime = Carbon::now();
-                $district_username = substr(session('user')->username,0,2);
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                if (count($user) && count($user_district)) {
-                    return view('User/Ward/AddUserWard');
-                }
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // //Ward User 
+    // public function GetAddUserWard() {
+    //     if (session('user')) {
+    //         if (strlen(session('user')->username) == 4) {
+    //             $currentTime = Carbon::now();
+    //             $district_username = substr(session('user')->username,0,2);
+    //             $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             if (count($user) && count($user_district)) {
+    //                 return view('User/Ward/AddUserWard');
+    //             }
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function PostAddUSerWard(Request $request) {
-        $username = $request->username;
-        $password = $request->password;
-        $district_id = substr($username,0,4);
-        $user = DB::table('users')->where('username', $username)->get();
-        if ($username == "" || $password == "" || strlen($username) != 6 || count($user) || !ctype_digit($username) || 
-            $district_id != session('user')->username) {
-            return redirect('adduserward')->with('mes','Thêm tài khoản thất bại');
-        }
-        DB::table('users')->insert(['username' => $username,'password' => $password]);
-        return redirect('adduserward')->with('mes','Thêm tài khoản thành công');
-    }
+    // public function PostAddUSerWard(Request $request) {
+    //     $username = $request->username;
+    //     $password = $request->password;
+    //     $district_id = substr($username,0,4);
+    //     $user = DB::table('users')->where('username', $username)->get();
+    //     if ($username == "" || $password == "" || strlen($username) != 6 || count($user) || !ctype_digit($username) || 
+    //         $district_id != session('user')->username) {
+    //         return redirect('adduserward')->with('mes','Thêm tài khoản thất bại');
+    //     }
+    //     DB::table('users')->insert(['username' => $username,'password' => $password]);
+    //     return redirect('adduserward')->with('mes','Thêm tài khoản thành công');
+    // }
 
-    public function ShowUSerWard() {
-        if (session('user')) {
-            $district_id = session('user')->username.'%';
-            if (strlen(session('user')->username) == 4) {
-                $user = DB::table('users')->whereRaw('LENGTH(username) = 6')->Where('username', 'like', $district_id)->get();
-                return view('User/Ward/ShowUserWard',['user'=>$user]);
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // public function ShowUSerWard() {
+    //     if (session('user')) {
+    //         $district_id = session('user')->username.'%';
+    //         if (strlen(session('user')->username) == 4) {
+    //             $user = DB::table('users')->whereRaw('LENGTH(username) = 6')->Where('username', 'like', $district_id)->get();
+    //             return view('User/Ward/ShowUserWard',['user'=>$user]);
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function DeleteUserWard(Request $request) {
-        if (session('user')) {
-            if (strlen(session('user')->username) == 4) {
-                $currentTime = Carbon::now();
-                $district_username = substr(session('user')->username,0,2);
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                if (count($user) && count($user_district)) {
-                    DB::table('users')->where('username', $request->username)->delete();
-                    return redirect('showuserward')->with('mes','Xóa tài khoản thành công');
-                }
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // public function DeleteUserWard(Request $request) {
+    //     if (session('user')) {
+    //         if (strlen(session('user')->username) == 4) {
+    //             $currentTime = Carbon::now();
+    //             $district_username = substr(session('user')->username,0,2);
+    //             $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             if (count($user) && count($user_district)) {
+    //                 DB::table('users')->where('username', $request->username)->delete();
+    //                 return redirect('showuserward')->with('mes','Xóa tài khoản thành công');
+    //             }
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function GetEditUserWard() {
-        if (session('user')) {
-            if (strlen(session('user')->username) == 4) {
-                $currentTime = Carbon::now();
-                $district_username = substr(session('user')->username,0,2);
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                if (count($user) && count($user_district)) {
-                    return view('User/Ward/EditUserWard');
-                }
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // public function GetEditUserWard() {
+    //     if (session('user')) {
+    //         if (strlen(session('user')->username) == 4) {
+    //             $currentTime = Carbon::now();
+    //             $district_username = substr(session('user')->username,0,2);
+    //             $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             if (count($user) && count($user_district)) {
+    //                 return view('User/Ward/EditUserWard');
+    //             }
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function PostEditUserWard(Request $request) {
-        $district_id = session('user')->username.'%';
-        $user = DB::table('users')->where('username', $request->username)->Where('username', 'like', $district_id)->get();
-        if (count($user) && strlen($request->username) == 6 && $request->password != "") {
-            DB::table('users')->where('username', $request->username)->update(['password' => $request->password]);
-            return redirect('edituserward')->with('mes','Sửa tài khoản thành công');
-        }
-        return redirect('edituserward')->with('mes','Sửa tài khoản thất bại');
-    }
+    // public function PostEditUserWard(Request $request) {
+    //     $district_id = session('user')->username.'%';
+    //     $user = DB::table('users')->where('username', $request->username)->Where('username', 'like', $district_id)->get();
+    //     if (count($user) && strlen($request->username) == 6 && $request->password != "") {
+    //         DB::table('users')->where('username', $request->username)->update(['password' => $request->password]);
+    //         return redirect('edituserward')->with('mes','Sửa tài khoản thành công');
+    //     }
+    //     return redirect('edituserward')->with('mes','Sửa tài khoản thất bại');
+    // }
 
-    //Village User 
-    public function GetAddUserVillage() {
-        if (session('user')) {
-            if (strlen(session('user')->username) == 6) {
-                $currentTime = Carbon::now();
-                $district_username = substr(session('user')->username,0,2);
-                $ward_username = substr(session('user')->username,0,4);
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                $user_ward = DB::table('access')->where('username',$ward_username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                if (count($user) && count($user_district) && count($user_ward)) {
-                    return view('User/Village/AddUserVillage');
-                }
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // //Village User 
+    // public function GetAddUserVillage() {
+    //     if (session('user')) {
+    //         if (strlen(session('user')->username) == 6) {
+    //             $currentTime = Carbon::now();
+    //             $district_username = substr(session('user')->username,0,2);
+    //             $ward_username = substr(session('user')->username,0,4);
+    //             $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             $user_ward = DB::table('access')->where('username',$ward_username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             if (count($user) && count($user_district) && count($user_ward)) {
+    //                 return view('User/Village/AddUserVillage');
+    //             }
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function PostAddUSerVillage(Request $request) {
-        $username = $request->username;
-        $password = $request->password;
-        $ward_id = substr($username,0,6);
-        $user = DB::table('users')->where('username', $username)->get();
-        if ($username == "" || $password == "" || strlen($username) != 8 || count($user) || !ctype_digit($username) || 
-            $ward_id != session('user')->username) {
-            return redirect('adduservillage')->with('mes','Thêm tài khoản thất bại');
-        }
-        DB::table('users')->insert(['username' => $username,'password' => $password]);
-        return redirect('adduservillage')->with('mes','Thêm tài khoản thành công');
-    }
+    // public function PostAddUSerVillage(Request $request) {
+    //     $username = $request->username;
+    //     $password = $request->password;
+    //     $ward_id = substr($username,0,6);
+    //     $user = DB::table('users')->where('username', $username)->get();
+    //     if ($username == "" || $password == "" || strlen($username) != 8 || count($user) || !ctype_digit($username) || 
+    //         $ward_id != session('user')->username) {
+    //         return redirect('adduservillage')->with('mes','Thêm tài khoản thất bại');
+    //     }
+    //     DB::table('users')->insert(['username' => $username,'password' => $password]);
+    //     return redirect('adduservillage')->with('mes','Thêm tài khoản thành công');
+    // }
 
-    public function ShowUSerVillage() {
-        if (session('user')) {
-            $ward_id = session('user')->username.'%';
-            if (strlen(session('user')->username) == 6) {
-                $user = DB::table('users')->whereRaw('LENGTH(username) = 8')->Where('username', 'like', $ward_id)->get();
-                return view('User/Village/ShowUserVillage',['user'=>$user]);
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // public function ShowUSerVillage() {
+    //     if (session('user')) {
+    //         $ward_id = session('user')->username.'%';
+    //         if (strlen(session('user')->username) == 6) {
+    //             $user = DB::table('users')->whereRaw('LENGTH(username) = 8')->Where('username', 'like', $ward_id)->get();
+    //             return view('User/Village/ShowUserVillage',['user'=>$user]);
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function DeleteUserVillage(Request $request) {
-        if (session('user')) {
-            if (strlen(session('user')->username) == 6) {
-                $currentTime = Carbon::now();
-                $district_username = substr(session('user')->username,0,2);
-                $ward_username = substr(session('user')->username,0,4);
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                $user_ward = DB::table('access')->where('username',$ward_username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                if (count($user) && count($user_district) && count($user_ward)) {
-                    DB::table('users')->where('username', $request->username)->delete();
-                    return redirect('showuservillage')->with('mes','Xóa tài khoản thành công');
-                }
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // public function DeleteUserVillage(Request $request) {
+    //     if (session('user')) {
+    //         if (strlen(session('user')->username) == 6) {
+    //             $currentTime = Carbon::now();
+    //             $district_username = substr(session('user')->username,0,2);
+    //             $ward_username = substr(session('user')->username,0,4);
+    //             $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             $user_ward = DB::table('access')->where('username',$ward_username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             if (count($user) && count($user_district) && count($user_ward)) {
+    //                 DB::table('users')->where('username', $request->username)->delete();
+    //                 return redirect('showuservillage')->with('mes','Xóa tài khoản thành công');
+    //             }
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function GetEditUserVillage() {
-        if (session('user')) {
-            if (strlen(session('user')->username) == 6) {
-                $currentTime = Carbon::now();
-                $district_username = substr(session('user')->username,0,2);
-                $ward_username = substr(session('user')->username,0,4);
-                $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                $user_ward = DB::table('access')->where('username',$ward_username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
-                if (count($user) && count($user_district) && count($user_ward)) {
-                    return view('User/Village/EditUserVillage');
-                }
-            }
-        }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
-    }
+    // public function GetEditUserVillage() {
+    //     if (session('user')) {
+    //         if (strlen(session('user')->username) == 6) {
+    //             $currentTime = Carbon::now();
+    //             $district_username = substr(session('user')->username,0,2);
+    //             $ward_username = substr(session('user')->username,0,4);
+    //             $user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             $user_district = DB::table('access')->where('username',$district_username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             $user_ward = DB::table('access')->where('username',$ward_username)->where('start_date','<=',$currentTime)
+    //             ->where('end_date','>=',$currentTime)->get();
+    //             if (count($user) && count($user_district) && count($user_ward)) {
+    //                 return view('User/Village/EditUserVillage');
+    //             }
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
-    public function PostEditUserVillage(Request $request) {
-        $ward_id = session('user')->username.'%';
-        $user = DB::table('users')->where('username', $request->username)->Where('username', 'like', $ward_id)->get();
-        if (count($user) && strlen($request->username) == 8 && $request->password != "") {
-            DB::table('users')->where('username', $request->username)->update(['password' => $request->password]);
-            return redirect('edituservillage')->with('mes','Sửa tài khoản thành công');
-        }
-        return redirect('edituservillage')->with('mes','Sửa tài khoản thất bại');
-    }
+    // public function PostEditUserVillage(Request $request) {
+    //     $ward_id = session('user')->username.'%';
+    //     $user = DB::table('users')->where('username', $request->username)->Where('username', 'like', $ward_id)->get();
+    //     if (count($user) && strlen($request->username) == 8 && $request->password != "") {
+    //         DB::table('users')->where('username', $request->username)->update(['password' => $request->password]);
+    //         return redirect('edituservillage')->with('mes','Sửa tài khoản thành công');
+    //     }
+    //     return redirect('edituservillage')->with('mes','Sửa tài khoản thất bại');
+    // }
 }
