@@ -37,7 +37,7 @@ function loadLocationInfo() {
 }
 function postLocation(_code, _name) {
     let csrfToken = $("meta[name='csrf-token']").attr("content");
-    let location = [{ code: _code, name: _name }];
+    let location = { code: _code, name: _name };
     fetch('update-new-location', {
         method: 'post',
         headers: {
