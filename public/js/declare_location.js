@@ -89,4 +89,4 @@ $('body').on('keyup', '#location-code, #location-name', function () {
 $('body').on('click', '#cancel-location', function () {
     $("#location-code").val("");
     $("#location-name").val("");
-})
+});

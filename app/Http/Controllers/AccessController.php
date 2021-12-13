@@ -19,8 +19,10 @@ class AccessController extends Controller
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 2) {
                 $result = ['resp' => '', 'info' => []];
-                $access_user = DB::table('access')->where('username',session('user')->username)->first();
-                if ($access_user->access) {
+                $currentTime = Carbon::now();
+                $access_user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->where('access',1)->get();
+                if (count($access_user)) {
                     $result['resp'] = true;
                 } else {
                     $result['resp'] = false;
@@ -33,8 +35,10 @@ class AccessController extends Controller
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 4) {
                 $result = ['resp' => '', 'info' => []];
-                $access_user = DB::table('access')->where('username',session('user')->username)->first();
-                if ($access_user->access) {
+                $currentTime = Carbon::now();
+                $access_user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->where('access',1)->get();
+                if (count($access_user)) {
                     $result['resp'] = true;
                 } else {
                     $result['resp'] = false;
@@ -47,8 +51,10 @@ class AccessController extends Controller
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 6) {
                 $result = ['resp' => '', 'info' => []];
-                $access_user = DB::table('access')->where('username',session('user')->username)->first();
-                if ($access_user->access) {
+                $currentTime = Carbon::now();
+                $access_user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->where('access',1)->get();
+                if (count($access_user)) {
                     $result['resp'] = true;
                 } else {
                     $result['resp'] = false;
