@@ -45,6 +45,7 @@ class DeclareLocationController extends Controller
     }
 
     public function UpdateNewLocation(Request $request) {
+        // return response()->json($request);
         if (session('user')) {
             if (session('user')->username == "admin") {
                 $success = ['resp' => 'success','codes' => []];

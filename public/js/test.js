@@ -1,5 +1,5 @@
 // var csrfToken = $("meta[name='csrf-token']").attr("content");  
-// arr = [{code: "01", name : "Cầu Giấy"}, {code : "02", name : "Ba Đình"}, {code : "03", name : "Đống Đa"}];
+// arr = {code: "10", name : "Cầu Giấy"};
 // fetch('update-new-location', {
 //     method: 'post',
 //     headers: {
@@ -17,9 +17,9 @@
 // .then(response => response.json())
 // .then(data => console.log(data));
 
-// fetch('load-declared-permission')
-// .then(response => response.json())
-// .then(data => console.log(data));
+fetch('load-declared-permission')
+.then(response => response.json())
+.then(data => console.log(data));
 
 // var csrfToken = $("meta[name='csrf-token']").attr("content");  
 // fetch('add-new-user', {
@@ -28,7 +28,7 @@
 //         "Content-Type": "application/json",
 //         "X-CSRF-Token": csrfToken
 //     },
-//     body: JSON.stringify({username: '010103',password: 'a'})
+//     body: JSON.stringify({username: '10',password: '10'})
 //   }).then(function(response) {
 //     return response.json();
 //   }).then(function(data) {
@@ -42,7 +42,7 @@
 //         "Content-Type": "application/json",
 //         "X-CSRF-Token": csrfToken
 //     },
-//     body: JSON.stringify({code: '01010103', startDate: '2021/12/01', endDate: '2021/12/31'})
+//     body: JSON.stringify({code: '10', startDate: '2021/12/01', endDate: '2021/12/31'})
 //   }).then(function(response) {
 //     return response.json();
 //   }).then(function(data) {
