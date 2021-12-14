@@ -21,7 +21,7 @@ class AccessController extends Controller
                 $result = ['resp' => '', 'info' => []];
                 $currentTime = Carbon::now();
                 $access_user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->where('access',1)->get();
+                ->where('end_date','>=',$currentTime)->get();
                 if (count($access_user)) {
                     $result['resp'] = true;
                 } else {
@@ -37,7 +37,7 @@ class AccessController extends Controller
                 $result = ['resp' => '', 'info' => []];
                 $currentTime = Carbon::now();
                 $access_user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->where('access',1)->get();
+                ->where('end_date','>=',$currentTime)->get();
                 if (count($access_user)) {
                     $result['resp'] = true;
                 } else {
@@ -53,7 +53,7 @@ class AccessController extends Controller
                 $result = ['resp' => '', 'info' => []];
                 $currentTime = Carbon::now();
                 $access_user = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->where('access',1)->get();
+                ->where('end_date','>=',$currentTime)->get();
                 if (count($access_user)) {
                     $result['resp'] = true;
                 } else {
@@ -82,8 +82,7 @@ class AccessController extends Controller
                     $result['resp'] = 'error';
                     return response()->json($result);
                 }
-                DB::table('access')->insert(['username' => $username,'start_date' => $start_date, 'end_date' => $end_date,
-                'access' => 1]);
+                DB::table('access')->insert(['username' => $username,'start_date' => $start_date, 'end_date' => $end_date]);
                 $result['resp'] = 'success';
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 2) {
@@ -98,8 +97,7 @@ class AccessController extends Controller
                     $result['resp'] = 'error';
                     return response()->json($result);
                 }
-                DB::table('access')->insert(['username' => $username,'start_date' => $start_date, 'end_date' => $end_date,
-                'access' => 1]);
+                DB::table('access')->insert(['username' => $username,'start_date' => $start_date, 'end_date' => $end_date]);
                 $result['resp'] = 'success';
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 4) {
@@ -114,8 +112,7 @@ class AccessController extends Controller
                     $result['resp'] = 'error';
                     return response()->json($result);
                 }
-                DB::table('access')->insert(['username' => $username,'start_date' => $start_date, 'end_date' => $end_date,
-                'access' => 1]);
+                DB::table('access')->insert(['username' => $username,'start_date' => $start_date, 'end_date' => $end_date]);
                 $result['resp'] = 'success';
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 6) {
@@ -130,8 +127,7 @@ class AccessController extends Controller
                     $result['resp'] = 'error';
                     return response()->json($result);
                 }
-                DB::table('access')->insert(['username' => $username,'start_date' => $start_date, 'end_date' => $end_date,
-                'access' => 1]);
+                DB::table('access')->insert(['username' => $username,'start_date' => $start_date, 'end_date' => $end_date]);
                 $result['resp'] = 'success';
                 return response()->json($result);
             }
