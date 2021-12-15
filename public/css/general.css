@@ -1,0 +1,73 @@
+.content-title {
+    margin: 0;
+    padding: 0;
+    font-size: 1.7rem;
+}
+
+.confirm-button {
+    background-color: deepskyblue;
+    color: white;
+    border: 2px solid deepskyblue;
+}
+.cancel-button {
+    padding: 6px;
+    background-color: white;
+    color: black;
+    border: 1px solid deepskyblue;
+}
+
+.input-label {
+    display: block;
+}
+
+.error-hint {
+    color: red;
+    margin-top: 5px;
+    font-size: 0.9rem;
+}
+
+.input-item {
+    box-sizing: border-box;
+    height: 45px;
+}
+.border-input-item {
+    width: 400px;
+    padding-left: 5px;
+    border: 1px solid deepskyblue;
+}
+.button-item {
+    width: 100px;
+    cursor: pointer;
+}
+.data-table {
+    border-collapse: collapse;
+}
+.table-cell {
+    box-sizing: border-box;
+    height: 45px;
+    padding-left: 5px;
+    border: 1px solid deepskyblue;
+}
+.icon-cell {
+    padding: 0;
+}
+.table-header {
+    background-color: deepskyblue;
+    color: white;
+    padding: 0 25px;
+}
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0;
+}
+.header-icon {
+    padding: 0 15px;
+    width: 100px;
+}
+.table-icon {
+    width: 45px;
+    height: 25px;
+    display: block;
+}

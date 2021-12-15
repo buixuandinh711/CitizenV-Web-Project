@@ -1,25 +1,34 @@
 $("#declare-location-nav").click(function () {
     createLocationPage();
 })
-function addLocationRow() {
-    let $locationRow = $('<div class="location-row">');
-    $locationRow.append('<input type="text" class="location-code location-input" placeholder="Mã địa phương" id="location-code">');
-    $locationRow.append('<input type="text" class="location-name location-input" placeholder="Tên địa phương" id="location-name">');
-    $locationRow.append('<button class="location-button confirm-button" id="submit-location">Thêm</button>');
-    $locationRow.append('<button class="location-button cancel-button" id="cancel-location">Hủy</button>');
-    $(".location-container").append($locationRow);
-}
 function createLocationPage() {
-    $contenContainer = $(".content-container");
-    if ($contenContainer.children().length > 0) {
-        return;
-    }
-    $contenContainer.append('<h2 class="content-title"></h2>');
-    $locationContainer = $('<div class="location-container">');
-    $contenContainer.append($locationContainer);
-    addLocationRow();
-    $locationContainer.append('<span class="input-error" id="location-input-error"></span>');
-    loadLocationInfo();
+    let $contenContainer = $(".content-container");
+    $contenContainer.empty();
+    $contenContainer.append('<h2 class="content-title">Cấp mã cho Tỉnh/Thành phố</h2>');
+
+    let $addLocationContainer = $('<div class="add-location-container">');
+    $addLocationContainer.append('<h2>Thêm địa phương mới</h2>');
+    let $locationInputContainer = $('<div class="location-input-container">');
+
+    let $div1 = $('<div>');
+    $div1.append('<input type="text" class="input-item border-input-item" id="declare-location-code" placeholder="Mã địa phương">');
+    $locationInputContainer.append($div1);
+
+    let $div2 = $('<div>');
+    $div2.append('<input type="text" class="input-item border-input-item" id="declare-location-name" placeholder="Tên địa phương">');
+    $locationInputContainer.append($div2);
+
+    let $div3 = $('<div>');
+    $div3.append('<button class="input-item confirm-button button-item" id="submit-new-location">Xác nhận</button>');
+    $locationInputContainer.append($div3);
+
+    let $div4 = $('<div>');
+    $div4.append('<button class="input-item cancel-button button-item" id="cancel-new-location">Hủy</button>');
+    $locationInputContainer.append($div4);
+
+    $addLocationContainer.append($locationInputContainer);
+    $addLocationContainer.append('<div class="error-hint" id="location-input-error"></div>');
+    $contenContainer.append($addLocationContainer);
 }
 var declaredCodes = [];
 function loadLocationInfo() {
@@ -50,6 +59,7 @@ function postLocation(_code, _name) {
     }).then(function (data) {
         if (data.resp == "success") {
             declaredCodes = data.codes;
+            clearInput();
             $.toast({
                 heading: 'Thêm địa phương thành công',
                 hideAfter: 1000,
@@ -61,9 +71,9 @@ function postLocation(_code, _name) {
     });
 
 }
-$('body').on('click', '#submit-location', function () {
-    let locationCode = $("#location-code").val().trim();
-    let locationName = $("#location-name").val().trim();
+$('body').on('click', '#submit-new-location', function () {
+    let locationCode = $("#declare-location-code").val().trim();
+    let locationName = $("#declare-location-name").val().trim();
     let $errorDisplay = $("#location-input-error");
     if (locationCode.length == 0 || locationName.length == 0) {
         $errorDisplay.html("Mã địa phương và tên địa phương không được trống!");
@@ -83,10 +93,15 @@ $('body').on('click', '#submit-location', function () {
     $errorDisplay.html("");
     postLocation(locationCode, locationName);
 });
-$('body').on('keyup', '#location-code, #location-name', function () {
+$('body').on('keydown', '#declare-location-code, #declare-location-name', function () {
     $("#location-input-error").empty();
 })
-$('body').on('click', '#cancel-location', function () {
-    $("#location-code").val("");
-    $("#location-name").val("");
-});
+
+$('body').on('click', '#cancel-new-location', function () {
+   clearInput();
+})
+function clearInput() {
+    $("#declare-location-code").val("");
+    $("#declare-location-name").val("");
+    $("#location-input-error").empty();
+}

@@ -1,46 +1,15 @@
-.content-title {
-    margin: 0;
-    padding: 0;
-    font-size: 1.7rem;
-}
-
-.location-container {
+.add-location-container {
     margin-top: 50px;
 }
-.location-input {
-    padding: 5px;
-    font-size: 1rem;
-    margin-right: 5px;
+.location-input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 1015px;
 }
-.location-code {
-    width: 120px;
+#declare-location-code {
+    width: 300px;
 }
-.location-name {
-    width: 250px;
-}
-.location-button {
-    padding: 5px;
-    width: 70px;
-    cursor: pointer;
-    margin-right: 5px;
-}
-.confirm-button {
-    background-color: deepskyblue;
-    color: white;
-    border: 2px solid deepskyblue;
-}
-.cancel-button {
-    padding: 6px;
-    background-color: white;
-    color: black;
-    border: 1px solid deepskyblue;
-}
-.add-all-button {
-    width: 90px;
-    margin-top: 10px;
-}
-.input-error {
-    color: red;
-    font-size: 0.8rem;
-    margin-top: 5px;
+#declare-location-name {
+    width: 500px;
 }
