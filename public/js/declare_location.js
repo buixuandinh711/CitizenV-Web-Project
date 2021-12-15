@@ -46,7 +46,7 @@ function loadLocationInfo() {
 }
 function postLocation(_code, _name) {
     let csrfToken = $("meta[name='csrf-token']").attr("content");
-    let location = [{ code: _code, name: _name }];
+    let location = { code: _code, name: _name };
     fetch('update-new-location', {
         method: 'post',
         headers: {
@@ -96,6 +96,7 @@ $('body').on('click', '#submit-new-location', function () {
 $('body').on('keydown', '#declare-location-code, #declare-location-name', function () {
     $("#location-input-error").empty();
 })
+
 $('body').on('click', '#cancel-new-location', function () {
    clearInput();
 })
