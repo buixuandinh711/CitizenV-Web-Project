@@ -64,38 +64,95 @@ class UserController extends Controller
         }
     }
 
-    public function ShowInfoUser() {
+    public function AccountLocationInfo() {
         if (session('user')) {
             if (session('user')->username == 'admin') {
-                $user = DB::table('users')->leftjoin('city', 'city.city_id', '=', 'users.username')
-                ->select('users.username')->selectRaw('city.city_name AS local_name')
-                ->where('users.username','admin')->first();
-                $user->local_name = 'Tổng cục';
-                return view('User/ShowInfoUser',['user'=>$user]);
-            } else if (strlen(session('user')->username) == 2) {   
-                $user = DB::table('users')->join('city', 'city.city_id', '=', 'users.username')
-                ->select('users.username')->selectRaw('city.city_name AS local_name')
-                ->where('users.username',session('user')->username)->first();
-                return view('User/ShowInfoUser',['user'=>$user]);
-            } else if (strlen(session('user')->username) == 4) {   
-                $user = DB::table('users')->join('district', 'district.district_id', '=', 'users.username')
-                ->select('users.username')->selectRaw('district.district_name AS local_name')
-                ->where('users.username',session('user')->username)->first();
-                return view('User/ShowInfoUser',['user'=>$user]);
-            } else if (strlen(session('user')->username) == 6) {   
-                $user = DB::table('users')->join('ward', 'ward.ward_id', '=', 'users.username')
-                ->select('users.username')->selectRaw('ward.ward_name AS local_name')
-                ->where('users.username',session('user')->username)->first();
-                return view('User/ShowInfoUser',['user'=>$user]);
-            } else if (strlen(session('user')->username) == 8) {   
-                $user = DB::table('users')->join('village', 'village.village_id', '=', 'users.username')
-                ->select('users.username')->selectRaw('village.village_name AS local_name')
-                ->where('users.username',session('user')->username)->first();
-                return view('User/ShowInfoUser',['user'=>$user]);
+                $result = ['name' => 'cả nước', 'code' => 'admin', 'accountLocation' => [], 'noAccountLocation' => []];
+                $userlocation = DB::table('city')->leftjoin('users', 'city.city_id', '=', 'users.username')->selectraw('city.city_id as code')
+                ->selectraw('city.city_name as name')->whereraw('users.username is not null')->get();
+                $nouserlocation = DB::table('city')->leftjoin('users', 'city.city_id', '=', 'users.username')->selectraw('city.city_id as code')
+                ->selectraw('city.city_name as name')->whereraw('users.username is null')->get();
+                $result['accountLocation'] = $userlocation;
+                $result['noAccountLocation'] = $nouserlocation;
+                return response()->json($result);
+            } else if (strlen(session('user')->username) == 2) {
+                $result = ['name' => '', 'code' => '', 'accountLocation' => [], 'noAccountLocation' => []];
+                $city = DB::table('city')->where('city_id', session('user')->username)->first();
+                $result['name'] = $city->city_name;
+                $result['code'] = $city->city_id;
+                $userlocation = DB::table('district')->leftjoin('users', 'district.district_id', '=', 'users.username')
+                ->selectraw('district.district_id as code')->selectraw('district.district_name as name')
+                ->whereraw('users.username is not null')->where('city_id',session('user')->username)->get();
+                $nouserlocation = DB::table('district')->leftjoin('users', 'district.district_id', '=', 'users.username')
+                ->selectraw('district.district_id as code')->selectraw('district.district_name as name')
+                ->whereraw('users.username is null')->where('city_id',session('user')->username)->get();
+                $result['accountLocation'] = $userlocation;
+                $result['noAccountLocation'] = $nouserlocation;
+                return response()->json($result);
+            } else if (strlen(session('user')->username) == 4) {
+                $result = ['name' => '', 'code' => '', 'accountLocation' => [], 'noAccountLocation' => []];
+                $district = DB::table('district')->where('district_id', session('user')->username)->first();
+                $result['name'] = $district->district_name;
+                $result['code'] = $district->district_id;
+                $userlocation = DB::table('ward')->leftjoin('users', 'ward.ward_id', '=', 'users.username')
+                ->selectraw('ward.ward_id as code')->selectraw('ward.ward_name as name')
+                ->whereraw('users.username is not null')->where('district_id',session('user')->username)->get();
+                $nouserlocation = DB::table('ward')->leftjoin('users', 'ward.ward_id', '=', 'users.username')
+                ->selectraw('ward.ward_id as code')->selectraw('ward.ward_name as name')
+                ->whereraw('users.username is null')->where('district_id',session('user')->username)->get();
+                $result['accountLocation'] = $userlocation;
+                $result['noAccountLocation'] = $nouserlocation;
+                return response()->json($result);
+            } else if (strlen(session('user')->username) == 6) {
+                $result = ['name' => '', 'code' => '', 'accountLocation' => [], 'noAccountLocation' => []];
+                $ward = DB::table('ward')->where('ward_id', session('user')->username)->first();
+                $result['name'] = $ward->ward_name;
+                $result['code'] = $ward->ward_id;
+                $userlocation = DB::table('village')->leftjoin('users', 'village.village_id', '=', 'users.username')
+                ->selectraw('village.village_id as code')->selectraw('village.village_name as name')
+                ->whereraw('users.username is not null')->where('ward_id',session('user')->username)->get();
+                $nouserlocation = DB::table('village')->leftjoin('users', 'village.village_id', '=', 'users.username')
+                ->selectraw('village.village_id as code')->selectraw('village.village_name as name')
+                ->whereraw('users.username is null')->where('ward_id',session('user')->username)->get();
+                $result['accountLocation'] = $userlocation;
+                $result['noAccountLocation'] = $nouserlocation;
+                return response()->json($result);
             }
         }
-        return redirect('main')->with('mes','Bạn không đủ quyền');
     }
+
+    // public function ShowInfoUser() {
+    //     if (session('user')) {
+    //         if (session('user')->username == 'admin') {
+    //             $user = DB::table('users')->leftjoin('city', 'city.city_id', '=', 'users.username')
+    //             ->select('users.username')->selectRaw('city.city_name AS local_name')
+    //             ->where('users.username','admin')->first();
+    //             $user->local_name = 'Tổng cục';
+    //             return view('User/ShowInfoUser',['user'=>$user]);
+    //         } else if (strlen(session('user')->username) == 2) {   
+    //             $user = DB::table('users')->join('city', 'city.city_id', '=', 'users.username')
+    //             ->select('users.username')->selectRaw('city.city_name AS local_name')
+    //             ->where('users.username',session('user')->username)->first();
+    //             return view('User/ShowInfoUser',['user'=>$user]);
+    //         } else if (strlen(session('user')->username) == 4) {   
+    //             $user = DB::table('users')->join('district', 'district.district_id', '=', 'users.username')
+    //             ->select('users.username')->selectRaw('district.district_name AS local_name')
+    //             ->where('users.username',session('user')->username)->first();
+    //             return view('User/ShowInfoUser',['user'=>$user]);
+    //         } else if (strlen(session('user')->username) == 6) {   
+    //             $user = DB::table('users')->join('ward', 'ward.ward_id', '=', 'users.username')
+    //             ->select('users.username')->selectRaw('ward.ward_name AS local_name')
+    //             ->where('users.username',session('user')->username)->first();
+    //             return view('User/ShowInfoUser',['user'=>$user]);
+    //         } else if (strlen(session('user')->username) == 8) {   
+    //             $user = DB::table('users')->join('village', 'village.village_id', '=', 'users.username')
+    //             ->select('users.username')->selectRaw('village.village_name AS local_name')
+    //             ->where('users.username',session('user')->username)->first();
+    //             return view('User/ShowInfoUser',['user'=>$user]);
+    //         }
+    //     }
+    //     return redirect('main')->with('mes','Bạn không đủ quyền');
+    // }
 
     // //City User 
     // public function GetAddUserCity() {
