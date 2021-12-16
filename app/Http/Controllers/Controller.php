@@ -88,17 +88,17 @@ class Controller extends BaseController
     // }
 
     // public function ShowListPerson() {
-    //     if (session('user')) {
-    //         if (session('user')->username == 'admin') {
-    //             return redirect('showlistpersonall');
-    //         } else if (strlen(session('user')->username) == 2) {
-    //             return redirect('showlistpersoncity');
-    //         } else if (strlen(session('user')->username) == 4) {
-    //             return redirect('showlistpersondistrict');
-    //         } else if (strlen(session('user')->username) == 6) {
-    //             return redirect('showlistpersonward');
-    //         }
-    //     }
+        // if (session('user')) {
+        //     if (session('user')->username == 'admin') {
+        //         return redirect('showlistpersonall');
+        //     } else if (strlen(session('user')->username) == 2) {
+        //         return redirect('showlistpersoncity');
+        //     } else if (strlen(session('user')->username) == 4) {
+        //         return redirect('showlistpersondistrict');
+        //     } else if (strlen(session('user')->username) == 6) {
+        //         return redirect('showlistpersonward');
+        //     }
+        // }
     //     return redirect('main')->with('mes','Bạn không đủ quyền');
     // }
 

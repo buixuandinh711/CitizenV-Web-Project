@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class DeclareLocationController extends Controller
 {
@@ -45,13 +46,12 @@ class DeclareLocationController extends Controller
     }
 
     public function UpdateNewLocation(Request $request) {
-        // return response()->json($request);
         if (session('user')) {
             if (session('user')->username == "admin") {
                 $success = ['resp' => 'success','codes' => []];
                 $error = ['resp' => 'error']; 
-                $city_id = $request['code'];
-                $city_name = $request['name'];
+                $city_id = $request->code;
+                $city_name = $request->name;
                 $city = DB::table('city')->where('city_id', $city_id)->get();
                 if (count($city) || $city_id == "" || $city_name == "" || strlen($city_id) != 2 || !ctype_digit($city_id)) {
                     return response()->json($error);
@@ -63,12 +63,16 @@ class DeclareLocationController extends Controller
                 }
                 return response()->json($success);
             } else if (strlen(session('user')->username) == 2) {
+                $currentTime = Carbon::now();
                 $success = ['resp' => 'success','codes' => []];
                 $error = ['resp' => 'error']; 
-                $district_id = session('user')->username.$request['code'];
-                $district_name = $request['name'];
+                $district_id = session('user')->username.$request->code;
+                $district_name = $request->name;
                 $district = DB::table('district')->where('district_id', $district_id)->get();
-                if (count($district) || $district_id == "" || $district_name == "" || strlen($district_id) != 4 || !ctype_digit($district_id)) {
+                $access_city = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
+                if (count($district) || $district_id == "" || $district_name == "" || strlen($district_id) != 4 || !ctype_digit($district_id) ||
+                !count($access_city)) {
                     return response()->json($error);
                 }
                 DB::table('district')
@@ -79,12 +83,18 @@ class DeclareLocationController extends Controller
                 }
                 return response()->json($success);
             } else if (strlen(session('user')->username) == 4) {
+                $currentTime = Carbon::now();
                 $success = ['resp' => 'success','codes' => []];
                 $error = ['resp' => 'error']; 
-                $ward_id = session('user')->username.$request['code'];
-                $ward_name = $request['name'];
+                $ward_id = session('user')->username.$request->code;
+                $ward_name = $request->name;
                 $ward = DB::table('ward')->where('ward_id', $ward_id)->get();
-                if (count($ward) || $ward_id == "" || $ward_name == "" || strlen($ward_id) != 6 || !ctype_digit($ward_id)) {
+                $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
+                $access_district = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
+                if (count($ward) || $ward_id == "" || $ward_name == "" || strlen($ward_id) != 6 || !ctype_digit($ward_id) || 
+                !count($access_city) || !count($access_district)) {
                     return response()->json($error);
                 }
                 DB::table('ward')
@@ -95,12 +105,20 @@ class DeclareLocationController extends Controller
                 }
                 return response()->json($success);
             } else if (strlen(session('user')->username) == 6) {
+                $currentTime = Carbon::now();
                 $success = ['resp' => 'success','codes' => []];
                 $error = ['resp' => 'error']; 
-                $village_id = session('user')->username.$request['code'];
-                $village_name = $request['name'];
+                $village_id = session('user')->username.$request->code;
+                $village_name = $request->name;
                 $village = DB::table('village')->where('village_id', $village_id)->get();
-                if (count($village) || $village_id == "" || $village_name == "" || strlen($village_id) != 8 || !ctype_digit($village_id)) {
+                $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
+                $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
+                $access_ward = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
+                ->where('end_date','>=',$currentTime)->get();
+                if (count($village) || $village_id == "" || $village_name == "" || strlen($village_id) != 8 || !ctype_digit($village_id) || 
+                !count($access_city) || !count($access_district) || !count($access_ward)) {
                     return response()->json($error);
                 } 
                 DB::table('village')
