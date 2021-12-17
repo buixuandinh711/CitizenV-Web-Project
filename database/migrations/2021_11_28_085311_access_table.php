@@ -17,7 +17,6 @@ class AccessTable extends Migration
             $table->string('username');
             $table->date('start_date');
             $table->date('end_date');
-            $table->boolean('access');
         });
     }
 
