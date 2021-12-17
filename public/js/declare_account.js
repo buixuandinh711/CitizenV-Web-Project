@@ -56,7 +56,7 @@ function loadInfo() {
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
-        containLocation = { code: data.code == "admin" ? "" : code, name: data.name };
+        containLocation = { code: data.code == "admin" ? "" : data.code, name: data.name };
         $(".content-title").text("Cấp tài khoản cho địa phương thuộc địa bàn " + data.name);
         declaredLocation = data.accountLocation;
         createSelectLocationOption(data.noAccountLocation);
