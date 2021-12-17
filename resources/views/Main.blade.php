@@ -8,11 +8,13 @@
     <link rel="StyleSheet" href="css/home_styles.css">
     <link rel="StyleSheet" href="css/general.css">
     <link rel="StyleSheet" href="css/declare_location.css">
+    <link rel="StyleSheet" href="css/declare_account.css">
     <link rel="StyleSheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
     <script src="js/home.js" defer></script>
     <script src="js/declare_location.js" defer></script>
+    <script src="js/declare_account.js" defer></script>
     <script src="js/test.js" defer></script>
 </head>
 
@@ -38,7 +40,7 @@
             </div>
             <div class="dropdown-container" id="management-dropdown">
                 <span class="sidebar-nav" id="declare-location-nav">Khai báo địa phương</span>
-                <span class="sidebar-nav">Cấp tài khoản</span>
+                <span class="sidebar-nav" id="declare-account-nav">Cấp tài khoản</span>
             </div>
             <div class="sidebar-row" id="declaration">
                 <span class="sidebar-nav">Khai báo dân sô</span>
