@@ -1,12 +1,12 @@
-$("#declare-account-nav").click(function() {
+$("#declare-account-nav").click(function () {
     createAddAccountPage();
     clearInput();
-    createSelectLocationOption([{code:"01", name: "Ha Noi"}, {code:"02", name:"Ho Chi Minh"}, {code:"03", name:"Hai Duong"}]);
+    loadInfo();
 })
 function createAddAccountPage() {
     let $contenContainer = $(".content-container");
     $contenContainer.empty();
-    $contenContainer.append('<h2 class="content-title">Cấp tài khoản cho Tỉnh/Thành phố</h2>');
+    $contenContainer.append('<h2 class="content-title"></h2>');
     let $addAccountContainer = $('<div class="add-account-container">');
 
     let $addAccountRow1 = $('<div class="add-account-row">');
@@ -44,11 +44,11 @@ function createAddAccountPage() {
     $contenContainer.append($addAccountContainer);
 }
 
-var containLocation = {code:"01", name:""};
+var containLocation = { code: "01", name: "" };
 var declaredLocation = [];
 
 function loadInfo() {
-    fetch('current-local-info', {
+    fetch('account-location-info', {
         method: 'get',
         headers: {
             "Content-Type": "application/json",
@@ -56,11 +56,14 @@ function loadInfo() {
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
-        $(".content-title").text("Cấp tài khoản cho địa phương thuộc địa bàn " + data.local)
-        declaredLocation = data.codes;
+        containLocation = { code: data.code == "admin" ? "" : code, name: data.name };
+        $(".content-title").text("Cấp tài khoản cho địa phương thuộc địa bàn " + data.name);
+        declaredLocation = data.accountLocation;
+        createSelectLocationOption(data.noAccountLocation);
     });
 }
 function createSelectLocationOption(locationList) {
+
     let $locationSelector = $('#account-location-select');
 
     for (i = 0; i < locationList.length; i++) {
@@ -79,7 +82,32 @@ function selectLocation() {
     let locationCode = selectVal.substring(0, 2);
     $("#add-account-username").val(containLocation.code + locationCode);
 }
-$("body").on("click", "#submit-account-button", function() {
+function subNewAccount(_username, _password) {
+    let csrfToken = $("meta[name='csrf-token']").attr("content");
+    let account = { username: _username, password: _password };
+    fetch('add-new-user', {
+        method: 'post',
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken
+        },
+        body: JSON.stringify(account)
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        if (data.resp == "success") {
+            clearInput();
+            $.toast({
+                heading: 'Thêm địa phương thành công',
+                hideAfter: 1000,
+                bgColor: '#00bfff',
+                textColor: '#fff',
+                loaderBg: '#fff'
+            });
+        }
+    });
+}
+$("body").on("click", "#submit-account-button", function () {
     let password = $("#add-account-password").val().trim();
     let repassword = $("#add-account-repassword").val().trim();
     let $errorHint = $("#add-account-error");
@@ -96,10 +124,11 @@ $("body").on("click", "#submit-account-button", function() {
         return;
     }
     $errorHint.html("");
-    console.log("success");
+    let username = $("#add-account-username").val();
+    subNewAccount(username, password);
 });
 
-$("body").on("click", "#cancel-account-button", function() {
+$("body").on("click", "#cancel-account-button", function () {
     console.log(1);
     clearInput();
 });
