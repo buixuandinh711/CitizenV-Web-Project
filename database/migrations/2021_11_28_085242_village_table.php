@@ -19,6 +19,7 @@ class VillageTable extends Migration
             $table->string('ward_id');
             $table->string('village_id');
             $table->string('village_name');
+            $table->boolean('complete');
         });
     }
 

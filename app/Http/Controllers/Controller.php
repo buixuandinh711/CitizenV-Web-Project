@@ -18,9 +18,9 @@ class Controller extends BaseController
     public function CheckLogin(Request $request) {
         $username = $request['username'];
         $password = $request['password'];
-        $user = DB::table('users')->where('username', $username)->where('password', $password)->get();
-        if (count($user)) {
-            $request->session()->put('user', $user[0]);
+        $user = DB::table('users')->where('username', $username)->where('password', $password)->first();
+        if ($user) {
+            $request->session()->put('user', $user);
             return redirect('main');
         } else {
             return redirect('login')->with('mes','Đăng nhập thất bại');
@@ -41,17 +41,17 @@ class Controller extends BaseController
     }
 
     // public function ShowUser() {
-    //     if (session('user')) {
-    //         if (session('user')->username == 'admin') {
-    //             return redirect('showusercity');
-    //         } else if (strlen(session('user')->username) == 2) {
-    //             return redirect('showuserdistrict');
-    //         } else if (strlen(session('user')->username) == 4) {
-    //             return redirect('showuserward');
-    //         } else if (strlen(session('user')->username) == 6) {
-    //             return redirect('showuservillage');
-    //         }
-    //     }
+        // if (session('user')) {
+        //     if (session('user')->username == 'admin') {
+        //         return redirect('showusercity');
+        //     } else if (strlen(session('user')->username) == 2) {
+        //         return redirect('showuserdistrict');
+        //     } else if (strlen(session('user')->username) == 4) {
+        //         return redirect('showuserward');
+        //     } else if (strlen(session('user')->username) == 6) {
+        //         return redirect('showuservillage');
+        //     }
+        // }
     //     return redirect('main')->with('mes','Bạn không đủ quyền');
     // }
 
