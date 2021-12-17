@@ -1,5 +1,6 @@
 $("#declare-location-nav").click(function () {
     createLocationPage();
+    loadLocationInfo();
 })
 function createLocationPage() {
     let $contenContainer = $(".content-container");
