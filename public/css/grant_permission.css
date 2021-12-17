@@ -1,0 +1,26 @@
+.add-permission-container {
+    margin-top: 50px;
+}
+.permission-input-container {
+    width: 1420px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.granted-permission {
+    margin-top: 50px;
+}
+.edit-icon {
+    background-color: deepskyblue;
+    background-image: url(../image/icons8-edit-48.png) ;
+    background-size:contain;
+    background-repeat: no-repeat;   
+    background-position: center center;
+}
+.remove-icon {
+    background-color: red;
+    background-image: url(../image/icons8-cancel-64.png) ;
+    background-size:contain;
+    background-repeat: no-repeat;   
+    background-position: center center;
+}

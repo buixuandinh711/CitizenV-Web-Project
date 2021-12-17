@@ -9,12 +9,14 @@
     <link rel="StyleSheet" href="css/general.css">
     <link rel="StyleSheet" href="css/declare_location.css">
     <link rel="StyleSheet" href="css/declare_account.css">
+    <link rel="StyleSheet" href="css/grant_permission.css">
     <link rel="StyleSheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
     <script src="js/home.js" defer></script>
     <script src="js/declare_location.js" defer></script>
     <script src="js/declare_account.js" defer></script>
+    <script src="js/grant_permission.js" defer></script>
     <script src="js/test.js" defer></script>
 </head>
 
@@ -47,7 +49,7 @@
                 <b class="caret sidebar-caret"></b>
             </div>
             <div class="dropdown-container" id="declaration-dropdown">
-                <span class="sidebar-nav">Cấp quyền khai báo</span>
+                <span class="sidebar-nav" id="grant-declare-permission">Cấp quyền khai báo</span>
                 <span class="sidebar-nav">Theo dõi tiến độ</span>
             </div>
             <div class="sidebar-row" id="information">

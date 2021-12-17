@@ -58,9 +58,10 @@ function postLocation(_code, _name) {
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
+        console.log(data);
         if (data.resp == "success") {
             declaredCodes = data.codes;
-            clearInput();
+            clearLocationInput();
             $.toast({
                 heading: 'Thêm địa phương thành công',
                 hideAfter: 1000,
@@ -92,6 +93,7 @@ $('body').on('click', '#submit-new-location', function () {
         return;
     }
     $errorDisplay.html("");
+    console.log(123);
     postLocation(locationCode, locationName);
 });
 $('body').on('keydown', '#declare-location-code, #declare-location-name', function () {
@@ -99,9 +101,10 @@ $('body').on('keydown', '#declare-location-code, #declare-location-name', functi
 })
 
 $('body').on('click', '#cancel-new-location', function () {
-   clearInput();
+   clearLocationInput();
+   console.log(234);
 })
-function clearInput() {
+function clearLocationInput() {
     $("#declare-location-code").val("");
     $("#declare-location-name").val("");
     $("#location-input-error").empty();
