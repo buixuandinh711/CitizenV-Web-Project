@@ -1,6 +1,6 @@
 $("#declare-account-nav").click(function () {
     createAddAccountPage();
-    clearInput();
+    clearInputAccount();
     loadInfo();
 })
 function createAddAccountPage() {
@@ -46,6 +46,7 @@ function createAddAccountPage() {
 
 var containLocation = { code: "01", name: "" };
 var declaredLocation = [];
+var nonAccountLocation = [];
 
 function loadInfo() {
     fetch('account-location-info', {
@@ -59,30 +60,34 @@ function loadInfo() {
         containLocation = { code: data.code == "admin" ? "" : data.code, name: data.name };
         $(".content-title").text("Cấp tài khoản cho địa phương thuộc địa bàn " + data.name);
         declaredLocation = data.accountLocation;
-        createSelectLocationOption(data.noAccountLocation);
+        nonAccountLocation = data.noAccountLocation;
+        createSelectLocationOptionAccount(nonAccountLocation);
     });
 }
-function createSelectLocationOption(locationList) {
+function createSelectLocationOptionAccount(locationList) {
 
     let $locationSelector = $('#account-location-select');
 
     for (i = 0; i < locationList.length; i++) {
         let location = locationList[i].code + " - " + locationList[i].name;
-        let locationOption = $('<option>' + location + '</option>');
+        let locationOption = $('<option value="' + locationList[i].code + '">' + location + '</option>');
         $locationSelector.append(locationOption)
     }
     selectLocation();
 }
 $("body").on("change", "#account-location-select", selectLocation);
 function selectLocation() {
-    let selectVal = $("#account-location-select").val();
-    if (!selectVal) {
+    $("#add-account-error").html("");
+    let locationCode = $("#account-location-select").val();
+    if (!locationCode) {
         return;
     }
-    let locationCode = selectVal.substring(0, 2);
     $("#add-account-username").val(containLocation.code + locationCode);
 }
-function subNewAccount(_username, _password) {
+$("body").on("change", "#add-account-password, #add-account-repassword", function() {
+    $("#add-account-error").html("");
+});
+function submitNewAccount(_username, _password) {
     let csrfToken = $("meta[name='csrf-token']").attr("content");
     let account = { username: _username, password: _password };
     fetch('add-new-user', {
@@ -96,9 +101,11 @@ function subNewAccount(_username, _password) {
         return response.json();
     }).then(function (data) {
         if (data.resp == "success") {
-            clearInput();
+            clearInputAccount();
+            nonAccountLocation = nonAccountLocation.filter(item => item.code != _username);
+            createSelectLocationOptionAccount(nonAccountLocation);
             $.toast({
-                heading: 'Thêm địa phương thành công',
+                heading: 'Cấp tài khoản thành công',
                 hideAfter: 1000,
                 bgColor: '#00bfff',
                 textColor: '#fff',
@@ -106,6 +113,10 @@ function subNewAccount(_username, _password) {
             });
         }
     });
+}
+
+function removeDeclaredLocation(code) {
+
 }
 $("body").on("click", "#submit-account-button", function () {
     let password = $("#add-account-password").val().trim();
@@ -124,15 +135,15 @@ $("body").on("click", "#submit-account-button", function () {
         return;
     }
     $errorHint.html("");
-    let username = $("#add-account-username").val();
-    subNewAccount(username, password);
+    let username = $("#account-location-select").val();
+    submitNewAccount(username, password);
 });
 
 $("body").on("click", "#cancel-account-button", function () {
     console.log(1);
-    clearInput();
+    clearInputAccount();
 });
-function clearInput() {
+function clearInputAccount() {
     $("#add-account-password").val("");
     $("#add-account-repassword").val("");
     let $locationSelector = $("#account-location-select");
