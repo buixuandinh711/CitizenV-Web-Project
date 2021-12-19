@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class DeclarePopulationController extends Controller
 {
     public function AddPerson(Request $request) {
         if (session('user')) {
             if (strlen(session('user')->username) == 8) {
-                $currentTime = Carbon::now();
                 $result = ['resp' => ''];
                 $person_id = $request->code;
                 $person_name = $request->name;
@@ -29,13 +27,13 @@ class DeclarePopulationController extends Controller
                 $village_id = session('user')->username;
                 $person = DB::table('person')->where('person_id', $person_id)->get();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_ward = DB::table('access')->where('username',substr(session('user')->username,0,6))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_village = DB::table('access')->where('username',session('user')->username)
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 if (count($person) || !ctype_digit($person_id) || !count($access_city) || !count($access_district) ||
                 !count($access_ward) || !count($access_village) || $person_id == '' || $person_name == '' || $person_date == '' ||
                 $person_gender == '' ||	$person_home_town == ''	|| $person_permanent_address == '' || $person_temporary_address == '' 
@@ -58,7 +56,6 @@ class DeclarePopulationController extends Controller
     public function EditPerson(Request $request) {
         if (session('user')) {
             if (strlen(session('user')->username) == 8) {
-                $currentTime = Carbon::now();
                 $result = ['resp' => ''];
                 $person_id = $request->code;
                 $person_name = $request->name;
@@ -76,13 +73,13 @@ class DeclarePopulationController extends Controller
                 $village_id = session('user')->username;
                 $person = DB::table('person')->where('person_id', $person_id)->get();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_ward = DB::table('access')->where('username',substr(session('user')->username,0,6))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_village = DB::table('access')->where('username',session('user')->username)
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 if (!count($person) || !ctype_digit($person_id) || !count($access_city) || !count($access_district) ||
                 !count($access_ward) || !count($access_village) || $person_id == '' || $person_name == '' || $person_date == '' ||
                 $person_gender == '' ||	$person_home_town == ''	|| $person_permanent_address == '' || $person_temporary_address == '' 
@@ -104,18 +101,17 @@ class DeclarePopulationController extends Controller
     public function DeletePerson(Request $request) {
         if (session('user')) {
             if (strlen(session('user')->username) == 8) {
-                $currentTime = Carbon::now();
                 $result = ['resp' => ''];
                 $person_id = $request->code;
                 $person = DB::table('person')->where('person_id', $person_id)->get();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_ward = DB::table('access')->where('username',substr(session('user')->username,0,6))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_village = DB::table('access')->where('username',session('user')->username)
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 if (!count($person) || !ctype_digit($person_id) || !count($access_city) || !count($access_district) ||
                 !count($access_ward) || !count($access_village) || $person_id == '') {
                     $result['resp'] = 'error';

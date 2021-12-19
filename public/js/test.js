@@ -163,29 +163,29 @@
 //     console.log(data);
 //   });
 
-//   var csrfToken = $("meta[name='csrf-token']").attr("content");  
-//   fetch('edit-person', {
-//       method: 'post',
-//       headers: {
-//           "Content-Type": "application/json",
-//           "X-CSRF-Token": csrfToken
-//       },
-//       body: JSON.stringify({
-//         code	: '123456789',
-//         name	: 'Nguyen Van B',
-//         date	: '2000/01/01',
-//         gender	: 'Nam',
-//         home_town : 'Văn Than - Cao Đức - Gia Bình - Bắc Ninh',
-//         permanent_address : 'Văn Than - Cao Đức - Gia Bình - Bắc Ninh',	
-//         temporary_address	: 'Văn Than - Cao Đức - Gia Bình - Bắc Ninh',
-//         religion	: 'Không',
-//         level	: 'THPT',
-//         job : 'Làm ruộng'})
-//     }).then(function(response) {
-//       return response.json();
-//     }).then(function(data) {
-//       console.log(data);
-//     });
+  // var csrfToken = $("meta[name='csrf-token']").attr("content");  
+  // fetch('edit-person', {
+  //     method: 'post',
+  //     headers: {
+  //         "Content-Type": "application/json",
+  //         "X-CSRF-Token": csrfToken
+  //     },
+  //     body: JSON.stringify({
+  //       code	: '123456789',
+  //       name	: 'Nguyen Van B',
+  //       date	: '2000/01/01',
+  //       gender	: 'Nam',
+  //       home_town : 'Văn Than - Cao Đức - Gia Bình - Bắc Ninh',
+  //       permanent_address : 'Văn Than - Cao Đức - Gia Bình - Bắc Ninh',	
+  //       temporary_address	: 'Văn Than - Cao Đức - Gia Bình - Bắc Ninh',
+  //       religion	: 'Không',
+  //       level	: 'THPT',
+  //       job : 'Làm ruộng'})
+  //   }).then(function(response) {
+  //     return response.json();
+  //   }).then(function(data) {
+  //     console.log(data);
+  //   });
 
 // var csrfToken = $("meta[name='csrf-token']").attr("content");  
 // fetch('delete-person', {
