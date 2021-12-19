@@ -73,6 +73,7 @@ class AccessController extends Controller
                 return response()->json($result);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function SubmitDeclarePermission(Request $request) {
@@ -151,9 +152,10 @@ class AccessController extends Controller
                 return response()->json($result);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
-    public function DeleteAccess(Request $request) {
+    public function DeletePermission(Request $request) {
         if (session('user')) {
             if (session('user')->username == 'admin') {
                 $result = ['resp' => ''];
@@ -217,6 +219,7 @@ class AccessController extends Controller
                 return response()->json($result);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function EditAccess(Request $request) {
@@ -299,15 +302,16 @@ class AccessController extends Controller
                 return response()->json($result);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function DeclarePermissionLocationInfo() {
         if (session('user')) {
             if (session('user')->username == 'admin') {
-                $result = ['name' => 'cả nước', 'code' => 'admin', 'nonGrantedLocation ' => []];
+                $result = ['name' => 'cả nước', 'code' => 'admin', 'nonGrantedLocation' => []];
                 $noaccesslocation = DB::table('city')->leftjoin('access', 'city.city_id', '=', 'access.username')->selectraw('city.city_id as code')
                 ->selectraw('city.city_name as name')->whereraw('access.username is null')->get();
-                $result['nonGrantedLocation '] = $noaccesslocation;
+                $result['nonGrantedLocation'] = $noaccesslocation;
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 2) {
                 $result = ['name' => '', 'code' => '', 'nonGrantedLocation' => []];
@@ -350,5 +354,6 @@ class AccessController extends Controller
                 return response()->json($result);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 }

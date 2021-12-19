@@ -73,6 +73,7 @@ class UserController extends Controller
                 return response()->json($success);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function AccountLocationInfo() {
@@ -148,9 +149,10 @@ class UserController extends Controller
                 return response()->json($result);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
-    public function DeleteUser(Request $request) {
+    public function DeleteAccount(Request $request) {
         if (session('user')) {
             if (session('user')->username == 'admin') {
                 $success = ['resp' => 'success'];
@@ -210,6 +212,7 @@ class UserController extends Controller
                 return response()->json($success);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function EditUser(Request $request) {
@@ -277,5 +280,6 @@ class UserController extends Controller
                 return response()->json($success);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 }

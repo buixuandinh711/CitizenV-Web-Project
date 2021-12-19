@@ -52,6 +52,7 @@ class DeclarePopulationController extends Controller
                 return response()->json($result);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function EditPerson(Request $request) {
@@ -97,6 +98,7 @@ class DeclarePopulationController extends Controller
                 return response()->json($result);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function DeletePerson(Request $request) {
@@ -124,6 +126,7 @@ class DeclarePopulationController extends Controller
                 return response()->json($result);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function FollowDeclarePopulation() {
@@ -176,20 +179,26 @@ class DeclarePopulationController extends Controller
                 return response()->json($result);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function ShowTotalPopulation() {
         if (session('user')) {
             if (session('user')->username == 'admin') {
-                return redirect('showusercity');
+                $result = DB::table('person')->count();
+                return response()->json($result);
             } else if (strlen(session('user')->username) == 2) {
-                return redirect('showuserdistrict');
+                $result = DB::table('person')->where('city_id',session('user')->username)->count();
+                return response()->json($result);
             } else if (strlen(session('user')->username) == 4) {
-                return redirect('showuserward');
+                $result = DB::table('person')->where('district_id',session('user')->username)->count();
+                return response()->json($result);
             } else if (strlen(session('user')->username) == 6) {
-                return redirect('showuservillage');
+                $result = DB::table('person')->where('ward_id',session('user')->username)->count();
+                return response()->json($result);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function ShowListPopulation() {
@@ -198,58 +207,193 @@ class DeclarePopulationController extends Controller
                 $result = DB::table('person')->get();
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 2) {
-                return redirect('showuserdistrict');
+                $result = DB::table('person')->where('city_id',session('user')->username)->get();
+                return response()->json($result);
             } else if (strlen(session('user')->username) == 4) {
-                return redirect('showuserward');
+                $result = DB::table('person')->where('district_id',session('user')->username)->get();
+                return response()->json($result);
             } else if (strlen(session('user')->username) == 6) {
-                return redirect('showuservillage');
+                $result = DB::table('person')->where('ward_id',session('user')->username)->get();
+                return response()->json($result);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
-    public function ShowInfoPopulation() {
+    public function ShowInfoPopulation(Request $request) {
         if (session('user')) {
             if (session('user')->username == 'admin') {
-                return redirect('showusercity');
+                $success = ['resp' => 'success', 'info' => []];
+                $error = ['resp' => 'error'];
+                $person = DB::table('person')->where('person_id',$request->code)->first(); 
+                if (!ctype_digit($request->code) || !$person) {
+                    return response()->json($error);  
+                }
+                $success['info'] = $person;
+                return response()->json($success); 
             } else if (strlen(session('user')->username) == 2) {
-                return redirect('showuserdistrict');
+                $success = ['resp' => 'success', 'info' => []];
+                $error = ['resp' => 'error'];
+                $person = DB::table('person')->where('person_id',$request->code)->where('city_id',session('user')->username)->first();
+                if (!ctype_digit($request->code) || !$person) {
+                    return response()->json($error);  
+                }
+                $success['info'] = $person;
+                return response()->json($success); 
             } else if (strlen(session('user')->username) == 4) {
-                return redirect('showuserward');
+                $success = ['resp' => 'success', 'info' => []];
+                $error = ['resp' => 'error'];
+                $person = DB::table('person')->where('person_id',$request->code)->where('district_id',session('user')->username)->first();
+                if (!ctype_digit($request->code) || !$person) {
+                    return response()->json($error);  
+                }
+                $success['info'] = $person;
+                return response()->json($success); 
             } else if (strlen(session('user')->username) == 6) {
-                return redirect('showuservillage');
+                $success = ['resp' => 'success', 'info' => []];
+                $error = ['resp' => 'error'];
+                $person = DB::table('person')->where('person_id',$request->code)->where('ward_id',session('user')->username)->first();
+                if (!ctype_digit($request->code) || !$person) {
+                    return response()->json($error);  
+                }
+                $success['info'] = $person;
+                return response()->json($success); 
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function ShowTotalPopulationEachCity() {
-
+        if (session('user')) {
+            if (session('user')->username == 'admin') {
+                $result = DB::table('person')->select('city_id', DB::raw('count(*) as person_total'))->groupBy('city_id')->get();
+                return response()->json($result);
+            }
+        }
+        return response()->json(['resp' => 'error']);
     }
 
     public function ShowTotalPopulationEachDistrict() {
-        
+        if (session('user')->username == 'admin') {
+            $result = DB::table('person')->select('district_id', DB::raw('count(*) as person_total'))
+            ->groupBy('district_id')->get();
+            return response()->json($result);
+        } else if (strlen(session('user')->username) == 2) {
+            $result = DB::table('person')->select('district_id', DB::raw('count(*) as person_total'))
+            ->where('city_id',session('user')->username)->groupBy('district_id')->get();
+            return response()->json($result);
+        }
+        return response()->json(['resp' => 'error']);
     }
 
     public function ShowTotalPopulationEachWard() {
-        
+        if (session('user')->username == 'admin') {
+            $result = DB::table('person')->select('ward_id', DB::raw('count(*) as person_total'))
+            ->groupBy('ward_id')->get();
+            return response()->json($result);
+        } else if (strlen(session('user')->username) == 2) {
+            $result = DB::table('person')->select('ward_id', DB::raw('count(*) as person_total'))
+            ->where('city_id',session('user')->username)->groupBy('ward_id')->get();
+            return response()->json($result);
+        } else if (strlen(session('user')->username) == 4) {
+            $result = DB::table('person')->select('ward_id', DB::raw('count(*) as person_total'))
+            ->where('district_id',session('user')->username)->groupBy('ward_id')->get();
+            return response()->json($result);
+        }
+        return response()->json(['resp' => 'error']);
     }
 
     public function ShowTotalPopulationEachVillage() {
-        
+        if (strlen(session('user')->username) == 6) {
+            $result = DB::table('person')->select('village_id', DB::raw('count(*) as person_total'))
+            ->where('ward_id',session('user')->username)->groupBy('village_id')->get();
+            return response()->json($result);
+        }
+        return response()->json(['resp' => 'error']);
     }
 
-    public function ShowListPopulationEachCity() {
-
+    public function ShowListPopulationEachCity(Request $request) {
+        if (session('user')) {
+            if (session('user')->username == 'admin') {
+                $success = ['resp' => 'success', 'list' => []];
+                $error = ['resp' => 'error'];
+                $person  = DB::table('person')->where('city_id',$request->code)->get();
+                if (!count($person) || !ctype_digit($request->code) || strlen($request->code) != 2) {
+                    return response()->json($error); 
+                }
+                $success['list'] = $person;
+                return response()->json($success);
+            }
+        }
+        return response()->json(['resp' => 'error']);
     }
 
-    public function ShowListPopulationEachDistrict() {
-        
+    public function ShowListPopulationEachDistrict(Request $request) {
+        if (session('user')->username == 'admin') {
+            $success = ['resp' => 'success', 'list' => []];
+            $error = ['resp' => 'error'];
+            $person = DB::table('person')->where('district_id',$request->code)->get();
+            if (!count($person) || !ctype_digit($request->code) || strlen($request->code) != 4) {
+                return response()->json($error); 
+            }
+            $success['list'] = $person;
+            return response()->json($success);
+        } else if (strlen(session('user')->username) == 2) {
+            $success = ['resp' => 'success', 'list' => []];
+            $error = ['resp' => 'error'];
+            $person = DB::table('person')->where('district_id',$request->code)->where('city_id',session('user')->username)->get();
+            if (!count($person) || !ctype_digit($request->code) || strlen($request->code) != 4) {
+                return response()->json($error); 
+            }
+            $success['list'] = $person;
+            return response()->json($success);
+        }
+        return response()->json(['resp' => 'error']);
     }
 
-    public function ShowListPopulationEachWard() {
-        
+    public function ShowListPopulationEachWard(Request $request) {
+        if (session('user')->username == 'admin') {
+            $success = ['resp' => 'success', 'list' => []];
+            $error = ['resp' => 'error'];
+            $person = DB::table('person')->where('ward_id',$request->code)->get();
+            if (!count($person) || !ctype_digit($request->code) || strlen($request->code) != 6) {
+                return response()->json($error); 
+            }
+            $success['list'] = $person;
+            return response()->json($success);
+        } else if (strlen(session('user')->username) == 2) {
+            $success = ['resp' => 'success', 'list' => []];
+            $error = ['resp' => 'error'];
+            $person = DB::table('person')->where('ward_id',$request->code)->where('city_id',session('user')->username)->get();
+            if (!count($person) || !ctype_digit($request->code) || strlen($request->code) != 6) {
+                return response()->json($error); 
+            }
+            $success['list'] = $person;
+            return response()->json($success);
+        } else if (strlen(session('user')->username) == 4) {
+            $success = ['resp' => 'success', 'list' => []];
+            $error = ['resp' => 'error'];
+            $person = DB::table('person')->where('ward_id',$request->code)->where('district_id',session('user')->username)->get();
+            if (!count($person) || !ctype_digit($request->code) || strlen($request->code) != 6) {
+                return response()->json($error); 
+            }
+            $success['list'] = $person;
+            return response()->json($success);
+        }
+        return response()->json(['resp' => 'error']);
     }
 
-    public function ShowListPopulationEachVillage() {
-        
+    public function ShowListPopulationEachVillage(Request $request) {
+        if (strlen(session('user')->username) == 6) {
+            $success = ['resp' => 'success', 'list' => []];
+            $error = ['resp' => 'error'];
+            $person = DB::table('person')->where('village_id',$request->code)->where('ward_id',session('user')->username)->get();
+            if (!count($person) || !ctype_digit($request->code) || strlen($request->code) != 8) {
+                return response()->json($error); 
+            }
+            $success['list'] = $person;
+            return response()->json($success);
+        }
+        return response()->json(['resp' => 'error']);
     }
 }

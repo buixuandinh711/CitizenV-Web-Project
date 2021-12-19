@@ -43,6 +43,7 @@ class DeclareLocationController extends Controller
                 return response()->json($data);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function UpdateNewLocation(Request $request) {
@@ -132,6 +133,7 @@ class DeclareLocationController extends Controller
                 return response()->json($success);
             }
         } 
+        return response()->json(['resp' => 'error']);
     }
 
     public function DeleteLocation(Request $request) {
@@ -211,6 +213,7 @@ class DeclareLocationController extends Controller
                 return response()->json($success);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function EditLocation(Request $request) {
@@ -295,5 +298,6 @@ class DeclareLocationController extends Controller
                 return response()->json($success);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 }
