@@ -197,9 +197,43 @@ function submitNewPermission(_code, _name, _startDate, _endDate) {
     });
 }
 
+function postDeletePermission(_code, _name) {
+    let csrfToken = $("meta[name='csrf-token']").attr("content");
+    fetch('delete-permission', {
+        method: 'post',
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken
+        },
+        body: JSON.stringify({code : _code})
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        console.log(data);
+        if (data.resp == "success") {
+            
+            grantedPermissions = grantedPermissions.filter(item => item.user !== containLocation.code + _code);
+            createGrantedPermissionTable(grantedPermissions);
+            nonGrantedLocations.push({code : _code, name : _name});
+            createSelectLocationOptionPermission(nonGrantedLocations);
+
+            $.toast({
+                heading: 'Thu hồi quyền khai báo thành công!',
+                hideAfter: 1000,
+                bgColor: '#00bfff',
+                textColor: '#fff',
+                loaderBg: '#fff'
+            });
+
+        }
+    });
+}
+
 function createSelectLocationOptionPermission(locationList) {
 
     let $locationSelector = $('#permission-location-select');
+    $locationSelector.empty();
+    $locationSelector.append('<option disabled="disabled" selected value="">Chọn địa phương</option>');
 
     for (i = 0; i < locationList.length; i++) {
         let location = locationList[i].code + " - " + locationList[i].name;
@@ -210,9 +244,7 @@ function createSelectLocationOptionPermission(locationList) {
 }
 
 function clearInputPermission() {
-    let $locationSelector = $("#permission-location-select");
-    $locationSelector.empty();
-    $locationSelector.append('<option disabled="disabled" selected value="">Chọn địa phương</option>');
+    $("#permission-location-select").empty();
     $("#permission-start-date").val("");
     $("#permission-end-date").val("");
 }
@@ -222,6 +254,10 @@ $("body").on("change", "#permission-location-select, #permission-start-date, #pe
 })
 
 $("body").on("click", ".delete-permission-button", function() {
-    let code = $(this).parent().parent().parent().children(':first-child').html();
+    let $codeCell = $(this).parent().parent().parent().children(':first-child');
+    let code = $codeCell.html().substring(containLocation.code.length);
+    let name = $codeCell.next().html();
     console.log(code);
+    postDeletePermission(code, name);
 })
+
