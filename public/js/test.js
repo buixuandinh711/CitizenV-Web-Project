@@ -80,7 +80,7 @@
 //   });
 
 // var csrfToken = $("meta[name='csrf-token']").attr("content");  
-// fetch('delete-user', {
+// fetch('delete-account', {
 //     method: 'post',
 //     headers: {
 //         "Content-Type": "application/json",
@@ -108,7 +108,7 @@
 //   });
 
 // var csrfToken = $("meta[name='csrf-token']").attr("content");  
-// fetch('delete-access', {
+// fetch('delete-permission', {
 //     method: 'post',
 //     headers: {
 //         "Content-Type": "application/json",
@@ -207,6 +207,110 @@
 // .then(response => response.json())
 // .then(data => console.log(data));
 
-fetch('declare-permission-location-info')
-.then(response => response.json())
-.then(data => console.log(data));
+// fetch('declare-permission-location-info')
+// .then(response => response.json())
+// .then(data => console.log(data));
+
+// fetch('show-list-population')
+// .then(response => response.json())
+// .then(data => console.log(data));
+
+// fetch('show-total-population')
+// .then(response => response.json())
+// .then(data => console.log(data));
+
+// var csrfToken = $("meta[name='csrf-token']").attr("content");  
+// fetch('show-info-population', {
+//     method: 'post',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "X-CSRF-Token": csrfToken
+//     },
+//     body: JSON.stringify({
+//       code	: '123456789'
+//       })
+//   }).then(function(response) {
+//     return response.json();
+//   }).then(function(data) {
+//     console.log(data);
+//   });
+
+// fetch('show-total-population-each-city')
+// .then(response => response.json())
+// .then(data => console.log(data));
+
+// fetch('show-total-population-each-district')
+// .then(response => response.json())
+// .then(data => console.log(data));
+
+// fetch('show-total-population-each-ward')
+// .then(response => response.json())
+// .then(data => console.log(data));
+
+// fetch('show-total-population-each-village')
+// .then(response => response.json())
+// .then(data => console.log(data));
+
+// var csrfToken = $("meta[name='csrf-token']").attr("content");  
+// fetch('show-list-population-each-city', {
+//     method: 'post',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "X-CSRF-Token": csrfToken
+//     },
+//     body: JSON.stringify({
+//       code	: '01'
+//       })
+//   }).then(function(response) {
+//     return response.json();
+//   }).then(function(data) {
+//     console.log(data);
+//   });
+
+// var csrfToken = $("meta[name='csrf-token']").attr("content");  
+// fetch('show-list-population-each-district', {
+//     method: 'post',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "X-CSRF-Token": csrfToken
+//     },
+//     body: JSON.stringify({
+//       code	: '0101'
+//       })
+//   }).then(function(response) {
+//     return response.json();
+//   }).then(function(data) {
+//     console.log(data);
+//   });
+
+// var csrfToken = $("meta[name='csrf-token']").attr("content");  
+// fetch('show-list-population-each-ward', {
+//     method: 'post',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "X-CSRF-Token": csrfToken
+//     },
+//     body: JSON.stringify({
+//       code	: '010101'
+//       })
+//   }).then(function(response) {
+//     return response.json();
+//   }).then(function(data) {
+//     console.log(data);
+//   });
+
+// var csrfToken = $("meta[name='csrf-token']").attr("content");  
+// fetch('show-list-population-each-village', {
+//     method: 'post',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "X-CSRF-Token": csrfToken
+//     },
+//     body: JSON.stringify({
+//       code	: '01010101'
+//       })
+//   }).then(function(response) {
+//     return response.json();
+//   }).then(function(data) {
+//     console.log(data);
+//   });

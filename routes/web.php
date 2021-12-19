@@ -39,7 +39,7 @@ Route::get('account-location-info','App\Http\Controllers\UserController@AccountL
 
 Route::post('edit-user','App\Http\Controllers\UserController@EditUser');
 
-Route::post('delete-user','App\Http\Controllers\UserController@DeleteUser');
+Route::post('delete-account','App\Http\Controllers\UserController@DeleteAccount');
 
 //Access
 
@@ -51,7 +51,7 @@ Route::get('declare-permission-location-info','App\Http\Controllers\AccessContro
 
 Route::post('edit-access', 'App\Http\Controllers\AccessController@EditAccess');
 
-Route::post('delete-access', 'App\Http\Controllers\AccessController@DeleteAccess');
+Route::post('delete-permission', 'App\Http\Controllers\AccessController@DeletePermission');
 
 //Declare Population
 
@@ -62,3 +62,25 @@ Route::post('delete-person', 'App\Http\Controllers\DeclarePopulationController@D
 Route::post('edit-person', 'App\Http\Controllers\DeclarePopulationController@EditPerson');
 
 Route::get('follow-declare-population', 'App\Http\Controllers\DeclarePopulationController@FollowDeclarePopulation');
+
+Route::get('show-list-population', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulation');
+
+Route::get('show-total-population', 'App\Http\Controllers\DeclarePopulationController@ShowTotalPopulation');
+
+Route::post('show-info-population', 'App\Http\Controllers\DeclarePopulationController@ShowInfoPopulation');
+
+Route::get('show-total-population-each-city', 'App\Http\Controllers\DeclarePopulationController@ShowTotalPopulationEachCity');
+
+Route::get('show-total-population-each-district', 'App\Http\Controllers\DeclarePopulationController@ShowTotalPopulationEachDistrict');
+
+Route::get('show-total-population-each-ward', 'App\Http\Controllers\DeclarePopulationController@ShowTotalPopulationEachWard');
+
+Route::get('show-total-population-each-village', 'App\Http\Controllers\DeclarePopulationController@ShowTotalPopulationEachVillage');
+
+Route::post('show-list-population-each-city', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulationEachCity');
+
+Route::post('show-list-population-each-district', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulationEachDistrict');
+
+Route::post('show-list-population-each-ward', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulationEachWard');
+
+Route::post('show-list-population-each-village', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulationEachVillage');
