@@ -4,73 +4,72 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class UserController extends Controller
 {
     public function AddNewUser(Request $request) {
         if (session('user')) {
             if (session('user')->username == 'admin') {
-                $success = ['resp' => 'success'];
-                $error = ['resp' => 'error']; 
+                $result = ['resp' => '']; 
                 $username = $request->username;
                 $password = $request->password;
                 $user = DB::table('users')->where('username', $username)->get();
                 if ($username == "" || $password == "" || strlen($username) != 2 || count($user) || !ctype_digit($username)) {
-                    return response()->json($error);
+                    $result['resp'] = 'error';
+                    return response()->json($result);
                 }
                 DB::table('users')->insert(['username' => $username,'password' => $password]);
-                return response()->json($success);
+                $result['resp'] = 'success';
+                return response()->json($result);
             } else if (strlen(session('user')->username) == 2) {   
-                $success = ['resp' => 'success'];
-                $error = ['resp' => 'error']; 
+                $result = ['resp' => '']; 
                 $username = session('user')->username.$request->username;
                 $password = $request->password;
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $user = DB::table('users')->where('username', $username)->get();
                 if ($username == "" || $password == "" || strlen($username) != 4 || count($user) || !ctype_digit($username) || !count($access_city)) {
-                    return response()->json($error);
+                    $result['resp'] = 'error';
+                    return response()->json($result);
                 }
                 DB::table('users')->insert(['username' => $username,'password' => $password]);
-                return response()->json($success);
+                $result['resp'] = 'success';
+                return response()->json($result);
             } else if (strlen(session('user')->username) == 4) {   
-                $success = ['resp' => 'success'];
-                $error = ['resp' => 'error']; 
+                $result = ['resp' => '']; 
                 $username = session('user')->username.$request->username;
                 $password = $request->password;
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $user = DB::table('users')->where('username', $username)->get();
                 if ($username == "" || $password == "" || strlen($username) != 6 || count($user) || !ctype_digit($username) || !count($access_city) || 
                 !count($access_district)) {
-                    return response()->json($error);
+                    $result['resp'] = 'error';
+                    return response()->json($result);
                 }
                 DB::table('users')->insert(['username' => $username,'password' => $password]);
-                return response()->json($success);
+                $result['resp'] = 'success';
+                return response()->json($result);
             } else if (strlen(session('user')->username) == 6) {   
-                $success = ['resp' => 'success'];
-                $error = ['resp' => 'error']; 
+                $result = ['resp' => ''];  
                 $username = session('user')->username.$request->username;
                 $password = $request->password;
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $access_ward = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
+                $access_ward = DB::table('access')->where('username',session('user')->username)->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $user = DB::table('users')->where('username', $username)->get();
                 if ($username == "" || $password == "" || strlen($username) != 8 || count($user) || !ctype_digit($username) || !count($access_city) || 
                 !count($access_district) || !count($access_ward)) {
-                    return response()->json($error);
+                    $result['resp'] = 'error';
+                    return response()->json($result);
                 }
                 DB::table('users')->insert(['username' => $username,'password' => $password]);
-                return response()->json($success);
+                $result['resp'] = 'success';
+                return response()->json($result);
             }
         }
         return response()->json(['resp' => 'error']);
@@ -155,61 +154,61 @@ class UserController extends Controller
     public function DeleteAccount(Request $request) {
         if (session('user')) {
             if (session('user')->username == 'admin') {
-                $success = ['resp' => 'success'];
-                $error = ['resp' => 'error']; 
+                $result = ['resp' => '']; 
                 $username = $request->username;
                 $user = DB::table('users')->where('username', $username)->get();
                 if ($username == "" || strlen($username) != 2 || !count($user) || !ctype_digit($username)) {
-                    return response()->json($error);
+                    $result['resp'] = 'error';
+                    return response()->json($result);
                 }
                 DB::table('users')->where('username', $username)->delete();
-                return response()->json($success);
+                $result['resp'] = 'success';
+                return response()->json($result);
             } else if (strlen(session('user')->username) == 2) {   
-                $success = ['resp' => 'success'];
-                $error = ['resp' => 'error']; 
+                $result = ['resp' => ''];
                 $username = session('user')->username.$request->username;
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $user = DB::table('users')->where('username', $username)->get();
                 if ($username == "" || strlen($username) != 4 || !count($user) || !ctype_digit($username) || !count($access_city)) {
-                    return response()->json($error);
+                    $result['resp'] = 'error';
+                    return response()->json($result);
                 }
                 DB::table('users')->where('username', $username)->delete();
-                return response()->json($success);
+                $result['resp'] = 'success';
+                return response()->json($result);
             } else if (strlen(session('user')->username) == 4) {   
-                $success = ['resp' => 'success'];
-                $error = ['resp' => 'error']; 
+                $result = ['resp' => '']; 
                 $username = session('user')->username.$request->username;
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $user = DB::table('users')->where('username', $username)->get();
                 if ($username == "" || strlen($username) != 6 || !count($user) || !ctype_digit($username) || !count($access_city) || !count($access_district)) {
-                    return response()->json($error);
+                    $result['resp'] = 'error';
+                    return response()->json($result);
                 }
                 DB::table('users')->where('username', $username)->delete();
-                return response()->json($success);
+                $result['resp'] = 'success';
+                return response()->json($result);
             } else if (strlen(session('user')->username) == 6) {   
-                $success = ['resp' => 'success'];
-                $error = ['resp' => 'error']; 
+                $result = ['resp' => ''];
                 $username = session('user')->username.$request->username;
                 $user = DB::table('users')->where('username', $username)->get();
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $access_ward = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
+                $access_ward = DB::table('access')->where('username',session('user')->username)->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 if ($username == "" || strlen($username) != 8 || !count($user) || !ctype_digit($username) || !count($access_city) || !count($access_district) || 
                 !count($access_ward)) {
-                    return response()->json($error);
+                    $result['resp'] = 'error';
+                    return response()->json($result);
                 }
                 DB::table('users')->where('username', $username)->delete();
-                return response()->json($success);
+                $result['resp'] = 'success';
+                return response()->json($result);
             }
         }
         return response()->json(['resp' => 'error']);
@@ -218,66 +217,66 @@ class UserController extends Controller
     public function EditUser(Request $request) {
         if (session('user')) {
             if (session('user')->username == 'admin') {
-                $success = ['resp' => 'success'];
-                $error = ['resp' => 'error']; 
+                $result = ['resp' => ''];
                 $username = $request->username;
                 $password = $request->password;
                 $user = DB::table('users')->where('username', $username)->get();
                 if ($username == "" || $password == "" || strlen($username) != 2 || !count($user) || !ctype_digit($username)) {
-                    return response()->json($error);
+                    $result['resp'] = 'error';
+                    return response()->json($result);
                 }
                 DB::table('users')->where('username', $username)->update(['password' => $password]);
-                return response()->json($success);
+                $result['resp'] = 'success';
+                return response()->json($result);
             } else if (strlen(session('user')->username) == 2) {   
-                $success = ['resp' => 'success'];
-                $error = ['resp' => 'error']; 
+                $result = ['resp' => '']; 
                 $username = session('user')->username.$request->username;
                 $password = $request->password;
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $user = DB::table('users')->where('username', $username)->get();
                 if ($username == "" || $password == "" || strlen($username) != 4 || !count($user) || !ctype_digit($username) || !count($access_city)) {
-                    return response()->json($error);
+                    $result['resp'] = 'error';
+                    return response()->json($result);
                 }
                 DB::table('users')->where('username', $username)->update(['password' => $password]);
-                return response()->json($success);
+                $result['resp'] = 'success';
+                return response()->json($result);
             } else if (strlen(session('user')->username) == 4) {   
-                $success = ['resp' => 'success'];
-                $error = ['resp' => 'error']; 
+                $result = ['resp' => '']; 
                 $username = session('user')->username.$request->username;
                 $password = $request->password;
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $user = DB::table('users')->where('username', $username)->get();
                 if ($username == "" || $password == "" || strlen($username) != 6 || !count($user) || !ctype_digit($username) || !count($access_city) || 
                 !count($access_district)) {
-                    return response()->json($error);
+                    $result['resp'] = 'error';
+                    return response()->json($result);
                 }
                 DB::table('users')->where('username', $username)->update(['password' => $password]);
-                return response()->json($success);
+                $result['resp'] = 'success';
+                return response()->json($result);
             } else if (strlen(session('user')->username) == 6) {   
-                $success = ['resp' => 'success'];
-                $error = ['resp' => 'error']; 
+                $result = ['resp' => ''];
                 $username = session('user')->username.$request->username;
                 $password = $request->password;
                 $user = DB::table('users')->where('username', $username)->get();
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $access_ward = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
+                $access_ward = DB::table('access')->where('username',session('user')->username)->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 if ($username == "" || $password == "" || strlen($username) != 8 || !count($user) || !ctype_digit($username) || !count($access_city) || 
                 !count($access_district) || !count($access_ward)) {
-                    return response()->json($error);
+                    $result['resp'] = 'error';
+                    return response()->json($result);
                 }
                 DB::table('users')->where('username', $username)->update(['password' => $password]);
-                return response()->json($success);
+                $result['resp'] = 'success';
+                return response()->json($result);
             }
         }
         return response()->json(['resp' => 'error']);

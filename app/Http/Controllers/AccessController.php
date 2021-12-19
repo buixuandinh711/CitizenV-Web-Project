@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class AccessController extends Controller
 {
@@ -19,9 +18,7 @@ class AccessController extends Controller
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 2) {
                 $result = ['resp' => '', 'info' => []];
-                $currentTime = Carbon::now();
-                $access_city = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
+                $access_city = DB::table('access')->where('username',session('user')->username)->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 if (count($access_city)) {
                     $result['resp'] = true;
                 } else {
@@ -35,11 +32,9 @@ class AccessController extends Controller
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 4) {
                 $result = ['resp' => '', 'info' => []];
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $access_district = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
+                $access_district = DB::table('access')->where('username',session('user')->username)->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 if (count($access_city) && count($access_district)) {
                     $result['resp'] = true;
                 } else {
@@ -53,13 +48,11 @@ class AccessController extends Controller
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 6) {
                 $result = ['resp' => '', 'info' => []];
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $access_ward = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
+                $access_ward = DB::table('access')->where('username',session('user')->username)->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 if (count($access_city) && count($access_district) && count($access_ward)) {
                     $result['resp'] = true;
                 } else {
@@ -93,14 +86,12 @@ class AccessController extends Controller
                 $result['resp'] = 'success';
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 2) {
-                $currentTime = Carbon::now();
                 $result = ['resp' => ''];
                 $username = session('user')->username.$request->code;
                 $start_date = $request->startDate;
                 $end_date = $request->endDate;
                 $access = DB::table('access')->where('username', $username)->get();
-                $access_city = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
+                $access_city = DB::table('access')->where('username',session('user')->username)->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 if ($username == "" || $start_date == "" || $end_date == "" || strlen($username) != 4 || count($access) || 
                     !ctype_digit($username) || !count($access_city)) {
                     $result['resp'] = 'error';
@@ -110,16 +101,14 @@ class AccessController extends Controller
                 $result['resp'] = 'success';
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 4) {
-                $currentTime = Carbon::now();
                 $result = ['resp' => ''];
                 $username = session('user')->username.$request->code;
                 $start_date = $request->startDate;
                 $end_date = $request->endDate;
                 $access = DB::table('access')->where('username', $username)->get();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $access_district = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
+                $access_district = DB::table('access')->where('username',session('user')->username)->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 if ($username == "" || $start_date == "" || $end_date == "" || strlen($username) != 6 || count($access) || 
                     !ctype_digit($username) || !count($access_city) || !count($access_district)) {
                     $result['resp'] = 'error';
@@ -129,18 +118,16 @@ class AccessController extends Controller
                 $result['resp'] = 'success';
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 6) {
-                $currentTime = Carbon::now();
                 $result = ['resp' => ''];
                 $username = session('user')->username.$request->code;
                 $start_date = $request->startDate;
                 $end_date = $request->endDate;
                 $access = DB::table('access')->where('username', $username)->get();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $access_ward = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
+                $access_ward = DB::table('access')->where('username',session('user')->username)->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 if ($username == "" || $start_date == "" || $end_date == "" || strlen($username) != 8 || count($access) || 
                     !ctype_digit($username) || !count($access_city) || !count($access_district) ||
                     !count($access_ward)) {
@@ -169,9 +156,8 @@ class AccessController extends Controller
                 $result['resp'] = 'success';
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 2) {
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $result = ['resp' => ''];
                 $username = session('user')->username.$request->code;
                 $access = DB::table('access')->where('username', $username)->get();
@@ -183,11 +169,10 @@ class AccessController extends Controller
                 $result['resp'] = 'success';
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 4) {
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $result = ['resp' => ''];
                 $username = session('user')->username.$request->code;
                 $access = DB::table('access')->where('username', $username)->get();
@@ -199,13 +184,11 @@ class AccessController extends Controller
                 $result['resp'] = 'success';
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 6) {
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $access_ward = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
+                $access_ward = DB::table('access')->where('username',session('user')->username)->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $result = ['resp' => ''];
                 $username = session('user')->username.$request->code;
                 $access = DB::table('access')->where('username', $username)->get();
@@ -240,9 +223,8 @@ class AccessController extends Controller
                 $result['resp'] = 'success';
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 2) {
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $result = ['resp' => ''];
                 $username = session('user')->username.$request->code;
                 $start_date = $request->startDate;
@@ -258,11 +240,10 @@ class AccessController extends Controller
                 $result['resp'] = 'success';
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 4) {
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $result = ['resp' => ''];
                 $username = session('user')->username.$request->code;
                 $start_date = $request->startDate;
@@ -278,13 +259,11 @@ class AccessController extends Controller
                 $result['resp'] = 'success';
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 6) {
-                $currentTime = Carbon::now();
                 $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->where('start_date','<=',$currentTime)->where('end_date','>=',$currentTime)->get();
-                $access_ward = DB::table('access')->where('username',session('user')->username)->where('start_date','<=',$currentTime)
-                ->where('end_date','>=',$currentTime)->get();
+                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
+                $access_ward = DB::table('access')->where('username',session('user')->username)->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 $result = ['resp' => ''];
                 $username = session('user')->username.$request->code;
                 $start_date = $request->startDate;
