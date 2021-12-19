@@ -304,10 +304,10 @@ class AccessController extends Controller
     public function DeclarePermissionLocationInfo() {
         if (session('user')) {
             if (session('user')->username == 'admin') {
-                $result = ['name' => 'cả nước', 'code' => 'admin', 'nonGrantedLocation ' => []];
+                $result = ['name' => 'cả nước', 'code' => 'admin', 'nonGrantedLocation' => []];
                 $noaccesslocation = DB::table('city')->leftjoin('access', 'city.city_id', '=', 'access.username')->selectraw('city.city_id as code')
                 ->selectraw('city.city_name as name')->whereraw('access.username is null')->get();
-                $result['nonGrantedLocation '] = $noaccesslocation;
+                $result['nonGrantedLocation'] = $noaccesslocation;
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 2) {
                 $result = ['name' => '', 'code' => '', 'nonGrantedLocation' => []];
