@@ -42,28 +42,44 @@ class Controller extends BaseController
 
     public function DeclareLocation() {
         if (session('user')) {
-            return view('declarelocation');
+            if (strlen(session('user')->username) != 8) {
+                return view('declarelocation');
+            } else {
+                return redirect('main');
+            }
         }
         return redirect('login');
     }
 
     public function DeclareAccount() {
         if (session('user')) {
-            return view('declareaccount');
+            if (strlen(session('user')->username) != 8) {
+                return view('declareaccount');
+            } else {
+                return redirect('main');
+            }
         }
         return redirect('login');
     }
 
     public function GrantPermission() {
         if (session('user')) {
-            return view('grantpermission');
+            if (strlen(session('user')->username) != 8) {
+                return view('grantpermission');
+            } else {
+                return redirect('main');
+            }
         }
         return redirect('login');
     }
 
     public function AddCitizen() {
         if (session('user')) {
-            return view('addcitizen');
+            if (strlen(session('user')->username) == 8) {
+                return view('addcitizen');
+            } else {
+                return redirect('main');
+            }
         }
         return redirect('login');
     }
