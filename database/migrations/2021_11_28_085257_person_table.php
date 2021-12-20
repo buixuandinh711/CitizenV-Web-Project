@@ -22,7 +22,6 @@ class PersonTable extends Migration
             $table->string('person_name');
             $table->date('person_date');
             $table->string('person_gender');
-            $table->string('person_home_town');
             $table->string('person_permanent_address');
             $table->string('person_temporary_address');
             $table->string('person_religion');
