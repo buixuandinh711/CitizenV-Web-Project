@@ -1,0 +1,44 @@
+.add-citizen-container {
+    margin-top: 50px;
+    border: 1px solid deepskyblue;
+    padding: 50px 40px;
+}
+
+.add-citizen-row-container {
+    width: 620px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-citizen-row {
+    margin-bottom: 20px;
+}
+
+.add-citizen-select {
+    width: 150px;
+}
+
+.add-citizen-input {
+    width: 620px;
+}
+#add-citizen-gender, #add-citizen-grade {
+    width: 200px;
+}
+
+#add-citizen-dateofbirth, #add-citizen-job {
+    width: 413px;
+}
+#add-citizen-submit, #add-citizen-cancel {
+    width: 307px;
+}
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.add-citizen-button-row {
+    margin-top: 40px;
+}
+#add-citizen-error {
+    visibility: hidden;
+}
