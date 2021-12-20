@@ -37,15 +37,16 @@
                 <b class="caret sidebar-caret"></b>
             </div>
             <div class="dropdown-container" id="management-dropdown">
-                <a class="sidebar-nav" id="declare-location-nav" href='declarelocation'>Khai báo địa phương</a>
-                <a class="sidebar-nav" id="declare-account-nav" href='declareaccount'>Cấp tài khoản</a>
+                <a class="sidebar-nav" id="declare-location-nav" href='declare-location'>Khai báo địa phương</a>
+                <a class="sidebar-nav" id="declare-account-nav" href='declare-account'>Cấp tài khoản</a>
             </div>
             <div class="sidebar-row" id="declaration">
                 <span class="sidebar-nav">Khai báo dân sô</span>
                 <b class="caret sidebar-caret"></b>
             </div>
             <div class="dropdown-container" id="declaration-dropdown">
-                <a class="sidebar-nav" id="grant-declare-permission" href='grantpermission'>Cấp quyền khai báo</a>
+                <a class="sidebar-nav" id="grant-declare-permission" href='grant-permission'>Cấp quyền khai báo</a>
+                <a class="sidebar-nav" href='add-citizen'>>Khai báo dân số</a>
                 <a class="sidebar-nav">Theo dõi tiến độ</a>
             </div>
             <div class="sidebar-row" id="information">

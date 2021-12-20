@@ -21,11 +21,13 @@ Route::get('main','App\Http\Controllers\Controller@ShowMain');
 
 Route::get('logout','App\Http\Controllers\Controller@Logout');
 
-Route::get('declarelocation','App\Http\Controllers\Controller@DeclareLocation');
+Route::get('declare-location','App\Http\Controllers\Controller@DeclareLocation');
 
-Route::get('declareaccount','App\Http\Controllers\Controller@DeclareAccount');
+Route::get('declare-account','App\Http\Controllers\Controller@DeclareAccount');
 
-Route::get('grantpermission','App\Http\Controllers\Controller@GrantPermission');
+Route::get('grant-permission','App\Http\Controllers\Controller@GrantPermission');
+
+Route::get('add-citizen','App\Http\Controllers\Controller@AddCitizen');
 
 //Declare Location
 

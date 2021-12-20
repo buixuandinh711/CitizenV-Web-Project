@@ -32,24 +32,25 @@
                 <b class="caret sidebar-caret"></b>
             </div>
             <div class="dropdown-container" id="management-dropdown">
-                <span class="sidebar-nav" id="declare-location-nav">Khai báo địa phương</span>
-                <span class="sidebar-nav" id="declare-account-nav">Cấp tài khoản</span>
+                <a class="sidebar-nav" id="declare-location-nav" href='declare-location'>Khai báo địa phương</a>
+                <a class="sidebar-nav" id="declare-account-nav" href='declare-account'>Cấp tài khoản</a>
             </div>
             <div class="sidebar-row" id="declaration">
                 <span class="sidebar-nav">Khai báo dân sô</span>
                 <b class="caret sidebar-caret"></b>
             </div>
             <div class="dropdown-container" id="declaration-dropdown">
-                <span class="sidebar-nav">Cấp quyền khai báo</span>
-                <span class="sidebar-nav">Theo dõi tiến độ</span>
+                <a class="sidebar-nav" href='grant-permission'>Cấp quyền khai báo</a>
+                <a class="sidebar-nav" href='add-citizen'>>Khai báo dân số</a>
+                <a class="sidebar-nav">Theo dõi tiến độ</a>
             </div>
             <div class="sidebar-row" id="information">
                 <span class="sidebar-nav">Thông tin dân số</span>
                 <b class="caret sidebar-caret"></b>
             </div>
             <div class="dropdown-container" id="information-dropdown">
-                <span class="sidebar-nav">Số liệu dân số</span>
-                <span class="sidebar-nav">Danh sách dân số</span>
+                <a class="sidebar-nav">Số liệu dân số</a>
+                <a class="sidebar-nav">Danh sách dân số</a>
             </div>
         </aside>
         <div class="content-container">
