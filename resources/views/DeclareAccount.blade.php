@@ -46,7 +46,6 @@
             </div>
             <div class="dropdown-container" id="declaration-dropdown">
                 <a class="sidebar-nav" id="grant-declare-permission" href='grant-permission'>Cấp quyền khai báo</a>
-                <a class="sidebar-nav" href='add-citizen'>>Khai báo dân số</a>
                 <a class="sidebar-nav">Theo dõi tiến độ</a>
             </div>
             <div class="sidebar-row" id="information">
