@@ -39,4 +39,25 @@ class Controller extends BaseController
         $request->session()->forget('user');
         return redirect('login');
     }
+
+    public function DeclareLocation() {
+        if (session('user')) {
+            return view('declarelocation');
+        }
+        return redirect('login');
+    }
+
+    public function DeclareAccount() {
+        if (session('user')) {
+            return view('declareaccount');
+        }
+        return redirect('login');
+    }
+
+    public function GrantPermission() {
+        if (session('user')) {
+            return view('grantpermission');
+        }
+        return redirect('login');
+    }
 }

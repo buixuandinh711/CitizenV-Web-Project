@@ -1,12 +1,10 @@
 var $contentContainer = $(".content-container");
 
-$('#grant-declare-permission').click(function() {
-    $(".content-container").empty();
-    createGrantPermissionPage();
-    clearInputPermission()
-    loadGrantPermissionLocation();
-    loadGrantedPermission();
-})
+$(".content-container").empty();
+createGrantPermissionPage();
+clearInputPermission()
+loadGrantPermissionLocation();
+loadGrantedPermission();
 
 var containLocation = {};
 var nonGrantedLocations = [];
