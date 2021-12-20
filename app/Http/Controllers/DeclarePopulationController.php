@@ -14,8 +14,7 @@ class DeclarePopulationController extends Controller
                 $person_id = $request->code;
                 $person_name = $request->name;
                 $person_date = $request->date;
-                $person_gender = $request->gender;	
-                $person_home_town = $request->home_town;	
+                $person_gender = $request->gender;		
                 $person_permanent_address = $request->permanent_address;
                 $person_temporary_address = $request->temporary_address;
                 $person_religion = $request->religion;
@@ -36,15 +35,14 @@ class DeclarePopulationController extends Controller
                 ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 if (count($person) || !ctype_digit($person_id) || !count($access_city) || !count($access_district) ||
                 !count($access_ward) || !count($access_village) || $person_id == '' || $person_name == '' || $person_date == '' ||
-                $person_gender == '' ||	$person_home_town == ''	|| $person_permanent_address == '' || $person_temporary_address == '' 
+                $person_gender == '' ||	$person_permanent_address == '' || $person_temporary_address == '' 
                 || $person_religion == '' || $person_level == '' || $person_job == '') {
                     $result['resp'] = 'error';
                     return response()->json($result);
                 }
                 DB::table('person')->insert(['city_id' => $city_id,'district_id' => $district_id, 'ward_id' => $ward_id,
                 'village_id' => $village_id, 'person_id' => $person_id, 'person_name' => $person_name, 'person_date' => $person_date,
-                'person_gender' => $person_gender, 'person_home_town' => $person_home_town, 
-                'person_permanent_address' => $person_permanent_address, 'person_temporary_address' => $person_temporary_address,
+                'person_gender' => $person_gender, 'person_permanent_address' => $person_permanent_address, 'person_temporary_address' => $person_temporary_address,
                 'person_religion' => $person_religion, 'person_level' => $person_level, 'person_job' => $person_job]);
                 $result['resp'] = 'success';
                 return response()->json($result);
@@ -61,7 +59,6 @@ class DeclarePopulationController extends Controller
                 $person_name = $request->name;
                 $person_date = $request->date;
                 $person_gender = $request->gender;	
-                $person_home_town = $request->home_town;	
                 $person_permanent_address = $request->permanent_address;
                 $person_temporary_address = $request->temporary_address;
                 $person_religion = $request->religion;
@@ -82,14 +79,14 @@ class DeclarePopulationController extends Controller
                 ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
                 if (!count($person) || !ctype_digit($person_id) || !count($access_city) || !count($access_district) ||
                 !count($access_ward) || !count($access_village) || $person_id == '' || $person_name == '' || $person_date == '' ||
-                $person_gender == '' ||	$person_home_town == ''	|| $person_permanent_address == '' || $person_temporary_address == '' 
+                $person_gender == '' || $person_permanent_address == '' || $person_temporary_address == '' 
                 || $person_religion == '' || $person_level == '' || $person_job == '') {
                     $result['resp'] = 'error';
                     return response()->json($result);
                 }
                 DB::table('person')->where('person_id',$person_id)->update(['person_name' => $person_name, 
-                'person_date' => $person_date,'person_gender' => $person_gender, 'person_home_town' => $person_home_town, 
-                'person_permanent_address' => $person_permanent_address, 'person_temporary_address' => $person_temporary_address,
+                'person_date' => $person_date,'person_gender' => $person_gender, 'person_permanent_address' => $person_permanent_address, 
+                'person_temporary_address' => $person_temporary_address,
                 'person_religion' => $person_religion, 'person_level' => $person_level, 'person_job' => $person_job]);
                 $result['resp'] = 'success';
                 return response()->json($result);
@@ -132,10 +129,11 @@ class DeclarePopulationController extends Controller
                 $city = DB::table('city')->get();
                 foreach($city as $c) {
                     $complete = DB::table('village')->where('city_id',$c->city_id)->where('complete', 0)->get();
-                    if (count($complete)) {
-                        array_push($result,['city_id' => $c->city_id, 'complete' => false]);
+                    $totalperson = DB::table('person')->where('city_id',$c->city_id)->count();
+                    if (count($complete) || $totalperson == 0) {
+                        array_push($result,['city_id' => $c->city_id, 'complete' => false, 'totalperson' => $totalperson]);
                     } else {
-                        array_push($result,['city_id' => $c->city_id, 'complete' => true]);
+                        array_push($result,['city_id' => $c->city_id, 'complete' => true, 'totalperson' => $totalperson]);
                     }
                 }
                 return response()->json($result);
@@ -144,10 +142,11 @@ class DeclarePopulationController extends Controller
                 $district = DB::table('district')->where('city_id', session('user')->username)->get();
                 foreach($district as $d) {
                     $complete = DB::table('village')->where('district_id',$d->district_id)->where('complete', 0)->get();
-                    if (count($complete)) {
-                        array_push($result,['district_id' => $d->district_id, 'complete' => false]);
+                    $totalperson = DB::table('person')->where('district_id',$d->district_id)->count();
+                    if (count($complete) || $totalperson == 0) {
+                        array_push($result,['district_id' => $d->district_id, 'complete' => false, 'totalperson' => $totalperson]);
                     } else {
-                        array_push($result,['district_id' => $d->district_id, 'complete' => true]);
+                        array_push($result,['district_id' => $d->district_id, 'complete' => true, 'totalperson' => $totalperson]);
                     }
                 }
                 return response()->json($result);
@@ -156,20 +155,23 @@ class DeclarePopulationController extends Controller
                 $ward = DB::table('ward')->where('district_id', session('user')->username)->get();
                 foreach($ward as $w) {
                     $complete = DB::table('village')->where('ward_id',$w->ward_id)->where('complete', 0)->get();
-                    if (count($complete)) {
-                        array_push($result,['ward_id' => $w->ward_id, 'complete' => false]);
+                    $totalperson = DB::table('person')->where('ward_id',$w->ward_id)->count();
+                    if (count($complete) || $totalperson == 0) {
+                        array_push($result,['ward_id' => $w->ward_id, 'complete' => false, 'totalperson' => $totalperson]);
                     } else {
-                        array_push($result,['ward_id' => $w->ward_id, 'complete' => true]);
+                        array_push($result,['ward_id' => $w->ward_id, 'complete' => true, 'totalperson' => $totalperson]);
                     }
                 }
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 6) {
-                $result = DB::table('village')->where('ward_id', session('user')->username)->select('village_id','complete')->get();
-                foreach($result as $r) {
-                    if ($r->complete) {
-                        $r->complete = true;
+                $result = array();
+                $village = DB::table('village')->where('ward_id', session('user')->username)->get();
+                foreach($village as $v) {
+                    $totalperson = DB::table('person')->where('village_id',$v->village_id)->count();
+                    if (!$v->complete || $totalperson == 0) {
+                        array_push($result,['village_id' => $v->village_id, 'complete' => false, 'totalperson' => $totalperson]);
                     } else {
-                        $r->complete = false;
+                        array_push($result,['village_id' => $v->village_id, 'complete' => true, 'totalperson' => $totalperson]);
                     }
                 }
                 return response()->json($result);

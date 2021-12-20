@@ -1,8 +1,7 @@
-$("#declare-account-nav").click(function () {
-    createAddAccountPage();
-    clearInputAccount();
-    loadInfo();
-})
+createAddAccountPage();
+clearInputAccount();
+loadInfo();
+
 function createAddAccountPage() {
     let $contenContainer = $(".content-container");
     $contenContainer.empty();
