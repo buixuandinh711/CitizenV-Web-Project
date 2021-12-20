@@ -60,4 +60,11 @@ class Controller extends BaseController
         }
         return redirect('login');
     }
+
+    public function AddCitizen() {
+        if (session('user')) {
+            return view('addcitizen');
+        }
+        return redirect('login');
+    }
 }
