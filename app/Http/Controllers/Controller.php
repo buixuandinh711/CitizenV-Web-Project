@@ -29,7 +29,11 @@ class Controller extends BaseController
 
     public function ShowMain() {
         if (session('user')) {
-            return view('Main');
+            if (strlen(session('user')->username) != 8) {
+                return view('Main');
+            } else {
+                return view('mains');
+            }
         }
         return redirect('login');
     }

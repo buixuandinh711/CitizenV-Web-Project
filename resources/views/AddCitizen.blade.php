@@ -17,40 +17,22 @@
             <span class="page-logo">Citizen V</span>
             <div class="account-dropdown-container">
                 <span class="account-container">
-                    <a class="username">Admin</a>
+                    <a class="username">{{session('user')->username}}</a>
                     <b class="caret" id="account-caret"></b>
                 </span>
                 <div class="account-dropdown">
                     <a>Thông tin tài khoản</a>
-                    <a>Đăng xuất</a>
+                    <a href='logout'>Đăng xuất</a>
                 </div>
             </div>
         </header>
         <aside>
             <div class="sidebar-row" id="management">
-                <span class="sidebar-nav">Quản lý địa phương</span>
+                <span class="sidebar-nav">Khai báo dân số</span>
                 <b class="caret sidebar-caret"></b>
             </div>
             <div class="dropdown-container" id="management-dropdown">
-                <a class="sidebar-nav" id="declare-location-nav" href='declare-location'>Khai báo địa phương</a>
-                <a class="sidebar-nav" id="declare-account-nav" href='declare-account'>Cấp tài khoản</a>
-            </div>
-            <div class="sidebar-row" id="declaration">
-                <span class="sidebar-nav">Khai báo dân sô</span>
-                <b class="caret sidebar-caret"></b>
-            </div>
-            <div class="dropdown-container" id="declaration-dropdown">
-                <a class="sidebar-nav" href='grant-permission'>Cấp quyền khai báo</a>
-                <a class="sidebar-nav" href='add-citizen'>>Khai báo dân số</a>
-                <a class="sidebar-nav">Theo dõi tiến độ</a>
-            </div>
-            <div class="sidebar-row" id="information">
-                <span class="sidebar-nav">Thông tin dân số</span>
-                <b class="caret sidebar-caret"></b>
-            </div>
-            <div class="dropdown-container" id="information-dropdown">
-                <a class="sidebar-nav">Số liệu dân số</a>
-                <a class="sidebar-nav">Danh sách dân số</a>
+                <a class="sidebar-nav" id="declare-location-nav" href='add-citizen'>Nhập phiếu điều tra</a>
             </div>
         </aside>
         <div class="content-container">
