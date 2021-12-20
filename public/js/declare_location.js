@@ -42,7 +42,8 @@ function loadLocationInfo() {
         return response.json();
     }).then(function (data) {
         $(".content-title").text("Khai báo, cấp mã địa phương thuộc " + data.local)
-        declaredCodes = data.codes;
+        let declaredLocation = data.declared;
+        declaredCodes = declaredLocation.map(item => item.code);
     });
 }
 function postLocation(_code, _name) {
