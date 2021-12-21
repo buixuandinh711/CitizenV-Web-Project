@@ -293,9 +293,9 @@
 //     console.log(data);
 //   });
 
-fetch('change-complete-status')
-.then(response => response.json())
-.then(data => console.log(data));
+// fetch('change-complete-status')
+// .then(response => response.json())
+// .then(data => console.log(data));
 
 // fetch('get-complete-status')
 // .then(response => response.json())

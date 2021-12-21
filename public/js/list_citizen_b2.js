@@ -1,7 +1,22 @@
 $("#information-dropdown").css("display", "block");
 $("#information-dropdown a").css("color", "deepskyblue");
 
+var locationInfo = {};
 var citizenList = [];
+
+function loadLocationInfo() {
+    fetch('get-location-info', {
+        method: 'get',
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        locationInfo = data;
+        $(".content-title").html("Danh sách dân cư trên địa bàn " + locationInfo.name);
+    });
+}
 
 function loadCitizen() {
     let locationCode = $(".username").html();
@@ -12,7 +27,7 @@ function loadCitizen() {
             "Content-Type": "application/json",
             "X-CSRF-Token": csrfToken
         },
-        body: JSON.stringify({code : locationCode})
+        body: JSON.stringify({ code: locationCode })
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
@@ -21,7 +36,22 @@ function loadCitizen() {
     });
 }
 
+function loadCompleteStatus() {
+    fetch('get-complete-status', {
+        method: 'get',
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        updateCompleteStatus(data.isComplete);
+    });
+}
+
+loadLocationInfo();
 loadCitizen();
+loadCompleteStatus();
 
 function createDeclaredCitizenTable(citizenList) {
 
@@ -34,7 +64,7 @@ function createDeclaredCitizenTable(citizenList) {
     $(".total-declared-citizen").html("Tổng số dân cư đã khai báo: " + citizenList.length);
 
     if ($("#citizen-list-table").length == 0 && citizenList.length != 0) {
-    
+
         let citizenTable = $('<table class="data-table" id="citizen-list-table">');
         let tableHeader = $('<thead>');
         let headerRow = $('<tr>');
@@ -66,7 +96,7 @@ function createDeclaredCitizenTable(citizenList) {
         tableRow.append('<td class="table-cell">' + citizen.name + '</td>')
         tableRow.append('<td class="table-cell">' + citizen.gender + '</td>')
         tableRow.append('<td class="table-cell">' + citizen.dateOfBirth + '</td>')
-        
+
         let handlerCell = $('<td class="table-cell handler-cell">');
         let handlerContainer = $('<div class="handler-container">');
         handlerContainer.append('<span class="modify-delete">Xóa</span>');
@@ -86,7 +116,7 @@ function postDelete(_id) {
             "Content-Type": "application/json",
             "X-CSRF-Token": csrfToken
         },
-        body: JSON.stringify({id : _id})
+        body: JSON.stringify({ id: _id })
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
@@ -112,13 +142,38 @@ function postDelete(_id) {
     });
 }
 
-$("body").on("click", ".modify-delete", function() {
+$("body").on("click", ".modify-delete", function () {
     let citizenId = $(this).parent().parent().parent().children(':first-child').html();
     postDelete(citizenId);
 })
 
-$("#list-citizen-pending").click(function() {
-    $(this).removeClass("comfirm-button");
-    $(this).addClass("cancel-button");
+function updateCompleteStatus(isComplete) {
+    let $pendingButton = $("#list-citizen-pending");
+    if (!isComplete) {
+        $pendingButton.removeClass("cancel-button");
+        $pendingButton.addClass("confirm-button");
+        $pendingButton.html("Đánh dấu là hoàn thành")
+    } else {
+        $pendingButton.removeClass("confirm-button");
+        $pendingButton.addClass("cancel-button");
+        $pendingButton.html("Hủy đánh dấu hoàn thành")
+    }
+}
+
+function changeCompleteStatus() {
+    fetch('change-complete-status', {
+        method: 'get',
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        updateCompleteStatus(data.isComplete);
+    });
+}
+
+$("#list-citizen-pending").click(function () {
+    changeCompleteStatus();
 })
 
