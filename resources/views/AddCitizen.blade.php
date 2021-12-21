@@ -38,6 +38,13 @@
             <div class="dropdown-container" id="management-dropdown">
                 <a class="sidebar-nav" id="declare-location-nav" href='add-citizen'>Nhập phiếu điều tra</a>
             </div>
+            <div class="sidebar-row" id="information">
+                <span class="sidebar-nav">Thông tin dân số</span>
+                <b class="caret sidebar-caret"></b>
+            </div>
+            <div class="dropdown-container" id="information-dropdown">
+                <a class="sidebar-nav" href='list-citizen'>Danh sách dân số</a>
+            </div>
         </aside>
         <div class="content-container">
             <h2 class="content-title">Nhập liệu dân số</h2>
