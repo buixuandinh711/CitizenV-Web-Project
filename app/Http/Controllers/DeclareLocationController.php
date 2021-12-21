@@ -305,6 +305,7 @@ class DeclareLocationController extends Controller
             $city = DB::table('city')->selectRaw('city_id as code')->selectRaw('city_name as name')->get();
             return response()->json(['info' => $city]);
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function GetDistrict (Request $request) {
@@ -315,6 +316,7 @@ class DeclareLocationController extends Controller
             ->where('city_id', $request->code)->get();
             return response()->json(['info' => $district]);
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function GetWard (Request $request) {
@@ -325,17 +327,50 @@ class DeclareLocationController extends Controller
             ->where('district_id', $request->code)->get();
             return response()->json(['info' => $ward]);
         }
+        return response()->json(['resp' => 'error']);
     }
 
     public function GetVillage (Request $request) {
         if (session('user')) {
-            if (session('user')) {
-                $village = DB::table('village')
+            $village = DB::table('village')
+            ->selectRaw('village_id as code')
+            ->selectRaw('village_name as name')
+            ->where('ward_id', $request->code)->get();
+            return response()->json(['info' => $village]);
+        }
+        return response()->json(['resp' => 'error']);
+    }
+
+    public function GetLocationInfo() {
+        if (session('user')) {
+            if (session('user')->username == 'admin') {
+                return response()->json(['code' => 'admin', 'name' => 'cả nước']);
+            } else if (strlen(session('user')->username) == 2) {
+                $result = DB::table('city')
+                ->where('city_id', session('user')->username)
+                ->selectRaw('city_id as code')
+                ->selectRaw('city_name as name')->first();
+                return response()->json($result);
+            } else if (strlen(session('user')->username) == 4) {
+                $result = DB::table('district')
+                ->where('district_id', session('user')->username)
+                ->selectRaw('district_id as code')
+                ->selectRaw('district_name as name')->first();
+                return response()->json($result);
+            } else if (strlen(session('user')->username) == 6) {
+                $result = DB::table('ward')
+                ->where('ward_id', session('user')->username)
+                ->selectRaw('ward_id as code')
+                ->selectRaw('ward_name as name')->first();
+                return response()->json($result);
+            } else if (strlen(session('user')->username) == 8) {
+                $result = DB::table('village')
+                ->where('village_id', session('user')->username)
                 ->selectRaw('village_id as code')
-                ->selectRaw('village_name as name')
-                ->where('ward_id', $request->code)->get();
-                return response()->json(['info' => $village]);
+                ->selectRaw('village_name as name')->first();
+                return response()->json($result);
             }
         }
+        return response()->json(['resp' => 'error']);
     }
 }

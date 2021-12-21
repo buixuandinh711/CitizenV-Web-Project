@@ -49,13 +49,15 @@ Route::post('get-ward','App\Http\Controllers\DeclareLocationController@GetWard')
 
 Route::post('get-village','App\Http\Controllers\DeclareLocationController@GetVillage');
 
+Route::get('get-location-info','App\Http\Controllers\DeclareLocationController@GetLocationInfo');
+
 //User
 
 Route::post('add-new-user','App\Http\Controllers\UserController@AddNewUser');
 
 Route::get('account-location-info','App\Http\Controllers\UserController@AccountLocationInfo');
 
-Route::post('edit-user','App\Http\Controllers\UserController@EditUser');
+Route::post('edit-account','App\Http\Controllers\UserController@EditUser');
 
 Route::post('delete-account','App\Http\Controllers\UserController@DeleteAccount');
 
@@ -67,7 +69,7 @@ Route::post('submit-declared-permission','App\Http\Controllers\AccessController@
 
 Route::get('declare-permission-location-info','App\Http\Controllers\AccessController@DeclarePermissionLocationInfo');
 
-Route::post('edit-access', 'App\Http\Controllers\AccessController@EditAccess');
+Route::post('edit-permission', 'App\Http\Controllers\AccessController@EditAccess');
 
 Route::post('delete-permission', 'App\Http\Controllers\AccessController@DeletePermission');
 
@@ -83,26 +85,10 @@ Route::get('follow-declare-population', 'App\Http\Controllers\DeclarePopulationC
 
 Route::post('load-declared-citizen', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulation');
 
-Route::get('show-total-population', 'App\Http\Controllers\DeclarePopulationController@ShowTotalPopulation');
-
 Route::post('show-info-population', 'App\Http\Controllers\DeclarePopulationController@ShowInfoPopulation');
 
-Route::get('show-total-population-each-city', 'App\Http\Controllers\DeclarePopulationController@ShowTotalPopulationEachCity');
-
-Route::get('show-total-population-each-district', 'App\Http\Controllers\DeclarePopulationController@ShowTotalPopulationEachDistrict');
-
-Route::get('show-total-population-each-ward', 'App\Http\Controllers\DeclarePopulationController@ShowTotalPopulationEachWard');
-
-Route::get('show-total-population-each-village', 'App\Http\Controllers\DeclarePopulationController@ShowTotalPopulationEachVillage');
-
-Route::post('show-list-population-each-city', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulationEachCity');
-
-Route::post('show-list-population-each-district', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulationEachDistrict');
-
-Route::post('show-list-population-each-ward', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulationEachWard');
-
-Route::post('show-list-population-each-village', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulationEachVillage');
-
-Route::get('complete', 'App\Http\Controllers\DeclarePopulationController@Complete');
+Route::get('change-complete-status', 'App\Http\Controllers\DeclarePopulationController@ChangeCompleteStatus');
 
 Route::get('get-upper-location', 'App\Http\Controllers\DeclarePopulationController@GetUpperLocation');
+
+Route::get('get-complete-status', 'App\Http\Controllers\DeclarePopulationController@GetCompleteStatus');
