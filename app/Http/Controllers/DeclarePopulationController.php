@@ -20,9 +20,6 @@ class DeclarePopulationController extends Controller
                 $person_religion = $request->religion;
                 $person_level = $request->grade;
                 $person_job = $request->job;
-                $city_id = substr(session('user')->username,0,2);
-                $district_id = substr(session('user')->username,0,4);
-                $ward_id = substr(session('user')->username,0,6);
                 $village_id = session('user')->username;
                 $person = DB::table('person')->where('person_id', $person_id)->get();
                 $access_city = DB::table('access')
@@ -48,11 +45,10 @@ class DeclarePopulationController extends Controller
                     $result['resp'] = 'error';
                     return response()->json($result);
                 }
-                DB::table('person')->insert(['city_id' => $city_id,'district_id' => $district_id, 'ward_id' => $ward_id, 
-                    'village_id' => $village_id, 'person_id' => $person_id, 'person_name' => $person_name, 'person_date' => $person_date, 
-                    'person_gender' => $person_gender, 'person_permanent_address' => $person_permanent_address, 
-                    'person_temporary_address' => $person_temporary_address, 'person_religion' => $person_religion, 
-                    'person_level' => $person_level, 'person_job' => $person_job]);
+                DB::table('person')->insert(['village_id' => $village_id, 'person_id' => $person_id, 'person_name' => $person_name, 
+                    'person_date' => $person_date, 'person_gender' => $person_gender, 
+                    'person_permanent_address' => $person_permanent_address, 'person_temporary_address' => $person_temporary_address, 
+                    'person_religion' => $person_religion, 'person_level' => $person_level, 'person_job' => $person_job]);
                 $result['resp'] = 'success';
                 return response()->json($result);
             }

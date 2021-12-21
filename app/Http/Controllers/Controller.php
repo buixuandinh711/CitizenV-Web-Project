@@ -90,16 +90,10 @@ class Controller extends BaseController
 
     public function ListCitizen() {
         if (session('user')) {
-            if (session('user')->username == 'admin') {
-                return view('listcitizenall');
-            } else if (strlen(session('user')->username) == 2) {
-                return view('listcitizencity');
-            } else if (strlen(session('user')->username) == 4) {
-                return view('listcitizendistrict');
-            } else if (strlen(session('user')->username) == 6) {
-                return view('listcitizenward');
-            } else if (strlen(session('user')->username) == 8) {
-                return view('listcitizenvillage');
+            if (strlen(session('user')->username) == 8) {
+                return view('listcitizens');
+            } else if (strlen(session('user')->username) != 8) {
+                return view('listcitizen');
             }
         }
         return redirect('login');
