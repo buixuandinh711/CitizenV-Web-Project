@@ -94,6 +94,7 @@ aside {
 .account-dropdown a {
     display: block;
     padding: 5px;
+    color:black;
 }
 
 a {

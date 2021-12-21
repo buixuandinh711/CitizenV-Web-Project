@@ -23,7 +23,7 @@
                             <b class="caret" id="account-caret"></b>
                         </span>
                         <div class="account-dropdown">
-                            <a href="showinfouser">Thông tin tài khoản</a>
+                            <a>Thông tin tài khoản</a>
                             <a href="logout">Đăng xuất</a>
                         </div>
                     </div>

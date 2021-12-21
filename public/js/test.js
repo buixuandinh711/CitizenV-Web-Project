@@ -317,21 +317,21 @@
 // .then(response => response.json())
 // .then(data => console.log(data));
 
-var csrfToken = $("meta[name='csrf-token']").attr("content");  
-fetch('get-district', {
-    method: 'post',
-    headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-Token": csrfToken
-    },
-    body: JSON.stringify({
-      code	: '01'
-      })
-  }).then(function(response) {
-    return response.json();
-  }).then(function(data) {
-    console.log(data);
-  });
+// var csrfToken = $("meta[name='csrf-token']").attr("content");  
+// fetch('get-district', {
+//     method: 'post',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "X-CSRF-Token": csrfToken
+//     },
+//     body: JSON.stringify({
+//       code	: '01'
+//       })
+//   }).then(function(response) {
+//     return response.json();
+//   }).then(function(data) {
+//     console.log(data);
+//   });
 
 //   var csrfToken = $("meta[name='csrf-token']").attr("content");  
 // fetch('get-ward', {
@@ -364,3 +364,7 @@ fetch('get-district', {
 //   }).then(function(data) {
 //     console.log(data);
 //   });
+
+// fetch('complete')
+// .then(response => response.json())
+// .then(data => console.log(data));
