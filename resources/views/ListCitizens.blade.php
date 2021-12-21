@@ -49,7 +49,7 @@
         </aside>
         <div class="content-container">
             <div class="title-complete-container">
-                <h2 class="content-title">Danh sách dân cư</h2>
+                <h2 class="content-title"></h2>
                 <button class="input-item confirm-button complete-button" id="list-citizen-pending">Đánh dấu là hoàn thành</button>
             </div>
 
