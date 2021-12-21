@@ -1,7 +1,3 @@
-var permanentCitySelect = $("#add-citizen-permcity");
-var permanentDistrictSelect = $("#add-citizen-permdistrict");
-var permanentWardSelect = $("#add-citizen-permward");
-var permanentVillageSelect = $("#add-citizen-permvillage");
 var currentCitySelect = $("#add-citizen-curcity");
 var currentDistrictSelect = $("#add-citizen-curdistrict");
 var currentWardSelect = $("#add-citizen-curward");
@@ -13,6 +9,7 @@ const WARD_SELECT_DEFAULT = "Xã, Phường";
 const VILLAGE_SELECT_DEFAULT = "Thôn, Tổ dân phố";
 
 var cities = [];
+var locationCode = "";
 
 function loadCity() {
 
@@ -30,7 +27,6 @@ function loadCity() {
             createSelectLocationOption($("#add-citizen-curcity"), cities);
         });
     } else {
-        createSelectLocationOption($("#add-citizen-permcity"), cities);
         createSelectLocationOption($("#add-citizen-curcity"), cities);
     }
 
@@ -85,6 +81,24 @@ function loadVillage(ward, selector) {
     });
 }
 
+function loadPermenentInfo() {
+    fetch('get-upper-location', {
+        method: 'get',
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        console.log(data);
+        locationCode = data.code;
+        $("#add-citizen-permcity").val(data.city);
+        $("#add-citizen-permdistrict").val(data.district);
+        $("#add-citizen-permward").val(data.ward);
+        $("#add-citizen-permvillage").val(data.village);
+    });
+}
+
 function postCitizen(_id, _name, _gender, _dataOfBirth, _permanentAddress, _currentAddress, _religion, _grade, _job) {
     let csrfToken = $("meta[name='csrf-token']").attr("content");
     let citizen = {
@@ -129,25 +143,7 @@ function createSelectLocationOption(selector, locations) {
 }
 
 loadCity();
-
-permanentCitySelect.change(function () {
-    let cityCode = $(this).val();
-    resetSelector(permanentDistrictSelect, DISTRICT_SELECT_DEFAULT);
-    resetSelector(permanentWardSelect, WARD_SELECT_DEFAULT);
-    resetSelector(permanentVillageSelect, VILLAGE_SELECT_DEFAULT);
-    loadDistrict(cityCode, permanentDistrictSelect);
-})
-permanentDistrictSelect.change(function () {
-    let districtCode = $(this).val();
-    resetSelector(permanentWardSelect, WARD_SELECT_DEFAULT);
-    resetSelector(permanentVillageSelect, VILLAGE_SELECT_DEFAULT);
-    loadWard(districtCode, permanentWardSelect);
-})
-permanentWardSelect.change(function () {
-    let wardCode = $(this).val();
-    resetSelector(permanentVillageSelect, VILLAGE_SELECT_DEFAULT);
-    loadVillage(wardCode, permanentVillageSelect);
-})
+loadPermenentInfo();
 
 currentCitySelect.change(function () {
     let cityCode = $(this).val();
@@ -174,10 +170,6 @@ $("#add-citizen-submit").click(function () {
     let citizenName = $("#add-citizen-name").val().trim().replace(/\s{2,}/g, ' ');
     let gender = $("#add-citizen-gender").val();
     let dateOfBirth = $("#add-citizen-dateofbirth").val();
-    let permanentCity = permanentCitySelect.val();
-    let permanentDistrict = permanentDistrictSelect.val();
-    let permanentWard = permanentWardSelect.val();
-    let permanentVillage = permanentVillageSelect.val();
     let currentCity = currentCitySelect.val();
     let currentDistrict = currentDistrictSelect.val();
     let currentWard = currentWardSelect.val();
@@ -187,7 +179,6 @@ $("#add-citizen-submit").click(function () {
     let job = $("#add-citizen-job").val().trim().replace(/\s{2,}/g, ' ');
 
     if (citizenId.length == 0 || citizenName.length == 0 || !gender || dateOfBirth.length == 0
-        || !permanentCity || !permanentDistrict || !permanentWard || !permanentVillage
         || !currentCity || !currentDistrict || !currentWard || !currentVillage
         || religion.length == 0 || grade.length == 0 || job.length == 0) {
         setInputError("Thông tin không được để trống");
@@ -199,9 +190,8 @@ $("#add-citizen-submit").click(function () {
         return;
     }
 
-    console.log("success");
     setInputError("");
-    postCitizen(citizenId, citizenName, gender, dateOfBirth, permanentVillage, currentVillage, religion, grade, job);
+    postCitizen(citizenId, citizenName, gender, dateOfBirth, locationCode, currentVillage, religion, grade, job);
 
 });
 
@@ -216,10 +206,6 @@ function clearInput() {
     $("#add-citizen-gender option[disabled='disabled']").prop("selected", true);
     let dateOfBirth = $("#add-citizen-dateofbirth").val("");
 
-    resetSelector($("#add-citizen-permcity"), CITY_SELECT_DEFAULT);
-    resetSelector($("#add-citizen-permdistrict"), DISTRICT_SELECT_DEFAULT);
-    resetSelector($("#add-citizen-permward"), WARD_SELECT_DEFAULT);
-    resetSelector($("#add-citizen-permvillage"), VILLAGE_SELECT_DEFAULT);
     resetSelector($("#add-citizen-curcity"), CITY_SELECT_DEFAULT);
     resetSelector($("#add-citizen-curdistrict"), DISTRICT_SELECT_DEFAULT);
     resetSelector($("#add-citizen-curward"), WARD_SELECT_DEFAULT);
