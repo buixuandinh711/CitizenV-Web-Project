@@ -39,6 +39,14 @@ Route::post('edit-location','App\Http\Controllers\DeclareLocationController@Edit
 
 Route::post('delete-location','App\Http\Controllers\DeclareLocationController@DeleteLocation');
 
+Route::get('get-city','App\Http\Controllers\DeclareLocationController@GetCity');
+
+Route::post('get-district','App\Http\Controllers\DeclareLocationController@GetDistrict');
+
+Route::post('get-ward','App\Http\Controllers\DeclareLocationController@GetWard');
+
+Route::post('get-village','App\Http\Controllers\DeclareLocationController@GetVillage');
+
 //User
 
 Route::post('add-new-user','App\Http\Controllers\UserController@AddNewUser');
@@ -63,7 +71,7 @@ Route::post('delete-permission', 'App\Http\Controllers\AccessController@DeletePe
 
 //Declare Population
 
-Route::post('add-person', 'App\Http\Controllers\DeclarePopulationController@AddPerson');
+Route::post('submit-new-citizen', 'App\Http\Controllers\DeclarePopulationController@AddPerson');
 
 Route::post('delete-person', 'App\Http\Controllers\DeclarePopulationController@DeletePerson');
 

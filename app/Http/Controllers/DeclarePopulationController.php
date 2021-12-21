@@ -11,39 +11,48 @@ class DeclarePopulationController extends Controller
         if (session('user')) {
             if (strlen(session('user')->username) == 8) {
                 $result = ['resp' => ''];
-                $person_id = $request->code;
+                $person_id = $request->id;
                 $person_name = $request->name;
-                $person_date = $request->date;
+                $person_date = $request->dateOfBirth;
                 $person_gender = $request->gender;		
-                $person_permanent_address = $request->permanent_address;
-                $person_temporary_address = $request->temporary_address;
+                $person_permanent_address = $request->permanentAddress;
+                $person_temporary_address = $request->currentAddress;
                 $person_religion = $request->religion;
-                $person_level = $request->level;
+                $person_level = $request->grade;
                 $person_job = $request->job;
                 $city_id = substr(session('user')->username,0,2);
                 $district_id = substr(session('user')->username,0,4);
                 $ward_id = substr(session('user')->username,0,6);
                 $village_id = session('user')->username;
                 $person = DB::table('person')->where('person_id', $person_id)->get();
-                $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
-                $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
-                $access_ward = DB::table('access')->where('username',substr(session('user')->username,0,6))
-                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
-                $access_village = DB::table('access')->where('username',session('user')->username)
-                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
-                if (count($person) || !ctype_digit($person_id) || !count($access_city) || !count($access_district) ||
-                !count($access_ward) || !count($access_village) || $person_id == '' || $person_name == '' || $person_date == '' ||
-                $person_gender == '' ||	$person_permanent_address == '' || $person_temporary_address == '' 
-                || $person_religion == '' || $person_level == '' || $person_job == '') {
+                $access_city = DB::table('access')
+                ->where('username',substr(session('user')->username,0,2))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_district = DB::table('access')
+                ->where('username',substr(session('user')->username,0,4))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_ward = DB::table('access')
+                ->where('username',substr(session('user')->username,0,6))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_village = DB::table('access')
+                ->where('username',session('user')->username)
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                if (count($person) || !ctype_digit($person_id) || !count($access_city) || !count($access_district) || 
+                    !count($access_ward) || !count($access_village) || $person_id == '' || $person_name == '' || $person_date == '' || 
+                    $person_gender == '' ||	$person_permanent_address == '' || $person_temporary_address == '' || $person_religion == '' || 
+                    $person_level == '' || $person_job == '') {
                     $result['resp'] = 'error';
                     return response()->json($result);
                 }
-                DB::table('person')->insert(['city_id' => $city_id,'district_id' => $district_id, 'ward_id' => $ward_id,
-                'village_id' => $village_id, 'person_id' => $person_id, 'person_name' => $person_name, 'person_date' => $person_date,
-                'person_gender' => $person_gender, 'person_permanent_address' => $person_permanent_address, 'person_temporary_address' => $person_temporary_address,
-                'person_religion' => $person_religion, 'person_level' => $person_level, 'person_job' => $person_job]);
+                DB::table('person')->insert(['city_id' => $city_id,'district_id' => $district_id, 'ward_id' => $ward_id, 
+                    'village_id' => $village_id, 'person_id' => $person_id, 'person_name' => $person_name, 'person_date' => $person_date, 
+                    'person_gender' => $person_gender, 'person_permanent_address' => $person_permanent_address, 
+                    'person_temporary_address' => $person_temporary_address, 'person_religion' => $person_religion, 
+                    'person_level' => $person_level, 'person_job' => $person_job]);
                 $result['resp'] = 'success';
                 return response()->json($result);
             }
@@ -55,39 +64,47 @@ class DeclarePopulationController extends Controller
         if (session('user')) {
             if (strlen(session('user')->username) == 8) {
                 $result = ['resp' => ''];
-                $person_id = $request->code;
+                $person_id = $request->id;
                 $person_name = $request->name;
-                $person_date = $request->date;
-                $person_gender = $request->gender;	
-                $person_permanent_address = $request->permanent_address;
-                $person_temporary_address = $request->temporary_address;
+                $person_date = $request->dateOfBirth;
+                $person_gender = $request->gender;		
+                $person_permanent_address = $request->permanentAddress;
+                $person_temporary_address = $request->currentAddress;
                 $person_religion = $request->religion;
-                $person_level = $request->level;
+                $person_level = $request->grade;
                 $person_job = $request->job;
                 $city_id = substr(session('user')->username,0,2);
                 $district_id = substr(session('user')->username,0,4);
                 $ward_id = substr(session('user')->username,0,6);
                 $village_id = session('user')->username;
                 $person = DB::table('person')->where('person_id', $person_id)->get();
-                $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
-                $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
-                $access_ward = DB::table('access')->where('username',substr(session('user')->username,0,6))
-                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
-                $access_village = DB::table('access')->where('username',session('user')->username)
-                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
-                if (!count($person) || !ctype_digit($person_id) || !count($access_city) || !count($access_district) ||
-                !count($access_ward) || !count($access_village) || $person_id == '' || $person_name == '' || $person_date == '' ||
-                $person_gender == '' || $person_permanent_address == '' || $person_temporary_address == '' 
-                || $person_religion == '' || $person_level == '' || $person_job == '') {
+                $access_city = DB::table('access')
+                ->where('username',substr(session('user')->username,0,2))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_district = DB::table('access')
+                ->where('username',substr(session('user')->username,0,4))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_ward = DB::table('access')
+                ->where('username',substr(session('user')->username,0,6))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_village = DB::table('access')
+                ->where('username',session('user')->username)
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                if (!count($person) || !ctype_digit($person_id) || !count($access_city) || !count($access_district) || 
+                    !count($access_ward) || !count($access_village) || $person_id == '' || $person_name == '' || $person_date == '' || 
+                    $person_gender == '' || $person_permanent_address == '' || $person_temporary_address == '' || $person_religion == '' || 
+                    $person_level == '' || $person_job == '') {
                     $result['resp'] = 'error';
                     return response()->json($result);
                 }
-                DB::table('person')->where('person_id',$person_id)->update(['person_name' => $person_name, 
-                'person_date' => $person_date,'person_gender' => $person_gender, 'person_permanent_address' => $person_permanent_address, 
-                'person_temporary_address' => $person_temporary_address,
-                'person_religion' => $person_religion, 'person_level' => $person_level, 'person_job' => $person_job]);
+                DB::table('person')->where('person_id',$person_id)->update(['person_name' => $person_name, 'person_date' => $person_date,
+                    'person_gender' => $person_gender, 'person_permanent_address' => $person_permanent_address, 
+                    'person_temporary_address' => $person_temporary_address,'person_religion' => $person_religion, 
+                    'person_level' => $person_level, 'person_job' => $person_job]);
                 $result['resp'] = 'success';
                 return response()->json($result);
             }
@@ -99,16 +116,24 @@ class DeclarePopulationController extends Controller
         if (session('user')) {
             if (strlen(session('user')->username) == 8) {
                 $result = ['resp' => ''];
-                $person_id = $request->code;
+                $person_id = $request->id;
                 $person = DB::table('person')->where('person_id', $person_id)->get();
-                $access_city = DB::table('access')->where('username',substr(session('user')->username,0,2))
-                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
-                $access_district = DB::table('access')->where('username',substr(session('user')->username,0,4))
-                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
-                $access_ward = DB::table('access')->where('username',substr(session('user')->username,0,6))
-                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
-                $access_village = DB::table('access')->where('username',session('user')->username)
-                ->whereRaw('start_date <= now()')->whereRaw('end_date >= now()')->get();
+                $access_city = DB::table('access')
+                ->where('username',substr(session('user')->username,0,2))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_district = DB::table('access')
+                ->where('username',substr(session('user')->username,0,4))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_ward = DB::table('access')
+                ->where('username',substr(session('user')->username,0,6))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_village = DB::table('access')
+                ->where('username',session('user')->username)
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
                 if (!count($person) || !ctype_digit($person_id) || !count($access_city) || !count($access_district) ||
                 !count($access_ward) || !count($access_village) || $person_id == '') {
                     $result['resp'] = 'error';

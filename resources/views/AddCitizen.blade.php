@@ -14,7 +14,7 @@
 <body>
     <div class="container">
         <header>
-            <span class="page-logo">Citizen V</span>
+            <a class="page-logo" href='main'>Citizen V</a>
             <div class="account-dropdown-container">
                 <span class="account-container">
                     <a class="username">{{session('user')->username}}</a>
