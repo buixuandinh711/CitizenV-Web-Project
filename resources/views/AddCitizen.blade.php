@@ -75,18 +75,10 @@
                     <div class="add-citizen-row">
                         <label class="input-label">Địa chỉ thường trú</label>
                         <div class="add-citizen-row">
-                            <select id="add-citizen-permcity" type="text" class="input-item border-input-item add-citizen-select">
-                                <option disabled="disabled" selected>Tỉnh, Thành phố</option>
-                            </select>
-                            <select id="add-citizen-permdistrict" type="text" class="input-item border-input-item add-citizen-select">
-                                <option disabled="disabled" selected>Quận, Huyện</option>
-                            </select>
-                            <select id="add-citizen-permward" type="text" class="input-item border-input-item add-citizen-select">
-                                <option disabled="disabled" selected>Xã, Phường</option>
-                            </select>
-                            <select id="add-citizen-permvillage" type="text" class="input-item border-input-item add-citizen-select">
-                                <option disabled="disabled" selected>Thôn, Tổ dân phố</option>
-                            </select>
+                            <input id="add-citizen-permcity" type="text" class="input-item border-input-item add-citizen-select" disabled>
+                            <input id="add-citizen-permdistrict" type="text" class="input-item border-input-item add-citizen-select" disabled>
+                            <input id="add-citizen-permward" type="text" class="input-item border-input-item add-citizen-select" disabled>
+                            <input id="add-citizen-permvillage" type="text" class="input-item border-input-item add-citizen-select" disabled>
                         </div>
                     </div>
                     <div class="add-citizen-row">
