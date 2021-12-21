@@ -9,6 +9,7 @@
     <link rel="StyleSheet" href="css/add_citizen.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/home.js" defer></script>
+    <script src="js/add_citizen.js" defer></script>
 </head>
 
 <body>
