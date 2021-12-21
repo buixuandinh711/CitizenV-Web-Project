@@ -6,10 +6,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Home page</title>
     <link rel="StyleSheet" href="css/home_styles.css">
+    <link rel="StyleSheet" href="css/general.css">
+    <link rel="StyleSheet" href="css/list_citizen_b2.css">
     <link rel="StyleSheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
     <script src="js/home.js" defer></script>
+    <script src="js/list_citizen_b2.js" defer></script>
     <script src="js/test.js" defer></script>
 </head>
 
@@ -29,11 +32,11 @@
                     </div>
         </header>
         <aside>
-            <div class="sidebar-row" id="management">
+            <div class="sidebar-row" id="declaration">
                 <span class="sidebar-nav">Khai báo dân số</span>
                 <b class="caret sidebar-caret"></b>
             </div>
-            <div class="dropdown-container" id="management-dropdown">
+            <div class="dropdown-container" id="declaration-dropdown">
                 <a class="sidebar-nav" id="declare-location-nav" href='add-citizen'>Nhập phiếu điều tra</a>
             </div>
             <div class="sidebar-row" id="information">
@@ -45,7 +48,14 @@
             </div>
         </aside>
         <div class="content-container">
+            <div class="title-complete-container">
+                <h2 class="content-title">Danh sách dân cư</h2>
+                <button class="input-item confirm-button complete-button" id="list-citizen-pending">Đánh dấu là hoàn thành</button>
+            </div>
 
+            <div class="citizen-list-container">
+
+            </div>
         </div>
     </div>
 </body>

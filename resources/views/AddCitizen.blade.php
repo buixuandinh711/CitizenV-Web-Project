@@ -31,11 +31,11 @@
             </div>
         </header>
         <aside>
-            <div class="sidebar-row" id="management">
+            <div class="sidebar-row" id="declaration">
                 <span class="sidebar-nav">Khai báo dân số</span>
                 <b class="caret sidebar-caret"></b>
             </div>
-            <div class="dropdown-container" id="management-dropdown">
+            <div class="dropdown-container" id="declaration-dropdown">
                 <a class="sidebar-nav" id="declare-location-nav" href='add-citizen'>Nhập phiếu điều tra</a>
             </div>
             <div class="sidebar-row" id="information">

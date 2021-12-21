@@ -1,0 +1,11 @@
+.citizen-list-container {
+    margin-top: 70px;
+}
+.title-complete-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.complete-button {
+    height: 40px;
+}
