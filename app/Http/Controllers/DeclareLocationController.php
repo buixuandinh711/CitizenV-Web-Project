@@ -105,9 +105,7 @@ class DeclareLocationController extends Controller
                     $result['resp'] = 'error';
                     return response()->json($result);
                 }
-                DB::table('ward')
-                ->insert(['city_id' => substr(session('user')->username,0,2),'district_id' => session('user')->username,
-                    'ward_id' => $ward_id,'ward_name' => $ward_name]);
+                DB::table('ward')->insert(['district_id' => session('user')->username, 'ward_id' => $ward_id,'ward_name' => $ward_name]);
                 $result['resp'] = 'success';
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 6) {
@@ -133,8 +131,8 @@ class DeclareLocationController extends Controller
                     return response()->json($result);
                 } 
                 DB::table('village')
-                ->insert(['city_id' => substr(session('user')->username,0,2),'district_id' => substr(session('user')->username,0,4),
-                    'ward_id' => session('user')->username,'village_id' => $village_id, 'village_name' => $village_name, 'complete' => 0]);
+                ->insert(['ward_id' => session('user')->username,'village_id' => $village_id, 'village_name' => $village_name, 
+                    'complete' => 0]);
                 $result['resp'] = 'success';
                 return response()->json($result);
             }

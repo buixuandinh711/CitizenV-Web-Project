@@ -1,5 +1,5 @@
 // var csrfToken = $("meta[name='csrf-token']").attr("content");  
-// arr = {code: "10", name : "Cầu Giấy"};
+// arr = {code: "99", name : "Cầu Giấy"};
 // fetch('update-new-location', {
 //     method: 'post',
 //     headers: {
@@ -381,6 +381,6 @@
 // .then(response => response.json())
 // .then(data => console.log(data));
 
-fetch('get-upper-location')
-.then(response => response.json())
-.then(data => console.log(data));
+// fetch('get-upper-location')
+// .then(response => response.json())
+// .then(data => console.log(data));
