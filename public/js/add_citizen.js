@@ -236,3 +236,6 @@ function setInputError(err) {
     errorHint.html(err);
     errorHint.css("visibility", "visible");
 }
+
+$("#declaration-dropdown").css("display", "block");
+$("#declaration-dropdown a").css("color", "deepskyblue");
