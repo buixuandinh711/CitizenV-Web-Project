@@ -448,4 +448,16 @@ class DeclarePopulationController extends Controller
         }
         return response()->json(['resp' => 'error']);
     }
+
+    public function GetUpperLocation() {
+        if (strlen(session('user')->username) == 8) {
+            $city = DB::table('city')->where('city_id',substr(session('user')->username,0,2))->first();
+            $district = DB::table('district')->where('district_id',substr(session('user')->username,0,4))->first();
+            $ward = DB::table('ward')->where('ward_id',substr(session('user')->username,0,6))->first();
+            $village = DB::table('village')->where('village_id',session('user')->username)->first();
+            return response()->json(['village' => $village->village_name, 'ward' => $ward->ward_name, 
+                'district' => $district->district_name, 'city' => $city->city_name]);
+        }
+        return response()->json(['resp' => 'error']);
+    }
 }

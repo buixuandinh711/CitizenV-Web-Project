@@ -102,3 +102,5 @@ Route::post('show-list-population-each-ward', 'App\Http\Controllers\DeclarePopul
 Route::post('show-list-population-each-village', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulationEachVillage');
 
 Route::get('complete', 'App\Http\Controllers\DeclarePopulationController@Complete');
+
+Route::get('get-upper-location', 'App\Http\Controllers\DeclarePopulationController@GetUpperLocation');
