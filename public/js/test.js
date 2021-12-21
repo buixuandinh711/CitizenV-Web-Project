@@ -100,7 +100,7 @@
 //         "Content-Type": "application/json",
 //         "X-CSRF-Token": csrfToken
 //     },
-//     body: JSON.stringify({code: '10', startDate: '2021/12/01', endDate: '2021/12/31'})
+//     body: JSON.stringify({code: '64', startDate: '2021/12/01', endDate: '2021/12/31'})
 //   }).then(function(response) {
 //     return response.json();
 //   }).then(function(data) {
@@ -140,22 +140,22 @@
 // .then(data => console.log(data));
 
 // var csrfToken = $("meta[name='csrf-token']").attr("content");  
-// fetch('add-person', {
+// fetch('submit-new-citizen', {
 //     method: 'post',
 //     headers: {
 //         "Content-Type": "application/json",
 //         "X-CSRF-Token": csrfToken
 //     },
 //     body: JSON.stringify({
-//       code	: '123456789',
-//       name	: 'Nguyen Van A',
-//       date	: '2000/01/01',
-//       gender	: 'Nam',
-//       permanent_address : 'Văn Than - Cao Đức - Gia Bình - Bắc Ninh',	
-//       temporary_address	: 'Văn Than - Cao Đức - Gia Bình - Bắc Ninh',
-//       religion	: 'Không',
-//       level	: 'THPT',
-//       job : 'Làm ruộng'})
+//       id : '123456789123', 
+//       name: 'Nguyễn Văn A',  
+//       gender: 'Nam', 
+//       dateOfBirth: '2000/1/1', 
+//       permanentAddress: '01010101', 
+//       currentAddress: '01010101', 
+//       religion: 'Không', 
+//       grade: 'ThPT',
+//       job: 'Làm ruộng'})
 //   }).then(function(response) {
 //     return response.json();
 //   }).then(function(data) {
@@ -170,14 +170,14 @@
   //         "X-CSRF-Token": csrfToken
   //     },
   //     body: JSON.stringify({
-  //       code	: '123456789',
-  //       name	: 'Nguyen Van B',
-  //       date	: '2000/01/01',
-  //       gender	: 'Nam',
-  //       permanent_address : 'Văn Than - Cao Đức - Gia Bình - Bắc Ninh',	
-  //       temporary_address	: 'Văn Than - Cao Đức - Gia Bình - Bắc Ninh',
-  //       religion	: 'Không',
-  //       level	: 'THPT',
+  //       id : '123456789123', 
+  //     name: 'Nguyễn Văn B',  
+  //     gender: 'Nam', 
+  //     dateOfBirth: '2000/1/1', 
+  //     permanentAddress: '01010101', 
+  //     currentAddress: '01010101', 
+  //     religion: 'Không', 
+  //     grade: 'ThPT',
   //       job : 'Làm ruộng'})
   //   }).then(function(response) {
   //     return response.json();
@@ -306,6 +306,58 @@
 //     },
 //     body: JSON.stringify({
 //       code	: '01010101'
+//       })
+//   }).then(function(response) {
+//     return response.json();
+//   }).then(function(data) {
+//     console.log(data);
+//   });
+
+// fetch('get-city')
+// .then(response => response.json())
+// .then(data => console.log(data));
+
+var csrfToken = $("meta[name='csrf-token']").attr("content");  
+fetch('get-district', {
+    method: 'post',
+    headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": csrfToken
+    },
+    body: JSON.stringify({
+      code	: '01'
+      })
+  }).then(function(response) {
+    return response.json();
+  }).then(function(data) {
+    console.log(data);
+  });
+
+//   var csrfToken = $("meta[name='csrf-token']").attr("content");  
+// fetch('get-ward', {
+//     method: 'post',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "X-CSRF-Token": csrfToken
+//     },
+//     body: JSON.stringify({
+//       code	: '0101'
+//       })
+//   }).then(function(response) {
+//     return response.json();
+//   }).then(function(data) {
+//     console.log(data);
+//   });
+
+// var csrfToken = $("meta[name='csrf-token']").attr("content");  
+// fetch('get-village', {
+//     method: 'post',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "X-CSRF-Token": csrfToken
+//     },
+//     body: JSON.stringify({
+//       code	: '010101'
 //       })
 //   }).then(function(response) {
 //     return response.json();
