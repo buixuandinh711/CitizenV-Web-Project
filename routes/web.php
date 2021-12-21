@@ -100,3 +100,5 @@ Route::post('show-list-population-each-district', 'App\Http\Controllers\DeclareP
 Route::post('show-list-population-each-ward', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulationEachWard');
 
 Route::post('show-list-population-each-village', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulationEachVillage');
+
+Route::get('complete', 'App\Http\Controllers\DeclarePopulationController@Complete');

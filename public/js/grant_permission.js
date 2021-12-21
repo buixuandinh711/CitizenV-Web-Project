@@ -139,7 +139,7 @@ function loadGrantedPermission() {
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
-        console.log(data);
+        // console.log(data);
         grantedPermissions = data.info
         createGrantedPermissionTable(grantedPermissions);
     });
@@ -154,7 +154,7 @@ function loadGrantPermissionLocation() {
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
-        console.log(data);
+        // console.log(data);
         $(".content-title").text("Cấp quyền khai báo cho địa phương thuộc địa bàn " + data.name);
         containLocation = {code : data.code == "admin" ? "" : data.code, name : data.name};
         nonGrantedLocations = data.nonGrantedLocation;
