@@ -3,11 +3,14 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Home page</title>
     <link rel="StyleSheet" href="css/home_styles.css">
     <link rel="StyleSheet" href="css/general.css">
     <link rel="StyleSheet" href="css/add_citizen.css">
+    <link rel="StyleSheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
     <script src="js/home.js" defer></script>
     <script src="js/add_citizen.js" defer></script>
 </head>
@@ -66,7 +69,7 @@
                         <label class="input-label">Địa chỉ thường trú</label>
                         <div class="add-citizen-row">
                             <select id="add-citizen-permcity" type="text" class="input-item border-input-item add-citizen-select">
-                                <option disabled="disabled" selected>Tỉnh, Thành Phố</option>
+                                <option disabled="disabled" selected>Tỉnh, Thành phố</option>
                             </select>
                             <select id="add-citizen-permdistrict" type="text" class="input-item border-input-item add-citizen-select">
                                 <option disabled="disabled" selected>Quận, Huyện</option>
@@ -83,7 +86,7 @@
                         <label class="input-label">Nơi ở hiện tại</label>
                         <div class="add-citizen-row">
                             <select id="add-citizen-curcity" type="text" class="input-item border-input-item add-citizen-select">
-                                <option disabled="disabled" selected>Tỉnh, Thành Phố</option>
+                                <option disabled="disabled" selected>Tỉnh, Thành phố</option>
                             </select>
                             <select id="add-citizen-curdistrict" type="text" class="input-item border-input-item add-citizen-select">
                                 <option disabled="disabled" selected>Quận, Huyện</option>
