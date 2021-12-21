@@ -87,4 +87,21 @@ class Controller extends BaseController
         }
         return redirect('login');
     }
+
+    public function ListCitizen() {
+        if (session('user')) {
+            if (session('user')->username == 'admin') {
+                return view('listcitizenall');
+            } else if (strlen(session('user')->username) == 2) {
+                return view('listcitizencity');
+            } else if (strlen(session('user')->username) == 4) {
+                return view('listcitizendistrict');
+            } else if (strlen(session('user')->username) == 6) {
+                return view('listcitizenward');
+            } else if (strlen(session('user')->username) == 8) {
+                return view('listcitizenvillage');
+            }
+        }
+        return redirect('login');
+    }
 }

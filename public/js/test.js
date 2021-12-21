@@ -209,9 +209,21 @@
 // .then(response => response.json())
 // .then(data => console.log(data));
 
-// fetch('show-list-population')
-// .then(response => response.json())
-// .then(data => console.log(data));
+// var csrfToken = $("meta[name='csrf-token']").attr("content");  
+// fetch('load-declared-citizen', {
+//     method: 'post',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "X-CSRF-Token": csrfToken
+//     },
+//     body: JSON.stringify({
+//       code	: '01010101'
+//       })
+//   }).then(function(response) {
+//     return response.json();
+//   }).then(function(data) {
+//     console.log(data);
+//   });
 
 // fetch('show-total-population')
 // .then(response => response.json())
@@ -369,6 +381,6 @@
 // .then(response => response.json())
 // .then(data => console.log(data));
 
-// fetch('get-upper-location')
-// .then(response => response.json())
-// .then(data => console.log(data));
+fetch('get-upper-location')
+.then(response => response.json())
+.then(data => console.log(data));

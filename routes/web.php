@@ -29,6 +29,8 @@ Route::get('grant-permission','App\Http\Controllers\Controller@GrantPermission')
 
 Route::get('add-citizen','App\Http\Controllers\Controller@AddCitizen');
 
+Route::get('list-citizen','App\Http\Controllers\Controller@ListCitizen');
+
 //Declare Location
 
 Route::get('current-local-info','App\Http\Controllers\DeclareLocationController@CurrentLocalInfo');
@@ -79,7 +81,7 @@ Route::post('edit-person', 'App\Http\Controllers\DeclarePopulationController@Edi
 
 Route::get('follow-declare-population', 'App\Http\Controllers\DeclarePopulationController@FollowDeclarePopulation');
 
-Route::get('show-list-population', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulation');
+Route::post('load-declared-citizen', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulation');
 
 Route::get('show-total-population', 'App\Http\Controllers\DeclarePopulationController@ShowTotalPopulation');
 
