@@ -14,7 +14,7 @@
 //   });
 
 // var csrfToken = $("meta[name='csrf-token']").attr("content");  
-// arr = {code: "10"};
+// arr = {code: "99"};
 // fetch('delete-location', {
 //     method: 'post',
 //     headers: {
@@ -29,7 +29,7 @@
 //   });
 
 // var csrfToken = $("meta[name='csrf-token']").attr("content");  
-// arr = {code: "10", name : "Đống Đa"};
+// arr = {code: "99", name : "Đống Đa"};
 // fetch('edit-location', {
 //     method: 'post',
 //     headers: {
@@ -58,7 +58,7 @@
 //         "Content-Type": "application/json",
 //         "X-CSRF-Token": csrfToken
 //     },
-//     body: JSON.stringify({username: '10',password: '10'})
+//     body: JSON.stringify({username: '99',password: '99'})
 //   }).then(function(response) {
 //     return response.json();
 //   }).then(function(data) {
@@ -66,13 +66,13 @@
 //   });
 
 // var csrfToken = $("meta[name='csrf-token']").attr("content");  
-// fetch('edit-user', {
+// fetch('edit-account', {
 //     method: 'post',
 //     headers: {
 //         "Content-Type": "application/json",
 //         "X-CSRF-Token": csrfToken
 //     },
-//     body: JSON.stringify({username: '10', password: '20'})
+//     body: JSON.stringify({username: '99', password: '98'})
 //   }).then(function(response) {
 //     return response.json();
 //   }).then(function(data) {
@@ -86,7 +86,7 @@
 //         "Content-Type": "application/json",
 //         "X-CSRF-Token": csrfToken
 //     },
-//     body: JSON.stringify({username: '10'})
+//     body: JSON.stringify({username: '99'})
 //   }).then(function(response) {
 //     return response.json();
 //   }).then(function(data) {
@@ -100,7 +100,7 @@
 //         "Content-Type": "application/json",
 //         "X-CSRF-Token": csrfToken
 //     },
-//     body: JSON.stringify({code: '64', startDate: '2021/12/01', endDate: '2021/12/31'})
+//     body: JSON.stringify({code: '99', startDate: '2021/12/01', endDate: '2021/12/31'})
 //   }).then(function(response) {
 //     return response.json();
 //   }).then(function(data) {
@@ -114,7 +114,7 @@
 //         "Content-Type": "application/json",
 //         "X-CSRF-Token": csrfToken
 //     },
-//     body: JSON.stringify({code: '10'})
+//     body: JSON.stringify({code: '99'})
 //   }).then(function(response) {
 //     return response.json();
 //   }).then(function(data) {
@@ -122,13 +122,13 @@
 //   });
 
 // var csrfToken = $("meta[name='csrf-token']").attr("content");  
-// fetch('edit-access', {
+// fetch('edit-permission', {
 //     method: 'post',
 //     headers: {
 //         "Content-Type": "application/json",
 //         "X-CSRF-Token": csrfToken
 //     },
-//     body: JSON.stringify({code: '10', startDate: '2021/12/03', endDate: '2021/12/31'})
+//     body: JSON.stringify({code: '99', startDate: '2021/12/01', endDate: '2021/12/31'})
 //   }).then(function(response) {
 //     return response.json();
 //   }).then(function(data) {
@@ -193,7 +193,7 @@
 //         "X-CSRF-Token": csrfToken
 //     },
 //     body: JSON.stringify({
-//       code	: '123456789'
+//       id	: '123456789123'
 //       })
 //   }).then(function(response) {
 //     return response.json();
@@ -225,10 +225,6 @@
 //     console.log(data);
 //   });
 
-// fetch('show-total-population')
-// .then(response => response.json())
-// .then(data => console.log(data));
-
 // var csrfToken = $("meta[name='csrf-token']").attr("content");  
 // fetch('show-info-population', {
 //     method: 'post',
@@ -237,87 +233,7 @@
 //         "X-CSRF-Token": csrfToken
 //     },
 //     body: JSON.stringify({
-//       code	: '123456789'
-//       })
-//   }).then(function(response) {
-//     return response.json();
-//   }).then(function(data) {
-//     console.log(data);
-//   });
-
-// fetch('show-total-population-each-city')
-// .then(response => response.json())
-// .then(data => console.log(data));
-
-// fetch('show-total-population-each-district')
-// .then(response => response.json())
-// .then(data => console.log(data));
-
-// fetch('show-total-population-each-ward')
-// .then(response => response.json())
-// .then(data => console.log(data));
-
-// fetch('show-total-population-each-village')
-// .then(response => response.json())
-// .then(data => console.log(data));
-
-// var csrfToken = $("meta[name='csrf-token']").attr("content");  
-// fetch('show-list-population-each-city', {
-//     method: 'post',
-//     headers: {
-//         "Content-Type": "application/json",
-//         "X-CSRF-Token": csrfToken
-//     },
-//     body: JSON.stringify({
-//       code	: '01'
-//       })
-//   }).then(function(response) {
-//     return response.json();
-//   }).then(function(data) {
-//     console.log(data);
-//   });
-
-// var csrfToken = $("meta[name='csrf-token']").attr("content");  
-// fetch('show-list-population-each-district', {
-//     method: 'post',
-//     headers: {
-//         "Content-Type": "application/json",
-//         "X-CSRF-Token": csrfToken
-//     },
-//     body: JSON.stringify({
-//       code	: '0101'
-//       })
-//   }).then(function(response) {
-//     return response.json();
-//   }).then(function(data) {
-//     console.log(data);
-//   });
-
-// var csrfToken = $("meta[name='csrf-token']").attr("content");  
-// fetch('show-list-population-each-ward', {
-//     method: 'post',
-//     headers: {
-//         "Content-Type": "application/json",
-//         "X-CSRF-Token": csrfToken
-//     },
-//     body: JSON.stringify({
-//       code	: '010101'
-//       })
-//   }).then(function(response) {
-//     return response.json();
-//   }).then(function(data) {
-//     console.log(data);
-//   });
-
-// var csrfToken = $("meta[name='csrf-token']").attr("content");  
-// fetch('show-list-population-each-village', {
-//     method: 'post',
-//     headers: {
-//         "Content-Type": "application/json",
-//         "X-CSRF-Token": csrfToken
-//     },
-//     body: JSON.stringify({
-//       code	: '01010101'
+//       code	: '010101010001'
 //       })
 //   }).then(function(response) {
 //     return response.json();
@@ -377,10 +293,18 @@
 //     console.log(data);
 //   });
 
-// fetch('complete')
+fetch('change-complete-status')
+.then(response => response.json())
+.then(data => console.log(data));
+
+// fetch('get-complete-status')
 // .then(response => response.json())
 // .then(data => console.log(data));
 
 // fetch('get-upper-location')
+// .then(response => response.json())
+// .then(data => console.log(data));
+
+// fetch('get-location-info')
 // .then(response => response.json())
 // .then(data => console.log(data));
