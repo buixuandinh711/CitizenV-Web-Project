@@ -124,7 +124,7 @@ function loadLocationInfo() {
     });
 }
 
-$("#list-citizen-pending").click(function () {
+$("#declare-status-pending").click(function () {
     changeCompleteStatus();
 })
 
