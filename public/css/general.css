@@ -88,3 +88,9 @@
 .handler-cell {
     padding: 0;
 }
+
+.subtitle {
+    font-size: 1.5rem;
+    padding: 0;
+    margin: 15px 0;
+}
