@@ -6,10 +6,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Home page</title>
     <link rel="StyleSheet" href="css/home_styles.css">
+    <link rel="StyleSheet" href="css/general.css">
+    <link rel="StyleSheet" href="css/declare_status.css">
     <link rel="StyleSheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
     <script src="js/home.js" defer></script>
+    <script src="js/declare_status.js" defer></script>
     <script src="js/test.js" defer></script>
 </head>
 
@@ -43,7 +46,7 @@
             </div>
             <div class="dropdown-container" id="declaration-dropdown">
                 <a class="sidebar-nav" id="grant-declare-permission" href='grant-permission'>Cấp quyền khai báo</a>
-                <a class="sidebar-nav" href='declare-status'>Theo dõi tiến độ</a>
+                <a class="sidebar-nav" id="declare-status" href='declare-status'>Theo dõi tiến độ</a>
             </div>
             <div class="sidebar-row" id="information">
                 <span class="sidebar-nav">Thông tin dân số</span>
@@ -55,7 +58,13 @@
             </div>
         </aside>
         <div class="content-container">
-
+            <div class="title-complete-container">
+                <h2 class="content-title"></h2>
+                <button class="input-item confirm-button" id="declare-status-pending">Đánh dấu là hoàn thành</button>
+            </div>
+            <div class="declare-status-container">
+                <div class="title-status-contaier"></div>
+            </div>
         </div>
     </div>
 </body>

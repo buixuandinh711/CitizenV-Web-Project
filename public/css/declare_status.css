@@ -1,0 +1,11 @@
+.declare-status-container {
+    margin-top: 70px;
+}
+.title-complete-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#declare-status-pending {
+    display: none;
+}
