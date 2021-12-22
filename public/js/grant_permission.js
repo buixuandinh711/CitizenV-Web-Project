@@ -139,7 +139,6 @@ function loadGrantedPermission() {
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
-        // console.log(data);
         grantedPermissions = data.info
         createGrantedPermissionTable(grantedPermissions);
     });
@@ -154,7 +153,6 @@ function loadGrantPermissionLocation() {
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
-        // console.log(data);
         $(".content-title").text("Cấp quyền khai báo cho địa phương thuộc địa bàn " + data.name);
         containLocation = {code : data.code == "admin" ? "" : data.code, name : data.name};
         nonGrantedLocations = data.nonGrantedLocation;
@@ -175,7 +173,6 @@ function submitNewPermission(_code, _name, _startDate, _endDate) {
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
-        console.log(data);
         if (data.resp == "success") {
             
             clearInputPermission();
@@ -207,7 +204,6 @@ function postDeletePermission(_code, _name) {
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
-        console.log(data);
         if (data.resp == "success") {
             
             grantedPermissions = grantedPermissions.filter(item => item.user !== containLocation.code + _code);
@@ -255,7 +251,6 @@ $("body").on("click", ".delete-permission-button", function() {
     let $codeCell = $(this).parent().parent().parent().children(':first-child');
     let code = $codeCell.html().substring(containLocation.code.length);
     let name = $codeCell.next().html();
-    console.log(code);
     postDeletePermission(code, name);
 })
 

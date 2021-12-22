@@ -139,7 +139,6 @@ $("body").on("click", "#submit-account-button", function () {
 });
 
 $("body").on("click", "#cancel-account-button", function () {
-    console.log(1);
     clearInputAccount();
 });
 function clearInputAccount() {

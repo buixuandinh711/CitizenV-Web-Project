@@ -201,9 +201,9 @@
 //     console.log(data);
 //   });
 
-// fetch('follow-declare-population')
-// .then(response => response.json())
-// .then(data => console.log(data));
+fetch('get-declare-status')
+.then(response => response.json())
+.then(data => console.log(data));
 
 // fetch('declare-permission-location-info')
 // .then(response => response.json())
@@ -306,5 +306,9 @@
 // .then(data => console.log(data));
 
 // fetch('get-location-info')
+// .then(response => response.json())
+// .then(data => console.log(data));
+
+// fetch('get-permission-location')
 // .then(response => response.json())
 // .then(data => console.log(data));

@@ -143,7 +143,7 @@ class DeclarePopulationController extends Controller
         return response()->json(['resp' => 'error']);
     }
 
-    public function FollowDeclarePopulation() {
+    public function GetDeclareStatus() {
         if (session('user')) {
             if (session('user')->username == 'admin') {
                 $result = array();
@@ -152,10 +152,15 @@ class DeclarePopulationController extends Controller
                     $city_id = $c->city_id.'%';
                     $complete = DB::table('village')->where('village_id', 'like', $city_id)->where('complete', 0)->get();
                     $totalperson = DB::table('person')->where('village_id','like', $city_id)->count();
-                    if (count($complete) || $totalperson == 0) {
-                        array_push($result,['city_id' => $c->city_id, 'complete' => false, 'totalperson' => $totalperson]);
-                    } else {
-                        array_push($result,['city_id' => $c->city_id, 'complete' => true, 'totalperson' => $totalperson]);
+                    $access_city = DB::table('access')->where('username', $c->city_id)->first();
+                    if ($access_city) {
+                        if (count($complete) || $totalperson == 0) {
+                            array_push($result,['code' => $c->city_id, 'name' => $c->city_name , 'endDate' => $access_city->end_date, 
+                                'isComplete' => false, 'declaredCitizen' => $totalperson]);
+                        } else {
+                            array_push($result,['code' => $c->city_id, 'name' => $c->city_name , 'endDate' => $access_city->end_date, 
+                                'isComplete' => true, 'declaredCitizen' => $totalperson]);
+                        }
                     }
                 }
                 return response()->json($result);
@@ -166,10 +171,15 @@ class DeclarePopulationController extends Controller
                     $district_id = $d->district_id.'%';
                     $complete = DB::table('village')->where('village_id', 'like', $district_id)->where('complete', 0)->get();
                     $totalperson = DB::table('person')->where('village_id','like', $district_id)->count();
-                    if (count($complete) || $totalperson == 0) {
-                        array_push($result,['district_id' => $d->district_id, 'complete' => false, 'totalperson' => $totalperson]);
-                    } else {
-                        array_push($result,['district_id' => $d->district_id, 'complete' => true, 'totalperson' => $totalperson]);
+                    $access_district = DB::table('access')->where('username', $d->district_id)->first();
+                    if ($access_district) {
+                        if (count($complete) || $totalperson == 0) {
+                            array_push($result,['code' => $d->district_id, 'name' => $d->district_name , 
+                                'endDate' => $access_district->end_date, 'isComplete' => false, 'declaredCitizen' => $totalperson]);
+                        } else {
+                            array_push($result,['code' => $d->district_id, 'name' => $d->district_name , 
+                                'endDate' => $access_district->end_date, 'isComplete' => true, 'declaredCitizen' => $totalperson]);
+                        }
                     }
                 }
                 return response()->json($result);
@@ -180,10 +190,15 @@ class DeclarePopulationController extends Controller
                     $ward_id = $w->ward_id.'%';
                     $complete = DB::table('village')->where('village_id', 'like', $ward_id)->where('complete', 0)->get();
                     $totalperson = DB::table('person')->where('village_id','like', $ward_id)->count();
-                    if (count($complete) || $totalperson == 0) {
-                        array_push($result,['ward_id' => $w->ward_id, 'complete' => false, 'totalperson' => $totalperson]);
-                    } else {
-                        array_push($result,['ward_id' => $w->ward_id, 'complete' => true, 'totalperson' => $totalperson]);
+                    $access_ward = DB::table('access')->where('username', $w->ward_id)->first();
+                    if ($access_ward) {
+                        if (count($complete) || $totalperson == 0) {
+                            array_push($result,['code' => $w->ward_id, 'name' => $w->ward_name , 'endDate' => $access_ward->end_date, 
+                                'isComplete' => false, 'declaredCitizen' => $totalperson]);
+                        } else {
+                            array_push($result,['code' => $w->ward_id, 'name' => $w->ward_name , 'endDate' => $access_ward->end_date, 
+                                'isComplete' => true, 'declaredCitizen' => $totalperson]);
+                        }
                     }
                 }
                 return response()->json($result);
@@ -192,10 +207,15 @@ class DeclarePopulationController extends Controller
                 $village = DB::table('village')->where('ward_id', session('user')->username)->get();
                 foreach($village as $v) {
                     $totalperson = DB::table('person')->where('village_id',$v->village_id)->count();
-                    if (!$v->complete || $totalperson == 0) {
-                        array_push($result,['village_id' => $v->village_id, 'complete' => false, 'totalperson' => $totalperson]);
-                    } else {
-                        array_push($result,['village_id' => $v->village_id, 'complete' => true, 'totalperson' => $totalperson]);
+                    $access_village = DB::table('access')->where('username', $v->village_id)->first();
+                    if ($access_village) {
+                        if (!$v->complete || $totalperson == 0) {
+                            array_push($result,['code' => $v->village_id, 'name' => $v->village_name , 
+                                'endDate' => $access_village->end_date, 'isComplete' => false, 'declaredCitizen' => $totalperson]);
+                        } else {
+                            array_push($result,['code' => $v->village_id, 'name' => $v->village_name , 
+                                'endDate' => $access_village->end_date, 'isComplete' => true, 'declaredCitizen' => $totalperson]);
+                        }
                     }
                 }
                 return response()->json($result);

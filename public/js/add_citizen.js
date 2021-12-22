@@ -90,7 +90,6 @@ function loadPermenentInfo() {
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
-        console.log(data);
         locationCode = data.code;
         $("#add-citizen-permcity").val(data.city);
         $("#add-citizen-permdistrict").val(data.district);

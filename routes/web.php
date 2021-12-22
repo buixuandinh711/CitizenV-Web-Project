@@ -31,6 +31,8 @@ Route::get('add-citizen','App\Http\Controllers\Controller@AddCitizen');
 
 Route::get('list-citizen','App\Http\Controllers\Controller@ListCitizen');
 
+Route::get('declare-status','App\Http\Controllers\Controller@DeclareStatus');
+
 //Declare Location
 
 Route::get('current-local-info','App\Http\Controllers\DeclareLocationController@CurrentLocalInfo');
@@ -73,6 +75,8 @@ Route::post('edit-permission', 'App\Http\Controllers\AccessController@EditAccess
 
 Route::post('delete-permission', 'App\Http\Controllers\AccessController@DeletePermission');
 
+Route::get('get-permission-location', 'App\Http\Controllers\AccessController@GetPermissionLocation');
+
 //Declare Population
 
 Route::post('submit-new-citizen', 'App\Http\Controllers\DeclarePopulationController@AddPerson');
@@ -81,7 +85,7 @@ Route::post('delete-person', 'App\Http\Controllers\DeclarePopulationController@D
 
 Route::post('edit-person', 'App\Http\Controllers\DeclarePopulationController@EditPerson');
 
-Route::get('follow-declare-population', 'App\Http\Controllers\DeclarePopulationController@FollowDeclarePopulation');
+Route::get('get-declare-status', 'App\Http\Controllers\DeclarePopulationController@GetDeclareStatus');
 
 Route::post('load-declared-citizen', 'App\Http\Controllers\DeclarePopulationController@ShowListPopulation');
 

@@ -98,4 +98,15 @@ class Controller extends BaseController
         }
         return redirect('login');
     }
+
+    public function DeclareStatus() {
+        if (session('user')) {
+            if (strlen(session('user')->username) != 8) {
+                return view('declarestatus');
+            } else {
+                return redirect('main');
+            }
+        }
+        return redirect('login');
+    }
 }
