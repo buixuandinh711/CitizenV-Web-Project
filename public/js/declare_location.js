@@ -57,7 +57,6 @@ function postLocation(_code, _name) {
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
-        console.log(data);
         if (data.resp == "success") {
             declaredCodes = data.codes;
             clearLocationInput();
@@ -92,7 +91,6 @@ $('body').on('click', '#submit-new-location', function () {
         return;
     }
     $errorDisplay.html("");
-    console.log(123);
     postLocation(locationCode, locationName);
 });
 $('body').on('keydown', '#declare-location-code, #declare-location-name', function () {
@@ -101,7 +99,6 @@ $('body').on('keydown', '#declare-location-code, #declare-location-name', functi
 
 $('body').on('click', '#cancel-new-location', function () {
    clearLocationInput();
-   console.log(234);
 })
 function clearLocationInput() {
     $("#declare-location-code").val("");

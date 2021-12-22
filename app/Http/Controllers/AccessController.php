@@ -414,4 +414,77 @@ class AccessController extends Controller
         }
         return response()->json(['resp' => 'error']);
     }
+
+    public function GetPermissionLocation() {
+        if (session('user')) {
+            if (session('user')->username == 'admin') {
+                return response()->json(['resp' => true]);
+            } else if (strlen(session('user')->username) == 2) {
+                $access_city = DB::table('access')
+                ->where('username',session('user')->username)
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                if (count($access_city)) {
+                    return response()->json(['resp' => true]);
+                } else {
+                    return response()->json(['resp' => false]);
+                }
+            } else if (strlen(session('user')->username) == 4) {
+                $access_city = DB::table('access')
+                ->where('username',substr(session('user')->username,0,2))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_district = DB::table('access')
+                ->where('username',session('user')->username)
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                if (count($access_city) && count($access_district)) {
+                    return response()->json(['resp' => true]);
+                } else {
+                    return response()->json(['resp' => false]);
+                }
+            } else if (strlen(session('user')->username) == 6) {
+                $access_city = DB::table('access')
+                ->where('username',substr(session('user')->username,0,2))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_district = DB::table('access')
+                ->where('username',substr(session('user')->username,0,4))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_ward = DB::table('access')
+                ->where('username',session('user')->username)
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                if (count($access_city) && count($access_district) && count($access_ward)) {
+                    return response()->json(['resp' => true]);
+                } else {
+                    return response()->json(['resp' => false]);
+                }
+            } else if (strlen(session('user')->username) == 8) {
+                $access_city = DB::table('access')
+                ->where('username',substr(session('user')->username,0,2))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_district = DB::table('access')
+                ->where('username',substr(session('user')->username,0,4))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_ward = DB::table('access')
+                ->where('username',substr(session('user')->username,0,6))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_village = DB::table('access')
+                ->where('username',session('user')->username)
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                if (count($access_city) && count($access_district) && count($access_ward) && count($access_village)) {
+                    return response()->json(['resp' => true]);
+                } else {
+                    return response()->json(['resp' => false]);
+                }
+            } 
+        }
+        return response()->json(['resp' => 'error']);
+    }
 }
