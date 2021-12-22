@@ -201,9 +201,9 @@
 //     console.log(data);
 //   });
 
-fetch('get-declare-status')
-.then(response => response.json())
-.then(data => console.log(data));
+// fetch('get-declare-status')
+// .then(response => response.json())
+// .then(data => console.log(data));
 
 // fetch('declare-permission-location-info')
 // .then(response => response.json())

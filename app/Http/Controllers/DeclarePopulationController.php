@@ -150,7 +150,7 @@ class DeclarePopulationController extends Controller
                 $city = DB::table('city')->get();
                 foreach($city as $c) {
                     $city_id = $c->city_id.'%';
-                    $complete = DB::table('village')->where('village_id', 'like', $city_id)->where('complete', 0)->get();
+                    $complete = DB::table('ward')->where('ward_id', 'like', $city_id)->where('complete', 0)->get();
                     $totalperson = DB::table('person')->where('village_id','like', $city_id)->count();
                     $access_city = DB::table('access')->where('username', $c->city_id)->first();
                     if ($access_city) {
@@ -169,7 +169,7 @@ class DeclarePopulationController extends Controller
                 $district = DB::table('district')->where('city_id', session('user')->username)->get();
                 foreach($district as $d) {
                     $district_id = $d->district_id.'%';
-                    $complete = DB::table('village')->where('village_id', 'like', $district_id)->where('complete', 0)->get();
+                    $complete = DB::table('ward')->where('ward_id', 'like', $district_id)->where('complete', 0)->get();
                     $totalperson = DB::table('person')->where('village_id','like', $district_id)->count();
                     $access_district = DB::table('access')->where('username', $d->district_id)->first();
                     if ($access_district) {
@@ -188,11 +188,10 @@ class DeclarePopulationController extends Controller
                 $ward = DB::table('ward')->where('district_id', session('user')->username)->get();
                 foreach($ward as $w) {
                     $ward_id = $w->ward_id.'%';
-                    $complete = DB::table('village')->where('village_id', 'like', $ward_id)->where('complete', 0)->get();
                     $totalperson = DB::table('person')->where('village_id','like', $ward_id)->count();
                     $access_ward = DB::table('access')->where('username', $w->ward_id)->first();
                     if ($access_ward) {
-                        if (count($complete) || $totalperson == 0) {
+                        if (!$w->complete || $totalperson == 0) {
                             array_push($result,['code' => $w->ward_id, 'name' => $w->ward_name , 'endDate' => $access_ward->end_date, 
                                 'isComplete' => false, 'declaredCitizen' => $totalperson]);
                         } else {
@@ -285,7 +284,35 @@ class DeclarePopulationController extends Controller
 
     public function ChangeCompleteStatus() {
         if (session('user')) {
-            if (strlen(session('user')->username) == 8) {
+            if (strlen(session('user')->username) == 6) {
+                $access_city = DB::table('access')
+                ->where('username',substr(session('user')->username,0,2))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_district = DB::table('access')
+                ->where('username',substr(session('user')->username,0,4))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $access_ward = DB::table('access')
+                ->where('username',substr(session('user')->username,0,6))
+                ->whereRaw('start_date <= now()')
+                ->whereRaw('end_date >= now()')->get();
+                $ward = DB::table('ward')->where('ward_id', session('user')->username)->first();
+                if (!count($access_city) || !count($access_district) || !count($access_ward)) {
+                    if ($ward->complete) {
+                        return response()->json(['isComplete' => true]);
+                    } else {
+                        return response()->json(['isComplete' => false]);
+                    }
+                }
+                if ($ward->complete) {
+                    DB::table('ward')->where('ward_id', session('user')->username)->update(['complete' => 0]);
+                    return response()->json(['isComplete' => false]);
+                } else {
+                    DB::table('ward')->where('ward_id', session('user')->username)->update(['complete' => 1]);
+                    return response()->json(['isComplete' => true]);
+                }
+            } else if (strlen(session('user')->username) == 8) {
                 $access_city = DB::table('access')
                 ->where('username',substr(session('user')->username,0,2))
                 ->whereRaw('start_date <= now()')
@@ -335,7 +362,14 @@ class DeclarePopulationController extends Controller
     }
 
     public function GetCompleteStatus() {
-        if (strlen(session('user')->username) == 8) {
+        if (strlen(session('user')->username) == 6) {
+            $ward = DB::table('ward')->where('ward_id', session('user')->username)->first();
+                if ($ward->complete) {
+                    return response()->json(['isComplete' => true]); 
+                } else {
+                    return response()->json(['isComplete' => false]);
+                }
+        } else if (strlen(session('user')->username) == 8) {
             $village = DB::table('village')->where('village_id', session('user')->username)->first();
                 if ($village->complete) {
                     return response()->json(['isComplete' => true]); 

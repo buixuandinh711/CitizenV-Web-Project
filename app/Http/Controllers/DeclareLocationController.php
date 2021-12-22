@@ -105,7 +105,8 @@ class DeclareLocationController extends Controller
                     $result['resp'] = 'error';
                     return response()->json($result);
                 }
-                DB::table('ward')->insert(['district_id' => session('user')->username, 'ward_id' => $ward_id,'ward_name' => $ward_name]);
+                DB::table('ward')->insert(['district_id' => session('user')->username, 'ward_id' => $ward_id,'ward_name' => $ward_name,
+                    'complete' => 0]);
                 $result['resp'] = 'success';
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 6) {
