@@ -379,32 +379,48 @@ class DeclarePopulationController extends Controller
     }
 
     public function GetUpperLocation() {
-        if (strlen(session('user')->username) == 8) {
-            $city = DB::table('city')->where('city_id',substr(session('user')->username,0,2))->first();
-            $district = DB::table('district')->where('district_id',substr(session('user')->username,0,4))->first();
-            $ward = DB::table('ward')->where('ward_id',substr(session('user')->username,0,6))->first();
-            $village = DB::table('village')->where('village_id',session('user')->username)->first();
-            return response()->json(['code' => $village->village_id,'village' => $village->village_name, 'ward' => $ward->ward_name, 
-                'district' => $district->district_name, 'city' => $city->city_name]);
+        if (session('user')) {
+            if (strlen(session('user')->username) == 2) {
+                $city = DB::table('city')->where('city_id',substr(session('user')->username,0,2))->first();
+                return response()->json(['city' => $city->city_name]);
+            } else if (strlen(session('user')->username) == 4) {
+                $city = DB::table('city')->where('city_id',substr(session('user')->username,0,2))->first();
+                $district = DB::table('district')->where('district_id',substr(session('user')->username,0,4))->first();
+                return response()->json(['district' => $district->district_name, 'city' => $city->city_name]);
+            } else if (strlen(session('user')->username) == 6) {
+                $city = DB::table('city')->where('city_id',substr(session('user')->username,0,2))->first();
+                $district = DB::table('district')->where('district_id',substr(session('user')->username,0,4))->first();
+                $ward = DB::table('ward')->where('ward_id',substr(session('user')->username,0,6))->first();
+                return response()->json(['ward' => $ward->ward_name, 'district' => $district->district_name, 'city' => $city->city_name]);
+            } else if (strlen(session('user')->username) == 8) {
+                $city = DB::table('city')->where('city_id',substr(session('user')->username,0,2))->first();
+                $district = DB::table('district')->where('district_id',substr(session('user')->username,0,4))->first();
+                $ward = DB::table('ward')->where('ward_id',substr(session('user')->username,0,6))->first();
+                $village = DB::table('village')->where('village_id',session('user')->username)->first();
+                return response()->json(['village' => $village->village_name, 'ward' => $ward->ward_name, 
+                    'district' => $district->district_name, 'city' => $city->city_name]);
+            }
         }
         return response()->json(['resp' => 'error']);
     }
 
     public function GetCompleteStatus() {
-        if (strlen(session('user')->username) == 6) {
-            $ward = DB::table('ward')->where('ward_id', session('user')->username)->first();
+        if (session('user')) {
+            if (strlen(session('user')->username) == 6) {
+                $ward = DB::table('ward')->where('ward_id', session('user')->username)->first();
                 if ($ward->complete) {
                     return response()->json(['isComplete' => true]); 
                 } else {
                     return response()->json(['isComplete' => false]);
                 }
-        } else if (strlen(session('user')->username) == 8) {
-            $village = DB::table('village')->where('village_id', session('user')->username)->first();
+            } else if (strlen(session('user')->username) == 8) {
+                $village = DB::table('village')->where('village_id', session('user')->username)->first();
                 if ($village->complete) {
                     return response()->json(['isComplete' => true]); 
                 } else {
                     return response()->json(['isComplete' => false]);
                 }
+            }
         }
         return response()->json(['resp' => 'error']);
     }
