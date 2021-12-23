@@ -301,9 +301,9 @@
 // .then(response => response.json())
 // .then(data => console.log(data));
 
-// fetch('get-upper-location')
-// .then(response => response.json())
-// .then(data => console.log(data));
+fetch('get-upper-location')
+.then(response => response.json())
+.then(data => console.log(data));
 
 // fetch('get-location-info')
 // .then(response => response.json())
