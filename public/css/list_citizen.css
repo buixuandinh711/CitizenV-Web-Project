@@ -1,0 +1,13 @@
+.select-location-row {
+    display: flex;
+    justify-content: space-between;
+}
+.list-citizen-select {
+    width: 200px;
+}
+#search-button {
+    width: 100px;
+}
+.select-location-row {
+    width: 920px;
+}

@@ -13,7 +13,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
     <script src="js/home.js" defer></script>
     <script src="js/grant_permission.js" defer></script>
-    <script src="js/test.js" defer></script>
 </head>
 
 <body>
