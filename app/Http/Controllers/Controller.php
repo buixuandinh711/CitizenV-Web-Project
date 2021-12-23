@@ -109,4 +109,15 @@ class Controller extends BaseController
         }
         return redirect('login');
     }
+
+    public function CitizenInfo() {
+        if (session('user')) {
+            if (strlen(session('user')->username) != 8) {
+                return view('citizeninfo');
+            } else {
+                return view('citizeninfos');
+            }
+        }
+        return redirect('login');
+    }
 }

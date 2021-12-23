@@ -33,6 +33,8 @@ Route::get('list-citizen','App\Http\Controllers\Controller@ListCitizen');
 
 Route::get('declare-status','App\Http\Controllers\Controller@DeclareStatus');
 
+Route::get('citizen-info','App\Http\Controllers\Controller@CitizenInfo');
+
 //Declare Location
 
 Route::get('current-local-info','App\Http\Controllers\DeclareLocationController@CurrentLocalInfo');
@@ -96,3 +98,7 @@ Route::get('change-complete-status', 'App\Http\Controllers\DeclarePopulationCont
 Route::get('get-upper-location', 'App\Http\Controllers\DeclarePopulationController@GetUpperLocation');
 
 Route::get('get-complete-status', 'App\Http\Controllers\DeclarePopulationController@GetCompleteStatus');
+
+Route::post('post-citizen-info', 'App\Http\Controllers\DeclarePopulationController@PostCitizenInfo');
+
+Route::get('get-citizen-info', 'App\Http\Controllers\DeclarePopulationController@GetCitizenInfo');
