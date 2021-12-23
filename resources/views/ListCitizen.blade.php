@@ -6,11 +6,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Home page</title>
     <link rel="StyleSheet" href="css/home_styles.css">
+    <link rel="StyleSheet" href="css/general.css">
+    <link rel="StyleSheet" href="css/list_citizen.css">
     <link rel="StyleSheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
     <script src="js/home.js" defer></script>
-    <script src="js/test.js" defer></script>
+    <script src="js/list_citizen.js" defer></script>
+
 </head>
 
 <body>
@@ -55,7 +58,26 @@
             </div>
         </aside>
         <div class="content-container">
-
+            <h2 class="content-title">Xem thông tin dân số</h2>
+            <div class="list-citizen-container">
+                <div class="select-location-container">
+                    <div class="select-location-row">
+                        <!-- <select id="add-citizen-curcity" type="text" class="input-item border-input-item list-citizen-select">
+                            <option disabled="disabled" selected>Tỉnh, Thành phố</option>
+                        </select>
+                        <select id="add-citizen-curdistrict" type="text" class="input-item border-input-item list-citizen-select">
+                            <option disabled="disabled" selected>Quận, Huyện</option>
+                        </select>
+                        <select id="add-citizen-curward" type="text" class="input-item border-input-item list-citizen-select">
+                            <option disabled="disabled" selected>Xã, Phường</option>
+                        </select>
+                        <select id="add-citizen-curvillage" type="text" class="input-item border-input-item list-citizen-select">
+                            <option disabled="disabled" selected>Thôn, Tổ dân phố</option>
+                        </select>
+                        <button class="input-item confirm-button" id="search-button">Xác nhận</button> -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

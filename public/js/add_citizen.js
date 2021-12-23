@@ -9,7 +9,7 @@ const WARD_SELECT_DEFAULT = "Xã, Phường";
 const VILLAGE_SELECT_DEFAULT = "Thôn, Tổ dân phố";
 
 var cities = [];
-var locationCode = "";
+var locationCode = $(".username").html();
 
 function loadCity() {
 
@@ -90,7 +90,6 @@ function loadPermenentInfo() {
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
-        locationCode = data.code;
         $("#add-citizen-permcity").val(data.city);
         $("#add-citizen-permdistrict").val(data.district);
         $("#add-citizen-permward").val(data.ward);
