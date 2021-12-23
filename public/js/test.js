@@ -301,14 +301,34 @@
 // .then(response => response.json())
 // .then(data => console.log(data));
 
-fetch('get-upper-location')
-.then(response => response.json())
-.then(data => console.log(data));
+// fetch('get-upper-location')
+// .then(response => response.json())
+// .then(data => console.log(data));
 
 // fetch('get-location-info')
 // .then(response => response.json())
 // .then(data => console.log(data));
 
 // fetch('get-permission-location')
+// .then(response => response.json())
+// .then(data => console.log(data));
+
+// var csrfToken = $("meta[name='csrf-token']").attr("content");  
+// fetch('post-citizen-info', {
+//     method: 'post',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "X-CSRF-Token": csrfToken
+//     },
+//     body: JSON.stringify({
+//       id	: '010101010001'
+//       })
+//   }).then(function(response) {
+//     return response.json();
+//   }).then(function(data) {
+//     console.log(data);
+//   });
+
+// fetch('get-citizen-info')
 // .then(response => response.json())
 // .then(data => console.log(data));
