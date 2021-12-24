@@ -426,4 +426,37 @@ class DeclareLocationController extends Controller
         }
         return response()->json(['resp' => 'error']);
     }
+
+    public function GetGeneralInfo() {
+        if (session('user')) {
+            if (session('user')->username == 'admin') {
+                $result = ['name' => 'cả nước',  'lowerLocations' => '', 'population' => ''];
+                $result['lowerLocations'] = DB::table('city')->count();
+                $result['population'] = DB::table('person')->count();
+                return response()->json($result);
+            } else if (strlen(session('user')->username) == 2) {
+                $result = ['name' => '',  'lowerLocations' => '', 'population' => ''];
+                $city = DB::table('city')->where('city_id',session('user')->username)->first();
+                $result['name'] = $city->city_name;
+                $result['lowerLocations'] = DB::table('district')->where('city_id',session('user')->username)->count();
+                $result['population'] = DB::table('person')->where('village_id','like',session('user')->username.'%')->count();
+                return response()->json($result);
+            } else if (strlen(session('user')->username) == 4) {
+                $result = ['name' => '',  'lowerLocations' => '', 'population' => ''];
+                $district = DB::table('district')->where('district_id',session('user')->username)->first();
+                $result['name'] = $district->district_name;
+                $result['lowerLocations'] = DB::table('ward')->where('district_id',session('user')->username)->count();
+                $result['population'] = DB::table('person')->where('village_id','like',session('user')->username.'%')->count();
+                return response()->json($result);
+            } else if (strlen(session('user')->username) == 6) {
+                $result = ['name' => '',  'lowerLocations' => '', 'population' => ''];
+                $ward = DB::table('ward')->where('ward_id',session('user')->username)->first();
+                $result['name'] = $ward->ward_name;
+                $result['lowerLocations'] = DB::table('village')->where('ward_id',session('user')->username)->count();
+                $result['population'] = DB::table('person')->where('village_id','like',session('user')->username.'%')->count();
+                return response()->json($result);
+            }
+        }
+        return response()->json(['resp' => 'error']);
+    }
 }

@@ -61,6 +61,8 @@ Route::get('get-location-info','App\Http\Controllers\DeclareLocationController@G
 
 Route::get('get-location-chart','App\Http\Controllers\DeclareLocationController@GetLocationChart');
 
+Route::get('get-general-info','App\Http\Controllers\DeclareLocationController@GetGeneralInfo');
+
 //User
 
 Route::post('add-new-user','App\Http\Controllers\UserController@AddNewUser');
