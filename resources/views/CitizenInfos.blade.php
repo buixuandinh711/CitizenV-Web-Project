@@ -6,11 +6,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Home page</title>
     <link rel="StyleSheet" href="css/home_styles.css">
+    <link rel="StyleSheet" href="css/general.css">
+    <link rel="StyleSheet" href="css/citizen_info.css">
     <link rel="StyleSheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
     <script src="js/home.js" defer></script>
-    <script src="js/test.js" defer></script>
+    <script src="js/citizen_info.js" defer></script>
 </head>
 
 <body>
@@ -45,7 +47,51 @@
             </div>
         </aside>
         <div class="content-container">
-
+            <h2 class="content-title">Thông tin công dân</h2>
+            <div class="wrapper">
+                <div class="citizen-info-container">
+                    <div class="citizen-info-row">
+                        <label for="citizen-name" class="input-label">Họ và tên</label>
+                        <input id="citizen-name" type="text" class="input-item border-input-item citizen-info-input" disabled>
+                    </div>
+                    <div class="citizen-info-row">
+                        <label for="citizen-id" class="input-label">Mã số định danh cá nhân</label>
+                        <input id="citizen-id" type="text" class="input-item border-input-item citizen-info-input" disabled>
+                    </div>
+                    <div class="citizen-row-container citizen-info-row">
+                        <div>
+                            <label class="input-label">Giới tính</label>
+                            <input type="text" class="input-item border-input-item" id="citizen-gender" disabled>
+                        </div>
+                        <div>
+                            <label class="input-label">Ngày sinh</label>
+                            <input id="citizen-dateofbirth" type="text" class="input-item border-input-item citizen-info-input" disabled>
+                        </div>
+                    </div>
+                    <div class="citizen-info-row">
+                        <label class="input-label">Địa chỉ thường trú</label>
+                        <input id="citizen-permaddress" type="text" class="input-item border-input-item citizen-info-input" disabled>
+                    </div>
+                    <div class="citizen-info-row">
+                        <label class="input-label">Nơi ở hiện tại</label>
+                        <input id="citizen-curaddress" type="text" class="input-item border-input-item citizen-info-input" disabled>
+                    </div>
+                    <div class="citizen-info-row">
+                        <label class="input-label">Tôn giáo</label>
+                        <input id="citizen-religion" type="text" class="input-item border-input-item citizen-info-input" disabled>
+                    </div>
+                    <div class="citizen-row-container citizen-info-row">
+                        <div>
+                            <label for="citizen-grade" class="input-label">Trình độ văn hóa</label>
+                            <input id="citizen-grade" type="text" class="input-item border-input-item citizen-info-input" disabled>
+                        </div>
+                        <div>
+                            <label for="citizen-job" class="input-label">Nghề nghiệp</label>
+                            <input id="citizen-job" type="text" class="input-item border-input-item citizen-info-input" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
