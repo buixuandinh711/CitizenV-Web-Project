@@ -120,4 +120,13 @@ class Controller extends BaseController
         }
         return redirect('login');
     }
+
+    public function InfoCitizen() {
+        if (session('user')) {
+            if (strlen(session('user')->username) != 8) {
+                return view('infocitizen');
+            }
+        }
+        return redirect('login');
+    }
 }

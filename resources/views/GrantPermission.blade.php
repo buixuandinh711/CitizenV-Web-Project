@@ -53,6 +53,7 @@
             </div>
             <div class="dropdown-container" id="information-dropdown">
                 <a class="sidebar-nav">Số liệu dân số</a>
+                <a class="sidebar-nav" href='info-citizen'>Thông tin công dân</a>
                 <a class="sidebar-nav" href='list-citizen'>Danh sách dân số</a>
             </div>
         </aside>
