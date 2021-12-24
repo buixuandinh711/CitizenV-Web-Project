@@ -41,6 +41,7 @@ class Controller extends BaseController
     public function Logout(Request $request)
     {
         $request->session()->forget('user');
+        $request->session()->forget('id');
         return redirect('login');
     }
 

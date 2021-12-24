@@ -455,7 +455,6 @@ class DeclarePopulationController extends Controller
             $result['religion'] = $person->person_religion;
             $result['grade'] = $person->person_level;
             $result['job'] = $person->person_job;
-            $request->session()->forget('id');
             return response()->json($result);
         }
         return response()->json(['resp' => 'error']);
@@ -463,9 +462,12 @@ class DeclarePopulationController extends Controller
 
     public function PostCitizenInfo(Request $request) {
         if (session('user')) {
-            $result = ['id' => '', 'name' => '', 'gender' => '', 'dateOfBirth' => '', 'permanentAddress' => '', 'currentAddress' => '', 
+            $result = ['resp' => 'success' ,'id' => '', 'name' => '', 'gender' => '', 'dateOfBirth' => '', 'permanentAddress' => '', 'currentAddress' => '', 
                 'religion' => '', 'grade' => '', 'job' => ''];
             $person = DB::table('person')->where('person_id', $request->id)->first();
+            if (!$person) {
+                return response()->json(['resp' => 'error']);
+            }
             $city_permanent = DB::table('city')->where('city_id', substr($person->person_permanent_address,0,2))->first();
             $district_permanent = DB::table('district')->where('district_id', substr($person->person_permanent_address,0,4))->first();
             $ward_permanent = DB::table('ward')->where('ward_id', substr($person->person_permanent_address,0,6))->first();
