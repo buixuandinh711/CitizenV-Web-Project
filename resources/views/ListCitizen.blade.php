@@ -59,23 +59,13 @@
         </aside>
         <div class="content-container">
             <h2 class="content-title">Xem thông tin dân số</h2>
-            <div class="list-citizen-container">
+            <div class="wrapper">
                 <div class="select-location-container">
                     <div class="select-location-row">
-                        <!-- <select id="add-citizen-curcity" type="text" class="input-item border-input-item list-citizen-select">
-                            <option disabled="disabled" selected>Tỉnh, Thành phố</option>
-                        </select>
-                        <select id="add-citizen-curdistrict" type="text" class="input-item border-input-item list-citizen-select">
-                            <option disabled="disabled" selected>Quận, Huyện</option>
-                        </select>
-                        <select id="add-citizen-curward" type="text" class="input-item border-input-item list-citizen-select">
-                            <option disabled="disabled" selected>Xã, Phường</option>
-                        </select>
-                        <select id="add-citizen-curvillage" type="text" class="input-item border-input-item list-citizen-select">
-                            <option disabled="disabled" selected>Thôn, Tổ dân phố</option>
-                        </select>
-                        <button class="input-item confirm-button" id="search-button">Xác nhận</button> -->
                     </div>
+                </div>
+                <div class="citizen-list-container">
+                    <h2 class="subtitle" id="table-title">Danh sách dân số</h2>
                 </div>
             </div>
         </div>
