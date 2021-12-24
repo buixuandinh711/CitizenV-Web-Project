@@ -142,6 +142,25 @@ function postDelete(_id) {
     });
 }
 
+function postCheckInfo(_id) {
+    let csrfToken = $("meta[name='csrf-token']").attr("content");
+    fetch('check-citizen-info', {
+        method: 'post',
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken
+        },
+        body: JSON.stringify({ id: _id })
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        if (data.resp === "success") {
+            window.location.href = "citizen-info";
+        }
+    });
+}
+
+
 $("body").on("click", ".modify-delete", function () {
     let citizenId = $(this).parent().parent().parent().children(':first-child').html();
     postDelete(citizenId);
@@ -177,3 +196,9 @@ $("#list-citizen-pending").click(function () {
     changeCompleteStatus();
 })
 
+$("body").on("click", "tbody tr", function () {
+
+    let id = $(this).children(':first-child').html();
+    postCheckInfo(id);
+
+})

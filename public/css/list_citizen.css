@@ -19,3 +19,7 @@
 .select-location-row {
     width: 920px;
 }
+
+tbody tr {
+    cursor: pointer;
+}
