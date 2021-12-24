@@ -37,6 +37,8 @@ Route::get('citizen-info','App\Http\Controllers\Controller@CitizenInfo');
 
 Route::get('info-citizen','App\Http\Controllers\Controller@InfoCitizen');
 
+Route::get('general-info','App\Http\Controllers\Controller@GeneralInfo');
+
 //Declare Location
 
 Route::get('current-local-info','App\Http\Controllers\DeclareLocationController@CurrentLocalInfo');
