@@ -465,8 +465,12 @@ class DeclarePopulationController extends Controller
             $result = ['resp' => 'success' ,'id' => '', 'name' => '', 'gender' => '', 'dateOfBirth' => '', 'permanentAddress' => '', 'currentAddress' => '', 
                 'religion' => '', 'grade' => '', 'job' => ''];
             $person = DB::table('person')->where('person_id', $request->id)->first();
+            $persons = DB::table('person')->where('person_id', $request->id)->where('village_id','like',session('user')->username.'%')->first();
             if (!$person) {
-                return response()->json(['resp' => 'error']);
+                return response()->json(['resp' => 'Không tồn tại']);
+            }
+            if (!$persons) {
+                return response()->json(['resp' => 'Không có quyền']);
             }
             $city_permanent = DB::table('city')->where('city_id', substr($person->person_permanent_address,0,2))->first();
             $district_permanent = DB::table('district')->where('district_id', substr($person->person_permanent_address,0,4))->first();
@@ -480,8 +484,8 @@ class DeclarePopulationController extends Controller
             $result['name'] = $person->person_name;
             $result['gender'] = $person->person_gender;
             $result['dateOfBirth'] = $person->person_date;
-            $result['permanentAddress'] = $village_permanent->village_name.','.$ward_permanent->ward_name.','.$district_permanent->district_name.'.,'.$city_permanent->city_name;
-            $result['currentAddress'] = $village_current->village_name.','.$ward_current->ward_name.','.$district_current->district_name.'.,'.$city_current->city_name;
+            $result['permanentAddress'] = $village_permanent->village_name.' , '.$ward_permanent->ward_name.' , '.$district_permanent->district_name.' , '.$city_permanent->city_name;
+            $result['currentAddress'] = $village_current->village_name.' , '.$ward_current->ward_name.' , '.$district_current->district_name.' , '.$city_current->city_name;
             $result['religion'] = $person->person_religion;
             $result['grade'] = $person->person_level;
             $result['job'] = $person->person_job;
