@@ -352,3 +352,7 @@
 // fetch('get-location-chart')
 // .then(response => response.json())
 // .then(data => console.log(data));
+
+fetch('get-general-info')
+.then(response => response.json())
+.then(data => console.log(data));
