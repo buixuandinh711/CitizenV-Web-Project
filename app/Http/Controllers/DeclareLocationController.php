@@ -311,6 +311,9 @@ class DeclareLocationController extends Controller
 
     public function GetDistrict (Request $request) {
         if (session('user')) {
+            if (strlen($request->code) != 2) {
+                return response()->json(['resp' => 'error']);
+            }
             $district = DB::table('district')
             ->selectRaw('district_id as code')
             ->selectRaw('district_name as name')
@@ -322,6 +325,9 @@ class DeclareLocationController extends Controller
 
     public function GetWard (Request $request) {
         if (session('user')) {
+            if (strlen($request->code) != 4) {
+                return response()->json(['resp' => 'error']);
+            }
             $ward = DB::table('ward')
             ->selectRaw('ward_id as code')
             ->selectRaw('ward_name as name')
@@ -333,6 +339,9 @@ class DeclareLocationController extends Controller
 
     public function GetVillage (Request $request) {
         if (session('user')) {
+            if (strlen($request->code) != 6) {
+                return response()->json(['resp' => 'error']);
+            }
             $village = DB::table('village')
             ->selectRaw('village_id as code')
             ->selectRaw('village_name as name')
@@ -369,6 +378,49 @@ class DeclareLocationController extends Controller
                 ->where('village_id', session('user')->username)
                 ->selectRaw('village_id as code')
                 ->selectRaw('village_name as name')->first();
+                return response()->json($result);
+            }
+        }
+        return response()->json(['resp' => 'error']);
+    }
+
+    public function GetLocationChart() {
+        if (session('user')) {
+            if (session('user')->username == 'admin') {
+                $result = ['locations' => [], 'population' => []];
+                $city = DB::table('city')->get();
+                foreach($city as $c) {
+                    $population = DB::table('person')->where('village_id','like', $c->city_id.'%')->count();
+                    array_push($result['locations'],$c->city_name);
+                    array_push($result['population'],$population);
+                }
+                return response()->json($result);
+            } else if (strlen(session('user')->username) == 2) {
+                $result = ['locations' => [], 'population' => []];
+                $district = DB::table('district')->where('city_id',session('user')->username)->get();
+                foreach($district as $d) {
+                    $population = DB::table('person')->where('village_id','like', $d->district_id.'%')->count();
+                    array_push($result['locations'],$d->district_name);
+                    array_push($result['population'],$population);
+                }
+                return response()->json($result);
+            } else if (strlen(session('user')->username) == 4) {
+                $result = ['locations' => [], 'population' => []];
+                $ward = DB::table('ward')->where('district_id',session('user')->username)->get();
+                foreach($ward as $w) {
+                    $population = DB::table('person')->where('village_id','like', $w->ward_id.'%')->count();
+                    array_push($result['locations'],$w->ward_name);
+                    array_push($result['population'],$population);
+                }
+                return response()->json($result);
+            } else if (strlen(session('user')->username) == 6) {
+                $result = ['locations' => [], 'population' => []];
+                $village = DB::table('village')->where('ward_id',session('user')->username)->get();
+                foreach($village as $v) {
+                    $population = DB::table('person')->where('village_id','like', $v->village_id.'%')->count();
+                    array_push($result['locations'],$v->village_name);
+                    array_push($result['population'],$population);
+                }
                 return response()->json($result);
             }
         }
