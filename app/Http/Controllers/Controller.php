@@ -130,4 +130,13 @@ class Controller extends BaseController
         }
         return redirect('login');
     }
+
+    public function GeneralInfo() {
+        if (session('user')) {
+            if (strlen(session('user')->username) != 8) {
+                return view('generalinfo');
+            }
+        }
+        return redirect('login');
+    }
 }
