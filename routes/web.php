@@ -104,3 +104,5 @@ Route::get('get-complete-status', 'App\Http\Controllers\DeclarePopulationControl
 Route::post('check-citizen-info', 'App\Http\Controllers\DeclarePopulationController@CheckCitizenInfo');
 
 Route::get('get-citizen-info', 'App\Http\Controllers\DeclarePopulationController@GetCitizenInfo');
+
+Route::post('get-citizen-info', 'App\Http\Controllers\DeclarePopulationController@PostCitizenInfo');
