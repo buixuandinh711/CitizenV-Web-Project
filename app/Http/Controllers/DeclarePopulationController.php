@@ -455,7 +455,34 @@ class DeclarePopulationController extends Controller
             $result['religion'] = $person->person_religion;
             $result['grade'] = $person->person_level;
             $result['job'] = $person->person_job;
-            // $request->session()->forget('id');
+            $request->session()->forget('id');
+            return response()->json($result);
+        }
+        return response()->json(['resp' => 'error']);
+    }
+
+    public function PostCitizenInfo(Request $request) {
+        if (session('user')) {
+            $result = ['id' => '', 'name' => '', 'gender' => '', 'dateOfBirth' => '', 'permanentAddress' => '', 'currentAddress' => '', 
+                'religion' => '', 'grade' => '', 'job' => ''];
+            $person = DB::table('person')->where('person_id', $request->id)->first();
+            $city_permanent = DB::table('city')->where('city_id', substr($person->person_permanent_address,0,2))->first();
+            $district_permanent = DB::table('district')->where('district_id', substr($person->person_permanent_address,0,4))->first();
+            $ward_permanent = DB::table('ward')->where('ward_id', substr($person->person_permanent_address,0,6))->first();
+            $village_permanent = DB::table('village')->where('village_id', substr($person->person_permanent_address,0,8))->first();
+            $city_current = DB::table('city')->where('city_id', substr($person->person_temporary_address,0,2))->first();
+            $district_current = DB::table('district')->where('district_id', substr($person->person_temporary_address,0,4))->first();
+            $ward_current = DB::table('ward')->where('ward_id', substr($person->person_temporary_address,0,6))->first();
+            $village_current = DB::table('village')->where('village_id', substr($person->person_temporary_address,0,8))->first();
+            $result['id'] = $person->person_id;
+            $result['name'] = $person->person_name;
+            $result['gender'] = $person->person_gender;
+            $result['dateOfBirth'] = $person->person_date;
+            $result['permanentAddress'] = $village_permanent->village_name.','.$ward_permanent->ward_name.','.$district_permanent->district_name.'.,'.$city_permanent->city_name;
+            $result['currentAddress'] = $village_current->village_name.','.$ward_current->ward_name.','.$district_current->district_name.'.,'.$city_current->city_name;
+            $result['religion'] = $person->person_religion;
+            $result['grade'] = $person->person_level;
+            $result['job'] = $person->person_job;
             return response()->json($result);
         }
         return response()->json(['resp' => 'error']);
