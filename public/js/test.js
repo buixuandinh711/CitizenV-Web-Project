@@ -314,7 +314,7 @@
 // .then(data => console.log(data));
 
 // var csrfToken = $("meta[name='csrf-token']").attr("content");  
-// fetch('post-citizen-info', {
+// fetch('check-citizen-info', {
 //     method: 'post',
 //     headers: {
 //         "Content-Type": "application/json",
@@ -329,6 +329,6 @@
 //     console.log(data);
 //   });
 
-// fetch('get-citizen-info')
-// .then(response => response.json())
-// .then(data => console.log(data));
+fetch('get-citizen-info')
+.then(response => response.json())
+.then(data => console.log(data));

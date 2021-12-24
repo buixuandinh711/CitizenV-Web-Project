@@ -425,23 +425,23 @@ class DeclarePopulationController extends Controller
         return response()->json(['resp' => 'error']);
     }
 
-    public function PostCitizenInfo(Request $request) {
+    public function CheckCitizenInfo(Request $request) {
         if (session('user')) {
             $request->session()->put('id', $request->id);
-            return response()->json(session('id'));
+            return response()->json(['resp' => 'success']);
         }
         return response()->json(['resp' => 'error']);
     }
 
     public function GetCitizenInfo(Request $request) {
         if (session('user') && session('id')) {
-            $result = ['id' => '', 'name' => '', 'gender' => '', 'dateOfBirth' => '', 'permaddress' => '', 'currentAddress' => '', 
+            $result = ['id' => '', 'name' => '', 'gender' => '', 'dateOfBirth' => '', 'permanentAddress' => '', 'currentAddress' => '', 
                 'religion' => '', 'grade' => '', 'job' => ''];
             $person = DB::table('person')->where('person_id', session('id'))->first();
-            $city_perm = DB::table('city')->where('city_id', substr($person->person_permanent_address,0,2))->first();
-            $district_perm = DB::table('district')->where('district_id', substr($person->person_permanent_address,0,4))->first();
-            $ward_perm = DB::table('ward')->where('ward_id', substr($person->person_permanent_address,0,6))->first();
-            $village_perm = DB::table('village')->where('village_id', substr($person->person_permanent_address,0,8))->first();
+            $city_permanent = DB::table('city')->where('city_id', substr($person->person_permanent_address,0,2))->first();
+            $district_permanent = DB::table('district')->where('district_id', substr($person->person_permanent_address,0,4))->first();
+            $ward_permanent = DB::table('ward')->where('ward_id', substr($person->person_permanent_address,0,6))->first();
+            $village_permanent = DB::table('village')->where('village_id', substr($person->person_permanent_address,0,8))->first();
             $city_current = DB::table('city')->where('city_id', substr($person->person_temporary_address,0,2))->first();
             $district_current = DB::table('district')->where('district_id', substr($person->person_temporary_address,0,4))->first();
             $ward_current = DB::table('ward')->where('ward_id', substr($person->person_temporary_address,0,6))->first();
@@ -450,7 +450,7 @@ class DeclarePopulationController extends Controller
             $result['name'] = $person->person_name;
             $result['gender'] = $person->person_gender;
             $result['dateOfBirth'] = $person->person_date;
-            $result['permaddress'] = $village_perm->village_name.','.$ward_perm->ward_name.','.$district_perm->district_name.'.,'.$city_perm->city_name;
+            $result['permanentAddress'] = $village_permanent->village_name.','.$ward_permanent->ward_name.','.$district_permanent->district_name.'.,'.$city_permanent->city_name;
             $result['currentAddress'] = $village_current->village_name.','.$ward_current->ward_name.','.$district_current->district_name.'.,'.$city_current->city_name;
             $result['religion'] = $person->person_religion;
             $result['grade'] = $person->person_level;

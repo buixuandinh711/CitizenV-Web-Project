@@ -253,4 +253,34 @@ $("body").on("click", ".delete-permission-button", function() {
     let name = $codeCell.next().html();
     postDeletePermission(code, name);
 })
+function postDeletePermission(_code, _name) {
+    let csrfToken = $("meta[name='csrf-token']").attr("content");
+    fetch('delete-permission', {
+        method: 'post',
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken
+        },
+        body: JSON.stringify({code : _code})
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        if (data.resp == "success") {
+            
+            grantedPermissions = grantedPermissions.filter(item => item.user !== containLocation.code + _code);
+            createGrantedPermissionTable(grantedPermissions);
+            nonGrantedLocations.push({code : _code, name : _name});
+            createSelectLocationOptionPermission(nonGrantedLocations);
+
+            $.toast({
+                heading: 'Thu hồi quyền khai báo thành công!',
+                hideAfter: 1000,
+                bgColor: '#00bfff',
+                textColor: '#fff',
+                loaderBg: '#fff'
+            });
+
+        }
+    });
+}
 
