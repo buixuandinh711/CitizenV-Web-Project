@@ -471,7 +471,11 @@ class DeclarePopulationController extends Controller
             $result = ['resp' => 'success' ,'id' => '', 'name' => '', 'gender' => '', 'dateOfBirth' => '', 'permanentAddress' => '', 'currentAddress' => '', 
                 'religion' => '', 'grade' => '', 'job' => ''];
             $person = DB::table('person')->where('person_id', $request->id)->first();
-            $persons = DB::table('person')->where('person_id', $request->id)->where('village_id','like',session('user')->username.'%')->first();
+            if (session('user')->username == 'admin') {
+                $persons = $person;
+            } else {
+                $persons = DB::table('person')->where('person_id', $request->id)->where('village_id','like',session('user')->username.'%')->first();
+            }
             if (strlen($request->id) != 12) {
                 return response()->json(['resp' => 'error']);
             }
