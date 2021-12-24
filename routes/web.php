@@ -99,6 +99,6 @@ Route::get('get-upper-location', 'App\Http\Controllers\DeclarePopulationControll
 
 Route::get('get-complete-status', 'App\Http\Controllers\DeclarePopulationController@GetCompleteStatus');
 
-Route::post('post-citizen-info', 'App\Http\Controllers\DeclarePopulationController@PostCitizenInfo');
+Route::post('check-citizen-info', 'App\Http\Controllers\DeclarePopulationController@CheckCitizenInfo');
 
 Route::get('get-citizen-info', 'App\Http\Controllers\DeclarePopulationController@GetCitizenInfo');
