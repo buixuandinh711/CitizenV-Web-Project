@@ -467,10 +467,10 @@ class DeclarePopulationController extends Controller
             $person = DB::table('person')->where('person_id', $request->id)->first();
             $persons = DB::table('person')->where('person_id', $request->id)->where('village_id','like',session('user')->username.'%')->first();
             if (!$person) {
-                return response()->json(['resp' => 'Không tồn tại']);
+                return response()->json(['resp' => 'Thông tin công dân không tồn tại!']);
             }
             if (!$persons) {
-                return response()->json(['resp' => 'Không có quyền']);
+                return response()->json(['resp' => 'Không đủ quyền để xem thông tin!']);
             }
             $city_permanent = DB::table('city')->where('city_id', substr($person->person_permanent_address,0,2))->first();
             $district_permanent = DB::table('district')->where('district_id', substr($person->person_permanent_address,0,4))->first();

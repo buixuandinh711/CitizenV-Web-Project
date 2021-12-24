@@ -79,7 +79,7 @@
                     <div class="citizen-row-container citizen-info-row">
                         <div>
                             <label class="input-label">Giới tính</label>
-                            <input type="text" class="input-item border-input-item" id="citizen-gender" disabled>
+                            <input type="text" class="input-item border-input-item citizen-info-input" id="citizen-gender" disabled>
                         </div>
                         <div>
                             <label class="input-label">Ngày sinh</label>
