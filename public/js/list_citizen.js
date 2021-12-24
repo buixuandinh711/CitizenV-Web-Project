@@ -138,7 +138,6 @@ function loadVillage(ward) {
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
-        console.log(ward, data);
         let selector = $("#select-village");
         createSelectLocationOption(selector, data.info);
     });
@@ -157,6 +156,24 @@ function loadCitizen(villageCode) {
         return response.json();
     }).then(function (data) {
         createDeclaredCitizenTable(data);
+    });
+}
+
+function postCheckInfo(_id) {
+    let csrfToken = $("meta[name='csrf-token']").attr("content");
+    fetch('check-citizen-info', {
+        method: 'post',
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken
+        },
+        body: JSON.stringify({ id: _id })
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        if (data.resp === "success") {
+            window.location.href = "citizen-info";
+        }
     });
 }
 
@@ -253,10 +270,16 @@ $("body").on("change", "#select-ward", function () {
 })
 
 $("body").on("click", "#search-button", function () {
-    // let villageCode = $("#select-village").val();
-    // loadCitizen(villageCode);
-    window.location.href = 'https://www.google.com';
+    let villageCode = $("#select-village").val();
+    loadCitizen(villageCode);
 })
 
+
+$("body").on("click", "tbody tr", function () {
+
+    let id = $(this).children(':first-child').html();
+    postCheckInfo(id);
+
+})
 
 loadUpperLocations();
