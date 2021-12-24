@@ -112,3 +112,7 @@ Route::post('check-citizen-info', 'App\Http\Controllers\DeclarePopulationControl
 Route::get('get-citizen-info', 'App\Http\Controllers\DeclarePopulationController@GetCitizenInfo');
 
 Route::post('get-citizen-info', 'App\Http\Controllers\DeclarePopulationController@PostCitizenInfo');
+
+Route::get('get-age-chart', 'App\Http\Controllers\DeclarePopulationController@GetAgeChart');
+
+Route::get('get-gender-chart', 'App\Http\Controllers\DeclarePopulationController@GetGenderChart');
