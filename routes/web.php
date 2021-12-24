@@ -57,6 +57,8 @@ Route::post('get-village','App\Http\Controllers\DeclareLocationController@GetVil
 
 Route::get('get-location-info','App\Http\Controllers\DeclareLocationController@GetLocationInfo');
 
+Route::get('get-location-chart','App\Http\Controllers\DeclareLocationController@GetLocationChart');
+
 //User
 
 Route::post('add-new-user','App\Http\Controllers\UserController@AddNewUser');

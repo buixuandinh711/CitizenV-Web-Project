@@ -348,3 +348,7 @@
 //   }).then(function(data) {
 //     console.log(data);
 //   });
+
+// fetch('get-location-chart')
+// .then(response => response.json())
+// .then(data => console.log(data));

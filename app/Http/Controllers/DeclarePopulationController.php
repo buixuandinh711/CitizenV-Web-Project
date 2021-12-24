@@ -254,6 +254,9 @@ class DeclarePopulationController extends Controller
 
     public function ShowListPopulation(Request $request) {
         if (session('user')) {
+            if (strlen($request->code) != 8) {
+                return response()->json(['resp' => 'error']);
+            }
             $result = DB::table('person')
             ->where('village_id',$request->code)
             ->selectRaw('person_id as id')
@@ -271,7 +274,7 @@ class DeclarePopulationController extends Controller
                 $success = ['resp' => 'success', 'info' => []];
                 $error = ['resp' => 'error'];
                 $person = DB::table('person')->where('person_id',$request->code)->first(); 
-                if (!ctype_digit($request->code) || !$person) {
+                if (!ctype_digit($request->code) || !$person || strlen($request->code) != 12) {
                     return response()->json($error);  
                 }
                 $success['info'] = $person;
@@ -281,7 +284,7 @@ class DeclarePopulationController extends Controller
                 $error = ['resp' => 'error'];
                 $person = DB::table('person')->where('person_id',$request->code)
                 ->where('village_id','like',session('user')->username.'%')->first();
-                if (!ctype_digit($request->code) || !$person) {
+                if (!ctype_digit($request->code) || !$person || strlen($request->code) != 12) {
                     return response()->json($error);  
                 }
                 $success['info'] = $person;
@@ -291,7 +294,7 @@ class DeclarePopulationController extends Controller
                 $error = ['resp' => 'error'];
                 $person = DB::table('person')->where('person_id',$request->code)
                 ->where('village_id','like',session('user')->username.'%')->first();
-                if (!ctype_digit($request->code) || !$person) {
+                if (!ctype_digit($request->code) || !$person || strlen($request->code) != 12) {
                     return response()->json($error);  
                 }
                 $success['info'] = $person;
@@ -301,7 +304,7 @@ class DeclarePopulationController extends Controller
                 $error = ['resp' => 'error'];
                 $person = DB::table('person')->where('person_id',$request->code)
                 ->where('village_id','like',session('user')->username.'%')->first();
-                if (!ctype_digit($request->code) || !$person) {
+                if (!ctype_digit($request->code) || !$person || strlen($request->code) != 12) {
                     return response()->json($error);  
                 }
                 $success['info'] = $person;
@@ -427,6 +430,9 @@ class DeclarePopulationController extends Controller
 
     public function CheckCitizenInfo(Request $request) {
         if (session('user')) {
+            if (strlen($request->id) != 12) {
+                return response()->json(['resp' => 'error']);
+            }
             $request->session()->put('id', $request->id);
             return response()->json(['resp' => 'success']);
         }
@@ -466,11 +472,14 @@ class DeclarePopulationController extends Controller
                 'religion' => '', 'grade' => '', 'job' => ''];
             $person = DB::table('person')->where('person_id', $request->id)->first();
             $persons = DB::table('person')->where('person_id', $request->id)->where('village_id','like',session('user')->username.'%')->first();
+            if (strlen($request->id) != 12) {
+                return response()->json(['resp' => 'error']);
+            }
             if (!$person) {
-                return response()->json(['resp' => 'Không tồn tại']);
+                return response()->json(['resp' => 'Thông tin công dân không tồn tại']);
             }
             if (!$persons) {
-                return response()->json(['resp' => 'Không có quyền']);
+                return response()->json(['resp' => 'Không đủ quyền để xem thông tin']);
             }
             $city_permanent = DB::table('city')->where('city_id', substr($person->person_permanent_address,0,2))->first();
             $district_permanent = DB::table('district')->where('district_id', substr($person->person_permanent_address,0,4))->first();
