@@ -1,0 +1,25 @@
+.search-citizen-container {
+    margin-top: 50px;
+}
+
+.citizen-info-container {
+    margin-top: 30px;
+}
+
+#search-citizen-id {
+    width: 300px;
+}
+#search-citizen-button {
+    width: 100px;
+}
+#search-citizen-error {
+    visibility: hidden;
+}
+
+#info-container {
+    display: none;
+}
+
+#no-info-container {
+    display: none;
+}
