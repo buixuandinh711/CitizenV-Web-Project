@@ -58,7 +58,28 @@
             </div>
         </aside>
         <div class="content-container">
-
+            <div class="add-permission-container">
+                <h2>Thêm quyền khai báo mới</h2>
+                <div class="permission-input-container">
+                    <div class="location-container">
+                        <div>Chọn địa phương</div>
+                        <select class="input-item border-input-item" id="permission-location-select">
+                        </select>
+                    </div>
+                    <div class="date-container">
+                        <div>Ngày bắt đầu</div>
+                        <input type="date" class="input-item border-input-item" id="permission-start-date">
+                    </div>
+                    <div  class="date-container">
+                        <div>Ngày kết thúc</div>
+                        <input type="date" class="input-item border-input-item" id="permission-end-date">
+                    </div>
+                    <div class="button-container">
+                        <button class="input-item confirm-button half-button" id="submit-permission">Xác nhận</button>
+                        <button class="input-item cancel-button half-button" id="cancel-permission">Hủy</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

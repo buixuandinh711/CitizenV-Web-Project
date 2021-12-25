@@ -150,6 +150,7 @@ function loadVillage(ward) {
 }
 
 function loadCitizen(villageCode) {
+    console.log(villageCode);
     let csrfToken = $("meta[name='csrf-token']").attr("content");
     fetch('load-declared-citizen', {
         method: 'post',
@@ -161,7 +162,11 @@ function loadCitizen(villageCode) {
     }).then(function (response) {
         return response.json();
     }).then(function (data) {
-        createDeclaredCitizenTable(data);
+        if (data.resp === "error") {
+            createDeclaredCitizenTable([]);
+        } else {
+            createDeclaredCitizenTable(data);
+        }
     });
 }
 

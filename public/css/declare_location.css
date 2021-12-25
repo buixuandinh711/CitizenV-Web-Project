@@ -5,11 +5,27 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    width: 1015px;
+    width: 60%;
 }
-#declare-location-code {
-    width: 300px;
+.code-container {
+    flex: 2;
+    min-width: 100px;
+    margin-right: 5px;
 }
-#declare-location-name {
-    width: 500px;
+.name-container {
+    flex: 5;
+    margin-right: 5px;
+    min-width: 100px;
+}
+.button-container {
+    flex: 3;
+    display: flex;
+}
+
+#declare-location-code, #declare-location-name {
+    width: 100%;
+}
+
+#location-input-error {
+    visibility: hidden;
 }
