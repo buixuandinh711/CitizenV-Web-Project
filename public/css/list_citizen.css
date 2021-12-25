@@ -8,16 +8,15 @@
 
 .select-location-row {
     display: flex;
-    justify-content: space-between;
+    width: 70%;
 }
-.list-citizen-select {
-    width: 200px;
+#select-city, #select-district, #select-ward, #select-village {
+    flex: 5;
+    margin-right: 5px;
+    min-width: 100px;
 }
 #search-button {
-    width: 100px;
-}
-.select-location-row {
-    width: 920px;
+    flex: 2;
 }
 
 tbody tr {

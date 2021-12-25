@@ -5,37 +5,37 @@ function init() {
 
 init();
 
-createLocationPage();
+//createLocationPage();
 loadLocationInfo();
-function createLocationPage() {
-    let $contenContainer = $(".content-container");
-    $contenContainer.empty();
-    $contenContainer.append('<h2 class="content-title">Cấp mã cho Tỉnh/Thành phố</h2>');
+// function createLocationPage() {
+//     let $contenContainer = $(".content-container");
+//     $contenContainer.empty();
+//     $contenContainer.append('<h2 class="content-title">Cấp mã cho Tỉnh/Thành phố</h2>');
 
-    let $addLocationContainer = $('<div class="add-location-container">');
-    $addLocationContainer.append('<h2>Thêm địa phương mới</h2>');
-    let $locationInputContainer = $('<div class="location-input-container">');
+//     let $addLocationContainer = $('<div class="add-location-container">');
+//     $addLocationContainer.append('<h2>Thêm địa phương mới</h2>');
+//     let $locationInputContainer = $('<div class="location-input-container">');
 
-    let $div1 = $('<div>');
-    $div1.append('<input type="text" class="input-item border-input-item" id="declare-location-code" placeholder="Mã địa phương">');
-    $locationInputContainer.append($div1);
+//     let $div1 = $('<div>');
+//     $div1.append('<input type="text" class="input-item border-input-item" id="declare-location-code" placeholder="Mã địa phương">');
+//     $locationInputContainer.append($div1);
 
-    let $div2 = $('<div>');
-    $div2.append('<input type="text" class="input-item border-input-item" id="declare-location-name" placeholder="Tên địa phương">');
-    $locationInputContainer.append($div2);
+//     let $div2 = $('<div>');
+//     $div2.append('<input type="text" class="input-item border-input-item" id="declare-location-name" placeholder="Tên địa phương">');
+//     $locationInputContainer.append($div2);
 
-    let $div3 = $('<div>');
-    $div3.append('<button class="input-item confirm-button button-item" id="submit-new-location">Xác nhận</button>');
-    $locationInputContainer.append($div3);
+//     let $div3 = $('<div>');
+//     $div3.append('<button class="input-item confirm-button button-item" id="submit-new-location">Xác nhận</button>');
+//     $locationInputContainer.append($div3);
 
-    let $div4 = $('<div>');
-    $div4.append('<button class="input-item cancel-button button-item" id="cancel-new-location">Hủy</button>');
-    $locationInputContainer.append($div4);
+//     let $div4 = $('<div>');
+//     $div4.append('<button class="input-item cancel-button button-item" id="cancel-new-location">Hủy</button>');
+//     $locationInputContainer.append($div4);
 
-    $addLocationContainer.append($locationInputContainer);
-    $addLocationContainer.append('<div class="error-hint" id="location-input-error"></div>');
-    $contenContainer.append($addLocationContainer);
-}
+//     $addLocationContainer.append($locationInputContainer);
+//     $addLocationContainer.append('<div class="error-hint" id="location-input-error"></div>');
+//     $contenContainer.append($addLocationContainer);
+// }
 var declaredCodes = [];
 function loadLocationInfo() {
     fetch('current-local-info', {
@@ -83,21 +83,21 @@ $('body').on('click', '#submit-new-location', function () {
     let locationName = $("#declare-location-name").val().trim();
     let $errorDisplay = $("#location-input-error");
     if (locationCode.length == 0 || locationName.length == 0) {
-        $errorDisplay.html("Mã địa phương và tên địa phương không được trống!");
+        setInputError("Mã địa phương và tên địa phương không được trống!");
         return;
     }
     if (locationCode.length == 1) {
         locationCode = "0" + locationCode;
     }
     if (!locationCode.match(/^[0-9]{2}$/)) {
-        $errorDisplay.html("Mã địa phương sai định dạng");
+        setInputError("Mã địa phương sai định dạng");
         return;
     }
     if (declaredCodes.includes(locationCode)) {
-        $errorDisplay.html("Mã địa phương đã tồn tại");
+        setInputError("Mã địa phương đã tồn tại");
         return;
     }
-    $errorDisplay.html("");
+    setInputError("");
     postLocation(locationCode, locationName);
 });
 $('body').on('keydown', '#declare-location-code, #declare-location-name', function () {
@@ -111,4 +111,17 @@ function clearLocationInput() {
     $("#declare-location-code").val("");
     $("#declare-location-name").val("");
     $("#location-input-error").empty();
+}
+function setInputError(err) {
+
+    let errorHint = $("#location-input-error");
+
+    if (err.length == 0) {
+        errorHint.html("not error");
+        errorHint.css("visibility", "hidden");
+        return;
+    }
+
+    errorHint.html(err);
+    errorHint.css("visibility", "visible");
 }

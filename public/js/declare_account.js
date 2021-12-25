@@ -1,6 +1,5 @@
-createAddAccountPage();
-clearInputAccount();
 loadInfo();
+clearInputAccount();
 
 function init() {
     $("#management-dropdown").css("display", "block");
@@ -8,47 +7,6 @@ function init() {
 }
 
 init();
-
-function createAddAccountPage() {
-    let $contenContainer = $(".content-container");
-    $contenContainer.empty();
-    $contenContainer.append('<h2 class="content-title"></h2>');
-    let $addAccountContainer = $('<div class="add-account-container">');
-
-    let $addAccountRow1 = $('<div class="add-account-row">');
-
-    let $div1 = $('<div>');
-    $div1.append('<label for="account-location-select" class="input-label">Địa phương</label>');
-    $div1.append('<select id="account-location-select" class="input-item border-input-item">');
-    $addAccountRow1.append($div1);
-
-    let $div2 = $('<div>');
-    $div2.append('<label for="add-account-username" class="input-label">Tài khoản tương ứng</label>');
-    $div2.append('<input id="add-account-username" type="text" disabled class="input-item border-input-item" value="010203">');
-    $addAccountRow1.append($div2);
-
-    let $passwordDiv = $('<div class="password-container">');
-    $passwordDiv.append('<label class="input-label" for="add-account-password">Mật khẩu</label>');
-    $passwordDiv.append('<input type="password" class="input-item border-input-item add-account-input" id="add-account-password">');
-    $addAccountContainer.append($passwordDiv)
-
-    let $rePasswordDiv = $('<div class="password-container">');
-    $rePasswordDiv.append('<label class="input-label" for="add-account-repassword">Nhập lại mật khẩu</label>');
-    $rePasswordDiv.append('<input type="password" class="input-item border-input-item add-account-input" id="add-account-repassword">');
-    $addAccountContainer.append($rePasswordDiv)
-
-    let $addAccountRow2 = $('<div class="add-account-row">');
-    $addAccountRow2.append('<button class="input-item confirm-button add-account-button" id="submit-account-button">Xác nhận</button>');
-    $addAccountRow2.append('<button class="input-item cancel-button add-account-button" id="cancel-account-button">Hủy</button>')
-
-    $addAccountContainer.append($addAccountRow1);
-    $addAccountContainer.append($passwordDiv);
-    $addAccountContainer.append($rePasswordDiv)
-    $addAccountContainer.append('<div class="error-hint" id="add-account-error"></div>')
-    $addAccountContainer.append($addAccountRow2)
-
-    $contenContainer.append($addAccountContainer);
-}
 
 var containLocation = { code: "01", name: "" };
 var declaredLocation = [];
@@ -83,7 +41,7 @@ function createSelectLocationOptionAccount(locationList) {
 }
 $("body").on("change", "#account-location-select", selectLocation);
 function selectLocation() {
-    $("#add-account-error").html("");
+    setInputError("");
     let locationCode = $("#account-location-select").val();
     if (!locationCode) {
         return;
@@ -91,7 +49,7 @@ function selectLocation() {
     $("#add-account-username").val(containLocation.code + locationCode);
 }
 $("body").on("change", "#add-account-password, #add-account-repassword", function() {
-    $("#add-account-error").html("");
+    setInputError("");
 });
 function submitNewAccount(_username, _password) {
     let csrfToken = $("meta[name='csrf-token']").attr("content");
@@ -121,26 +79,23 @@ function submitNewAccount(_username, _password) {
     });
 }
 
-function removeDeclaredLocation(code) {
-
-}
 $("body").on("click", "#submit-account-button", function () {
+
     let password = $("#add-account-password").val().trim();
     let repassword = $("#add-account-repassword").val().trim();
-    let $errorHint = $("#add-account-error");
     if (password.length == 0 || repassword.length == 0) {
-        $errorHint.html("Mật khẩu không được để trống!");
+        setInputError("Mật khẩu không được để trống!");
         return;
     }
     if (!password.match(/^[0-9a-bA-B]\w{1,19}$/) || !repassword.match(/^[0-9a-bA-B]\w{1,19}$/)) {
-        $errorHint.html("Mật khẩu sai định dạng!");
+        setInputError("Mật khẩu sai định dạng!");
         return;
     }
     if (password != repassword) {
-        $errorHint.html("Nhập lại mật khẩu không khớp!");
+        setInputError("Nhập lại mật khẩu không khớp!");
         return;
     }
-    $errorHint.html("");
+    setInputError("");
     let username = $("#account-location-select").val();
     submitNewAccount(username, password);
 });
@@ -155,4 +110,18 @@ function clearInputAccount() {
     $locationSelector.empty();
     $locationSelector.append('<option disabled="disabled" selected>Chọn địa phương</option>')
     $('#add-account-username').val("");
+}
+
+function setInputError(err) {
+
+    let errorHint = $("#add-account-error");
+
+    if (err.length == 0) {
+        errorHint.html("not error");
+        errorHint.css("visibility", "hidden");
+        return;
+    }
+
+    errorHint.html(err);
+    errorHint.css("visibility", "visible");
 }

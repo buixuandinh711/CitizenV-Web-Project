@@ -1,25 +1,37 @@
 .add-account-container {
     margin-top: 50px;
-}
-.add-account-row {
     display: flex;
-    justify-content: space-between;
-    width: 500px;
-    margin-top: 15px;
+    align-items: flex-end;
+    width: 80%;
 }
-.add-account-input {
-    width: 500px;
+.location-select-container {
+    display: flex;
+    flex: 6;
 }
-.password-container {
-    margin-top: 15px;
+.select-container {
+    flex: 4;
+    margin-right: 5px;
+    min-width: 110px;
 }
-.add-account-button {
-    width: 247px;
-    cursor: pointer;
+.user-container {
+    flex: 6;
+    margin-right: 5px;
+    min-width: 150px;
 }
-#add-account-username {
-    width: 350px;
+.password-input {
+    flex: 5;
+    margin-right: 5px;
+    min-width: 130px;
 }
-#account-location-select {
-    width: 145px;
+.button-container {
+    display: flex;
+    flex: 4;
+}
+
+#add-account-password, #add-account-repassword, #account-location-select, #add-account-username {
+    width: 100%;
+}
+
+#add-account-error {
+    visibility: hidden;
 }

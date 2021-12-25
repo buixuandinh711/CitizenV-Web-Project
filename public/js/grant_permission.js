@@ -1,7 +1,3 @@
-var $contentContainer = $(".content-container");
-
-$(".content-container").empty();
-createGrantPermissionPage();
 clearInputPermission()
 loadGrantPermissionLocation();
 loadGrantedPermission();
@@ -15,41 +11,6 @@ function init() {
     $("#declaration-dropdown").css("display", "block");
     $("#grant-declare-permission").css("color", "deepskyblue");
 }
-
-function createGrantPermissionPage() {
-    $contentContainer.append('<h2 class="content-title">Cấp quyền khai báo</h2>');
-    let addPermissionContainer = $('<div class="add-permission-container">');
-    addPermissionContainer.append('<h2>Thêm quyền khai báo mới</h2>');
-
-    permissionInputContaienr = $('<div class="permission-input-container">');
-    
-    let div1 = $('<div>');
-    div1.append('<div>Chọn địa phương</div>');
-    div1.append('<select class="input-item border-input-item" id="permission-location-select">');
-    permissionInputContaienr.append(div1);
-
-    let div2 = $('<div>');
-    div2.append('<div>Ngày bắt đầu</div>');
-    div2.append('<input type="date" class="input-item border-input-item" id="permission-start-date">');
-    permissionInputContaienr.append(div2);
-
-    let div3 = $('<div>');
-    div3.append('<div>Ngày kết thúc</div>');
-    div3.append('<input type="date" class="input-item border-input-item" id="permission-end-date">');
-    permissionInputContaienr.append(div3);
-
-    let div4 = $('<div>');
-    div4.append('<button class="input-item confirm-button button-item" id="submit-permission">Xác nhận</button>');
-    permissionInputContaienr.append(div4);
-
-    let div5 = $('<div>');
-    div5.append('<button class="input-item cancel-button button-item" id="cancel-permission">Hủy</button>');
-    permissionInputContaienr.append(div5);
-
-    addPermissionContainer.append(permissionInputContaienr);
-    addPermissionContainer.append('<div class="error-hint" id="grant-permission-error"></div>')
-    $contentContainer.append(addPermissionContainer);
-} 
 
 $("body").on("click", "#submit-permission", function() {
     let selectedLocationCode = $("#permission-location-select").val();
@@ -105,7 +66,7 @@ function createGrantedPermissionTable(grantedList) {
         grantedTable.append(tableHeader);
         grantedTable.append('<tbody>');
         grantedPermissionContainer.append(grantedTable);
-        $contentContainer.append(grantedPermissionContainer);
+        $(".content-container").append(grantedPermissionContainer);
     }
 
     if (grantedList.length == 0) {
@@ -124,12 +85,17 @@ function createGrantedPermissionTable(grantedList) {
         tableRow.append('<td class="table-cell">' + grantedPermission.startDate + '</td>')
         tableRow.append('<td class="table-cell">' + grantedPermission.endDate + '</td>')
         
-        let iconCell = $('<td class="table-cell icon-cell">');
-        let iconContainer = $('<div class="icon-container">');
-       //iconContainer.append('<span class="table-icon edit-icon"></span>');
-        iconContainer.append('<span class="table-icon remove-icon delete-permission-button"></span>');
-        iconCell.append(iconContainer);
-        tableRow.append(iconCell);
+        // let iconCell = $('<td class="table-cell icon-cell">');
+        // let iconContainer = $('<div class="icon-container">');
+        // iconContainer.append('<span class="table-icon remove-icon delete-permission-button"></span>');
+        // iconCell.append(iconContainer);
+        // tableRow.append(iconCell);
+
+        let handlerCell = $('<td class="table-cell handler-cell">');
+        let handlerContainer = $('<div class="handler-container">');
+        handlerContainer.append('<span class="modify-delete">Xóa</span>');
+        handlerCell.append(handlerContainer);
+        tableRow.append(handlerCell);
 
         $tableBody.append(tableRow);
     }
@@ -253,7 +219,7 @@ $("body").on("change", "#permission-location-select, #permission-start-date, #pe
     $('#grant-permission-error').html("");
 })
 
-$("body").on("click", ".delete-permission-button", function() {
+$("body").on("click", ".modify-delete", function() {
     let $codeCell = $(this).parent().parent().parent().children(':first-child');
     let code = $codeCell.html().substring(containLocation.code.length);
     let name = $codeCell.next().html();

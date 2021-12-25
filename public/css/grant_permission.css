@@ -2,25 +2,24 @@
     margin-top: 50px;
 }
 .permission-input-container {
-    width: 1420px;
     display: flex;
-    justify-content: space-between;
     align-items: flex-end;
+    width: 70%;
+}
+.location-container {
+    flex: 4;
+    margin-right: 5px;
+    min-width: 120px;
+}
+.date-container {
+    flex: 5;
+    margin-right: 5px;
+}
+.button-container {
+    flex: 6;
+    margin-right: 5px;
+    display: flex;
 }
 .granted-permission {
     margin-top: 50px;
-}
-.edit-icon {
-    background-color: deepskyblue;
-    background-image: url(../image/icons8-edit-48.png) ;
-    background-size:contain;
-    background-repeat: no-repeat;   
-    background-position: center center;
-}
-.remove-icon {
-    background-color: red;
-    background-image: url(../image/icons8-cancel-64.png) ;
-    background-size:contain;
-    background-repeat: no-repeat;   
-    background-position: center center;
 }

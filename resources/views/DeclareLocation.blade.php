@@ -59,7 +59,22 @@
             </div>
         </aside>
         <div class="content-container">
-
+            <div class="add-location-container">
+                <h2>Thêm địa phương mới</h2>
+                <div class="location-input-container">
+                    <div class="code-container">
+                        <input type="text" class="input-item border-input-item " id="declare-location-code" placeholder="Mã địa phương">
+                    </div>
+                    <div class="name-container">
+                        <input type="text" class="input-item border-input-item" id="declare-location-name" placeholder="Tên địa phương">
+                    </div>
+                    <div class="button-container">
+                        <button class="input-item confirm-button half-button" id="submit-new-location">Xác nhận</button>
+                        <button class="input-item cancel-button half-button"  id="cancel-new-location">Hủy</button>
+                    </div>
+                </div>
+                <div class="error-hint" id="location-input-error">This is an error</div>
+            </div>
         </div>
     </div>
 </body>
