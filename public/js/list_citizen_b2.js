@@ -196,9 +196,9 @@ $("#list-citizen-pending").click(function () {
     changeCompleteStatus();
 })
 
-$("body").on("click", "tbody tr", function () {
+$("body").on("click", "tbody td:not(:last-child)", function () {
 
-    let id = $(this).children(':first-child').html();
+    let id = $(this).parent().children(':first-child').html();
     postCheckInfo(id);
 
 })
