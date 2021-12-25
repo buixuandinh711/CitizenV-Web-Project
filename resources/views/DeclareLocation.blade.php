@@ -19,17 +19,17 @@
 <body>
     <div class="container">
         <header>
-            <a href="main"><span class="page-logo">Citizen V</span><a>
-                    <div class="account-dropdown-container">
-                        <span class="account-container">
-                            <a class="username">{{session('user')->username}}</a>
-                            <b class="caret" id="account-caret"></b>
-                        </span>
-                        <div class="account-dropdown">
-                            <a>Thông tin tài khoản</a>
-                            <a href="logout">Đăng xuất</a>
-                        </div>
-                    </div>
+            <a href="main"><span class="page-logo">Citizen V</span></a>
+            <div class="account-dropdown-container">
+                <span class="account-container">
+                    <a class="username">{{session('user')->username}}</a>
+                    <b class="caret" id="account-caret"></b>
+                </span>
+                <div class="account-dropdown">
+                    <a>Thông tin tài khoản</a>
+                    <a href="logout">Đăng xuất</a>
+                </div>
+            </div>
         </header>
         <aside>
             <div class="sidebar-row" id="management">
@@ -70,7 +70,7 @@
                     </div>
                     <div class="button-container">
                         <button class="input-item confirm-button half-button" id="submit-new-location">Xác nhận</button>
-                        <button class="input-item cancel-button half-button"  id="cancel-new-location">Hủy</button>
+                        <button class="input-item cancel-button half-button" id="cancel-new-location">Hủy</button>
                     </div>
                 </div>
                 <div class="error-hint" id="location-input-error">This is an error</div>

@@ -2,34 +2,31 @@
     margin-top: 50px;
     border: 1px solid deepskyblue;
     padding: 50px 40px;
+    width: 40%;
 }
 
 .add-citizen-row-container {
-    width: 620px;
     display: flex;
-    justify-content: space-between;
+    width: 100%;
 }
 
 .add-citizen-row {
+    margin: 0 auto;
     margin-bottom: 20px;
+    width: 95%;
 }
 
 .add-citizen-select {
-    width: 150px;
+    flex: 5;
+    margin-right: 5px;
 }
 
-.add-citizen-input {
-    width: 620px;
+.date-container, .job-container {
+    flex: 7;
 }
-#add-citizen-gender, #add-citizen-grade {
-    width: 200px;
-}
-
-#add-citizen-dateofbirth, #add-citizen-job {
-    width: 413px;
-}
-#add-citizen-submit, #add-citizen-cancel {
-    width: 307px;
+.gender-container, .grade-container {
+    flex: 3;
+    margin-right: 5px;
 }
 .wrapper {
     display: flex;

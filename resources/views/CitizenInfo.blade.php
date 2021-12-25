@@ -18,7 +18,7 @@
 <body>
     <div class="container">
         <header>
-            <a href="main"><span class="page-logo">Citizen V</span><a>
+            <a href="main"><span class="page-logo">Citizen V</span></a>
                     <div class="account-dropdown-container">
                         <span class="account-container">
                             <a class="username">{{session('user')->username}}</a>
@@ -69,14 +69,16 @@
                         <label for="citizen-id" class="input-label">Mã số định danh cá nhân</label>
                         <input id="citizen-id" type="text" class="input-item border-input-item citizen-info-input" disabled>
                     </div>
-                    <div class="citizen-row-container citizen-info-row">
-                        <div>
-                            <label class="input-label">Giới tính</label>
-                            <input type="text" class="input-item border-input-item" id="citizen-gender" disabled>
-                        </div>
-                        <div>
-                            <label class="input-label">Ngày sinh</label>
-                            <input id="citizen-dateofbirth" type="text" class="input-item border-input-item citizen-info-input" disabled>
+                    <div class="citizen-info-row">
+                        <div class="citizen-row-container">
+                            <div class="gender-container">
+                                <label class="input-label">Giới tính</label>
+                                <input type="text" class="input-item border-input-item" id="citizen-gender" disabled>
+                            </div>
+                            <div class="date-container">
+                                <label class="input-label">Ngày sinh</label>
+                                <input id="citizen-dateofbirth" type="text" class="input-item border-input-item citizen-info-input" disabled>
+                            </div>
                         </div>
                     </div>
                     <div class="citizen-info-row">
@@ -91,14 +93,16 @@
                         <label class="input-label">Tôn giáo</label>
                         <input id="citizen-religion" type="text" class="input-item border-input-item citizen-info-input" disabled>
                     </div>
-                    <div class="citizen-row-container citizen-info-row">
-                        <div>
-                            <label for="citizen-grade" class="input-label">Trình độ văn hóa</label>
-                            <input id="citizen-grade" type="text" class="input-item border-input-item citizen-info-input" disabled>
-                        </div>
-                        <div>
-                            <label for="citizen-job" class="input-label">Nghề nghiệp</label>
-                            <input id="citizen-job" type="text" class="input-item border-input-item citizen-info-input" disabled>
+                    <div class="citizen-info-row">
+                        <div class="citizen-row-container">
+                            <div class="grade-container">
+                                <label for="citizen-grade" class="input-label">Trình độ văn hóa</label>
+                                <input id="citizen-grade" type="text" class="input-item border-input-item citizen-info-input" disabled>
+                            </div>
+                            <div class="job-container">
+                                <label for="citizen-job" class="input-label">Nghề nghiệp</label>
+                                <input id="citizen-job" type="text" class="input-item border-input-item citizen-info-input" disabled>
+                            </div>
                         </div>
                     </div>
                 </div>

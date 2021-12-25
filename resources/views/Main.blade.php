@@ -10,23 +10,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
     <script src="js/home.js" defer></script>
-    <script src="js/test.js" defer></script>
 </head>
 
 <body>
     <div class="container">
         <header>
-            <a href="main"><span class="page-logo">Citizen V</span><a>
-                    <div class="account-dropdown-container">
-                        <span class="account-container">
-                            <a class="username">{{session('user')->username}}</a>
-                            <b class="caret" id="account-caret"></b>
-                        </span>
-                        <div class="account-dropdown">
-                            <a>Thông tin tài khoản</a>
-                            <a href="logout">Đăng xuất</a>
-                        </div>
-                    </div>
+            <a href="main"><span class="page-logo">Citizen V</span></a>
+            <div class="account-dropdown-container">
+                <span class="account-container">
+                    <a class="username">{{session('user')->username}}</a>
+                    <b class="caret" id="account-caret"></b>
+                </span>
+                <div class="account-dropdown">
+                    <a>Thông tin tài khoản</a>
+                    <a href="logout">Đăng xuất</a>
+                </div>
+            </div>
         </header>
         <aside>
             <div class="sidebar-row" id="management">
