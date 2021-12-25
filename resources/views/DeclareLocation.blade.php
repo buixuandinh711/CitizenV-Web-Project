@@ -19,7 +19,14 @@
 <body>
     <div class="container">
         <header>
-            <a href="main"><span class="page-logo">Citizen V</span></a>
+            <div class="menu-title-container">
+                <div class="menu-icon">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <a href="main"><span class="page-logo">Citizen V</span></a>
+            </div>
             <div class="account-dropdown-container">
                 <span class="account-container">
                     <a class="username">{{session('user')->username}}</a>
@@ -59,6 +66,7 @@
             </div>
         </aside>
         <div class="content-container">
+            <h2 class="content-title"></h2>
             <div class="add-location-container">
                 <h2>Thêm địa phương mới</h2>
                 <div class="location-input-container">

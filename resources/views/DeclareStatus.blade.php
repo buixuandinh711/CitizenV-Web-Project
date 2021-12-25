@@ -13,13 +13,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
     <script src="js/home.js" defer></script>
     <script src="js/declare_status.js" defer></script>
-    <script src="js/test.js" defer></script>
 </head>
 
 <body>
     <div class="container">
         <header>
-            <a href="main"><span class="page-logo">Citizen V</span></a>
+            <div class="menu-title-container">
+                <div class="menu-icon">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <a href="main"><span class="page-logo">Citizen V</span></a>
+            </div>
             <div class="account-dropdown-container">
                 <span class="account-container">
                     <a class="username">{{session('user')->username}}</a>

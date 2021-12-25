@@ -19,7 +19,14 @@
 <body>
     <div class="container">
         <header>
-            <a href="main"><span class="page-logo">Citizen V</span></a>
+            <div class="menu-title-container">
+                <div class="menu-icon">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <a href="main"><span class="page-logo">Citizen V</span></a>
+            </div>
             <div class="account-dropdown-container">
                 <span class="account-container">
                     <a class="username">{{session('user')->username}}</a>
@@ -59,7 +66,7 @@
             </div>
         </aside>
         <div class="content-container">
-            <h2 class="content-title">Thông tin công dân</h2>
+            <h2 class="content-title">Tìm kiếm thông tin công dân</h2>
             <div class="search-citizen-container">
                 <label for="search-citizen-id" class="input-label">Mã số định danh cá nhân</label>
                 <input id="search-citizen-id" type="text" class="input-item border-input-item search-citizen-input">
