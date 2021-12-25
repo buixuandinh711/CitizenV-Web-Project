@@ -83,6 +83,12 @@ $("body").on("click", "#submit-account-button", function () {
 
     let password = $("#add-account-password").val().trim();
     let repassword = $("#add-account-repassword").val().trim();
+
+   if (!$("#account-location-select").val()) {
+       setInputError("Chưa chọn địa phương!")
+       return;
+   }
+
     if (password.length == 0 || repassword.length == 0) {
         setInputError("Mật khẩu không được để trống!");
         return;
