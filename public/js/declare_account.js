@@ -2,6 +2,13 @@ createAddAccountPage();
 clearInputAccount();
 loadInfo();
 
+function init() {
+    $("#management-dropdown").css("display", "block");
+    $("#declare-account-nav").css("color", "deepskyblue");
+}
+
+init();
+
 function createAddAccountPage() {
     let $contenContainer = $(".content-container");
     $contenContainer.empty();

@@ -5,10 +5,16 @@ createGrantPermissionPage();
 clearInputPermission()
 loadGrantPermissionLocation();
 loadGrantedPermission();
+init();
 
 var containLocation = {};
 var nonGrantedLocations = [];
 var grantedPermissions = [];
+
+function init() {
+    $("#declaration-dropdown").css("display", "block");
+    $("#grant-declare-permission").css("color", "deepskyblue");
+}
 
 function createGrantPermissionPage() {
     $contentContainer.append('<h2 class="content-title">Cấp quyền khai báo</h2>');

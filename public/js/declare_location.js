@@ -1,3 +1,10 @@
+function init() {
+    $("#management-dropdown").css("display", "block");
+    $("#declare-location-nav").css("color", "deepskyblue");
+}
+
+init();
+
 createLocationPage();
 loadLocationInfo();
 function createLocationPage() {

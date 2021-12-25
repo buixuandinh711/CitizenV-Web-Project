@@ -1,6 +1,9 @@
-var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-var yValues = [55000000, 49000000, 44000000, 24000000, 15000000];
-var barColors = "deepskyblue";
+function init() {
+  $("#information-dropdown").css("display", "block");
+  $("#general-info-page").css("color", "deepskyblue");
+}
+
+init();
 
 function createLocationChart(xValues, yValues) {
   new Chart("location-chart", {
@@ -8,7 +11,7 @@ function createLocationChart(xValues, yValues) {
     data: {
       labels: xValues,
       datasets: [{
-        backgroundColor: barColors,
+        backgroundColor: "deepskyblue",
         data: yValues
       }]
     },
@@ -48,7 +51,7 @@ function createAgeChart(yValues) {
     data: {
       labels: xValues,
       datasets: [{
-        backgroundColor: barColors,
+        backgroundColor: "deepskyblue",
         data: yValues
       }]
     },
