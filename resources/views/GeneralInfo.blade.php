@@ -6,11 +6,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Home page</title>
     <link rel="StyleSheet" href="css/home_styles.css">
+    <link rel="StyleSheet" href="css/general.css">
+    <link rel="StyleSheet" href="css/general_info.css">
     <link rel="StyleSheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="js/home.js" defer></script>
-    <script src="js/test.js" defer></script>
+    <script src="js/general_info.js" defer></script>
 </head>
 
 <body>
@@ -56,7 +59,28 @@
             </div>
         </aside>
         <div class="content-container">
-
+            <h2 class="content-title">Số liệu dân số</h2>
+            <div class="wrapper">
+                <div class="info-row">
+                    <div id="location-info">
+                        <h3 class="info-title">Thông tin chung</h3>
+                        <p class="info-element" id="info-name">Địa bàn: Tỉnh Hải Dương</p>
+                        <p class="info-element" id="info-lowers">Số địa phương trưc thuộc: 10</p>
+                        <p class="info-element" id="info-population">Tổng dân số: 1000000</p>
+                    </div>
+                    <div class="info-container" id="location-chart-container">
+                        <canvas class="chart-container" id="location-chart"></canvas>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-container" id="age-chart-container">
+                        <canvas class="chart-container" id="age-chart"></canvas>
+                    </div>
+                    <div class="info-container" id="gender-chart-container">
+                        <canvas class="chart-container" id="gender-chart"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
