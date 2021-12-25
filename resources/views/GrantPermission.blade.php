@@ -79,6 +79,7 @@
                         <button class="input-item cancel-button half-button" id="cancel-permission">Hủy</button>
                     </div>
                 </div>
+                <div class="error-hint" id="grant-permission-error">This is an error</div>
             </div>
         </div>
     </div>

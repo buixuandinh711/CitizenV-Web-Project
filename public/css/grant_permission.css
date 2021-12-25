@@ -23,3 +23,7 @@
 .granted-permission {
     margin-top: 50px;
 }
+
+#grant-permission-error {
+    visibility: hidden;
+}
