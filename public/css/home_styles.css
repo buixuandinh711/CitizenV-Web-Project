@@ -101,3 +101,35 @@ aside {
 a {
     text-decoration: none;
 }
+
+@media (max-width:800px) {
+
+    aside {
+        display: none;
+    }
+    .content-container {
+        margin-left: 0px;
+        padding-left: 20px;
+    }
+
+    .menu-icon {
+        margin-left: 10px;
+    }
+
+    .menu-icon div {
+        width: 30px;
+        height: 4px;
+        background-color: white;
+        margin-bottom: 4px;
+    }
+
+    .menu-icon div:last-child {
+        margin-bottom: 0;
+    }
+
+    .menu-title-container {
+        display: flex;
+        align-items: center;
+    }
+
+}

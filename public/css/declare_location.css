@@ -7,6 +7,7 @@
     align-items: flex-start;
     width: 60%;
 }
+
 .code-container {
     flex: 2;
     min-width: 100px;
@@ -22,10 +23,17 @@
     display: flex;
 }
 
-#declare-location-code, #declare-location-name {
-    width: 100%;
-}
-
 #location-input-error {
     visibility: hidden;
+}
+
+@media (max-width:800px) {
+    .location-input-container {
+        display:block; 
+        width: 100%;
+    }
+    .code-container, .name-container, .button-container {
+        min-width: 90%;
+        margin-bottom: 10px;
+    }
 }

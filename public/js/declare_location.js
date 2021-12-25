@@ -5,37 +5,7 @@ function init() {
 
 init();
 
-//createLocationPage();
 loadLocationInfo();
-// function createLocationPage() {
-//     let $contenContainer = $(".content-container");
-//     $contenContainer.empty();
-//     $contenContainer.append('<h2 class="content-title">Cấp mã cho Tỉnh/Thành phố</h2>');
-
-//     let $addLocationContainer = $('<div class="add-location-container">');
-//     $addLocationContainer.append('<h2>Thêm địa phương mới</h2>');
-//     let $locationInputContainer = $('<div class="location-input-container">');
-
-//     let $div1 = $('<div>');
-//     $div1.append('<input type="text" class="input-item border-input-item" id="declare-location-code" placeholder="Mã địa phương">');
-//     $locationInputContainer.append($div1);
-
-//     let $div2 = $('<div>');
-//     $div2.append('<input type="text" class="input-item border-input-item" id="declare-location-name" placeholder="Tên địa phương">');
-//     $locationInputContainer.append($div2);
-
-//     let $div3 = $('<div>');
-//     $div3.append('<button class="input-item confirm-button button-item" id="submit-new-location">Xác nhận</button>');
-//     $locationInputContainer.append($div3);
-
-//     let $div4 = $('<div>');
-//     $div4.append('<button class="input-item cancel-button button-item" id="cancel-new-location">Hủy</button>');
-//     $locationInputContainer.append($div4);
-
-//     $addLocationContainer.append($locationInputContainer);
-//     $addLocationContainer.append('<div class="error-hint" id="location-input-error"></div>');
-//     $contenContainer.append($addLocationContainer);
-// }
 var declaredCodes = [];
 function loadLocationInfo() {
     fetch('current-local-info', {
