@@ -1,0 +1,47 @@
+.info-row {
+    display: flex;
+    height: 400px;
+    margin-top: 50px;
+}
+.info-container {
+    border: 1px solid deepskyblue;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+#location-info {
+    flex: 3;
+    margin-right: 50px;
+    height: 60%;
+    border: 1px solid deepskyblue;
+}
+#location-chart-container {
+    flex: 7;
+}
+#age-chart-container {
+    flex: 7;
+    margin-right: 50px;
+}
+#gender-chart-container {
+    flex: 3;
+}
+.info-element {
+    margin: 15px 0;
+    font-size: 1.2rem;
+    padding: 0 10px;
+    font-weight: bold;
+}
+.info-title {
+    margin: 0;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 1.4rem;
+    background-color: deepskyblue;
+    color: white;
+}
+
+.chart-container {
+    max-width: 90%;
+    max-height: 90%;
+    padding: 10px;
+}
