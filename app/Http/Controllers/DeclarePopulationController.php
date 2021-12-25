@@ -510,91 +510,91 @@ class DeclarePopulationController extends Controller
     public function GetAgeChart() {
         if (session('user')) {
             if (session('user')->username == 'admin') {
-                $result = ['populions' => []];
+                $result = ['population' => []];
                 for ($i = 0; $i <= 10; $i++) {
                     if ($i == 0) {
-                        $populions = DB::table('person')
+                        $population = DB::table('person')
                         ->where(DB::raw('year(now()) - year(person_date)') ,'>=', $i)
                         ->where(DB::raw('year(now()) - year(person_date)') ,'<=', $i + 10)->count();
-                        array_push($result['populions'],$populions);
+                        array_push($result['population'],$population);
                     } else if ($i == 10) {
-                        $populions = DB::table('person')
+                        $population = DB::table('person')
                         ->where(DB::raw('year(now()) - year(person_date)') ,'>', $i * 10)->count();
-                        array_push($result['populions'],$populions);
+                        array_push($result['population'],$population);
                     } else {
-                        $populions = DB::table('person')
+                        $population = DB::table('person')
                         ->where(DB::raw('year(now()) - year(person_date)') ,'>', $i * 10)
                         ->where(DB::raw('year(now()) - year(person_date)') ,'<=', $i * 10 + 10)->count();
-                        array_push($result['populions'],$populions);
+                        array_push($result['population'],$population);
                     }
                 }
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 2) {
-                $result = ['populions' => []];
+                $result = ['population' => []];
                 for ($i = 0; $i <= 10; $i++) {
                     if ($i == 0) {
-                        $populions = DB::table('person')
+                        $population = DB::table('person')
                         ->where('village_id','like',session('user')->username.'%')
                         ->where(DB::raw('year(now()) - year(person_date)') ,'>=', $i)
                         ->where(DB::raw('year(now()) - year(person_date)') ,'<=', $i + 10)->count();
-                        array_push($result['populions'],$populions);
+                        array_push($result['population'],$population);
                     } else if ($i == 10) {
-                        $populions = DB::table('person')
+                        $population = DB::table('person')
                         ->where('village_id','like',session('user')->username.'%')
                         ->where(DB::raw('year(now()) - year(person_date)') ,'>', $i * 10)->count();
-                        array_push($result['populions'],$populions);
+                        array_push($result['population'],$population);
                     } else {
-                        $populions = DB::table('person')
+                        $population = DB::table('person')
                         ->where('village_id','like',session('user')->username.'%')
                         ->where(DB::raw('year(now()) - year(person_date)') ,'>', $i * 10)
                         ->where(DB::raw('year(now()) - year(person_date)') ,'<=', $i * 10 + 10)->count();
-                        array_push($result['populions'],$populions);
+                        array_push($result['population'],$population);
                     }
                 }
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 4) {
-                $result = ['populions' => []];
+                $result = ['population' => []];
                 for ($i = 0; $i <= 10; $i++) {
                     if ($i == 0) {
-                        $populions = DB::table('person')
+                        $population = DB::table('person')
                         ->where('village_id','like',session('user')->username.'%')
                         ->where(DB::raw('year(now()) - year(person_date)') ,'>=', $i)
                         ->where(DB::raw('year(now()) - year(person_date)') ,'<=', $i + 10)->count();
-                        array_push($result['populions'],$populions);
+                        array_push($result['population'],$population);
                     } else if ($i == 10) {
-                        $populions = DB::table('person')
+                        $population = DB::table('person')
                         ->where('village_id','like',session('user')->username.'%')
                         ->where(DB::raw('year(now()) - year(person_date)') ,'>', $i * 10)->count();
-                        array_push($result['populions'],$populions);
+                        array_push($result['population'],$population);
                     } else {
-                        $populions = DB::table('person')
+                        $population = DB::table('person')
                         ->where('village_id','like',session('user')->username.'%')
                         ->where(DB::raw('year(now()) - year(person_date)') ,'>', $i * 10)
                         ->where(DB::raw('year(now()) - year(person_date)') ,'<=', $i * 10 + 10)->count();
-                        array_push($result['populions'],$populions);
+                        array_push($result['population'],$population);
                     }
                 }
                 return response()->json($result);
             } else if (strlen(session('user')->username) == 6) {
-                $result = ['populions' => []];
+                $result = ['population' => []];
                 for ($i = 0; $i <= 10; $i++) {
                     if ($i == 0) {
-                        $populions = DB::table('person')
+                        $population = DB::table('person')
                         ->where('village_id','like',session('user')->username.'%')
                         ->where(DB::raw('year(now()) - year(person_date)') ,'>=', $i)
                         ->where(DB::raw('year(now()) - year(person_date)') ,'<=', $i + 10)->count();
-                        array_push($result['populions'],$populions);
+                        array_push($result['population'],$population);
                     } else if ($i == 10) {
-                        $populions = DB::table('person')
+                        $population = DB::table('person')
                         ->where('village_id','like',session('user')->username.'%')
                         ->where(DB::raw('year(now()) - year(person_date)') ,'>', $i * 10)->count();
-                        array_push($result['populions'],$populions);
+                        array_push($result['population'],$population);
                     } else {
-                        $populions = DB::table('person')
+                        $population = DB::table('person')
                         ->where('village_id','like',session('user')->username.'%')
                         ->where(DB::raw('year(now()) - year(person_date)') ,'>', $i * 10)
                         ->where(DB::raw('year(now()) - year(person_date)') ,'<=', $i * 10 + 10)->count();
-                        array_push($result['populions'],$populions);
+                        array_push($result['population'],$population);
                     }
                 }
                 return response()->json($result);
