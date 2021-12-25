@@ -18,17 +18,17 @@
 <body>
     <div class="container">
         <header>
-            <a href="main"><span class="page-logo">Citizen V</span><a>
-                    <div class="account-dropdown-container">
-                        <span class="account-container">
-                            <a class="username">{{session('user')->username}}</a>
-                            <b class="caret" id="account-caret"></b>
-                        </span>
-                        <div class="account-dropdown">
-                            <a>Thông tin tài khoản</a>
-                            <a href="logout">Đăng xuất</a>
-                        </div>
-                    </div>
+            <a href="main"><span class="page-logo">Citizen V</span></a>
+            <div class="account-dropdown-container">
+                <span class="account-container">
+                    <a class="username">{{session('user')->username}}</a>
+                    <b class="caret" id="account-caret"></b>
+                </span>
+                <div class="account-dropdown">
+                    <a>Thông tin tài khoản</a>
+                    <a href="logout">Đăng xuất</a>
+                </div>
+            </div>
         </header>
         <aside>
             <div class="sidebar-row" id="management">
@@ -70,7 +70,7 @@
                         <div>Ngày bắt đầu</div>
                         <input type="date" class="input-item border-input-item" id="permission-start-date">
                     </div>
-                    <div  class="date-container">
+                    <div class="date-container">
                         <div>Ngày kết thúc</div>
                         <input type="date" class="input-item border-input-item" id="permission-end-date">
                     </div>
