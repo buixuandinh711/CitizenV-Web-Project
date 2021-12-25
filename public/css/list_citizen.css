@@ -22,3 +22,6 @@
 tbody tr {
     cursor: pointer;
 }
+#list-citizen-error {
+    visibility: hidden;
+}

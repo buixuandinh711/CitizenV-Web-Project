@@ -26,7 +26,7 @@ $("body").on("click", "#submit-permission", function() {
     let $errorHint = $('#grant-permission-error');
 
     if (!selectedLocationCode || startDate.length == 0 || endDate.length == 0) {
-        $errorHint.html("Thông tin không được để trống!");
+        setInputError("Thông tin không được để trống!");
         return;
     }
 
@@ -34,14 +34,16 @@ $("body").on("click", "#submit-permission", function() {
     currentDate.setHours(0, 0, 0, 0);
    
     if (parseDate(startDate) < currentDate) {
-        $errorHint.html("Ngày bắt đầu nhỏ hơn thời điểm hiện tại!");
+        setInputError("Ngày bắt đầu nhỏ hơn thời điểm hiện tại!");
         return;
     }
 
     if (parseDate(startDate) > parseDate(endDate)) {
-        $errorHint.html("Ngày bắt đầu lớn hơn ngày kết thúc!");
+        setInputError("Ngày bắt đầu lớn hơn ngày kết thúc!");
         return;
     }
+
+    setInputError("");
 
     submitNewPermission(selectedLocationCode, selectedLocationName, startDate, endDate);
 })
@@ -85,11 +87,6 @@ function createGrantedPermissionTable(grantedList) {
         tableRow.append('<td class="table-cell">' + grantedPermission.startDate + '</td>')
         tableRow.append('<td class="table-cell">' + grantedPermission.endDate + '</td>')
         
-        // let iconCell = $('<td class="table-cell icon-cell">');
-        // let iconContainer = $('<div class="icon-container">');
-        // iconContainer.append('<span class="table-icon remove-icon delete-permission-button"></span>');
-        // iconCell.append(iconContainer);
-        // tableRow.append(iconCell);
 
         let handlerCell = $('<td class="table-cell handler-cell">');
         let handlerContainer = $('<div class="handler-container">');
@@ -216,7 +213,7 @@ function clearInputPermission() {
 }
 
 $("body").on("change", "#permission-location-select, #permission-start-date, #permission-end-date", function() {
-    $('#grant-permission-error').html("");
+    setInputError("");
 })
 
 $("body").on("click", ".modify-delete", function() {
@@ -256,3 +253,16 @@ function postDeletePermission(_code, _name) {
     });
 }
 
+function setInputError(err) {
+
+    let errorHint = $("#grant-permission-error");
+
+    if (err.length == 0) {
+        errorHint.html("not error");
+        errorHint.css("visibility", "hidden");
+        return;
+    }
+
+    errorHint.html(err);
+    errorHint.css("visibility", "visible");
+}

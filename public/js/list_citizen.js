@@ -150,7 +150,6 @@ function loadVillage(ward) {
 }
 
 function loadCitizen(villageCode) {
-    console.log(villageCode);
     let csrfToken = $("meta[name='csrf-token']").attr("content");
     fetch('load-declared-citizen', {
         method: 'post',
@@ -264,6 +263,7 @@ $("body").on("change", "#select-city", function () {
     resetSelector($("#select-district"), DISTRICT_SELECT_DEFAULT);
     resetSelector($("#select-ward"), WARD_SELECT_DEFAULT);
     resetSelector($("#select-village"), VILLAGE_SELECT_DEFAULT);
+    setInputError("");
     loadDistrict(code);
 })
 
@@ -271,17 +271,29 @@ $("body").on("change", "#select-district", function () {
     let code = $(this).val();
     resetSelector($("#select-ward"), WARD_SELECT_DEFAULT);
     resetSelector($("#select-village"), VILLAGE_SELECT_DEFAULT);
+    setInputError("");
     loadWard(code);
 })
 
 $("body").on("change", "#select-ward", function () {
     let code = $(this).val();
     resetSelector($("#select-village"), VILLAGE_SELECT_DEFAULT);
+    setInputError("");
     loadVillage(code);
 })
 
+$("body").on("change", "#select-village", function () {
+    setInputError("");
+})
+
 $("body").on("click", "#search-button", function () {
+
     let villageCode = $("#select-village").val();
+    if (!villageCode) {
+        setInputError("Địa phương không được để trống!")
+        return;
+    }
+    setInputError("")
     loadCitizen(villageCode);
 })
 
@@ -294,3 +306,17 @@ $("body").on("click", "tbody tr", function () {
 })
 
 loadUpperLocations();
+
+function setInputError(err) {
+
+    let errorHint = $("#list-citizen-error");
+
+    if (err.length == 0) {
+        errorHint.html("not error");
+        errorHint.css("visibility", "hidden");
+        return;
+    }
+
+    errorHint.html(err);
+    errorHint.css("visibility", "visible");
+}

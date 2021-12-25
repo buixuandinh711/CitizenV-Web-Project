@@ -64,6 +64,7 @@
                 <div class="select-location-container">
                     <div class="select-location-row">
                     </div>
+                    <div class="error-hint" id="list-citizen-error">This is an error</div>
                 </div>
                 <div class="citizen-list-container">
                     <h2 class="subtitle" id="table-title">Danh sách dân số</h2>
