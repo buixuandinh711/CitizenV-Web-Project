@@ -6,6 +6,12 @@ var DISTRICT_SELECT_DEFAULT = "Quận, Huyện";
 var WARD_SELECT_DEFAULT = "Xã, Phường";
 var VILLAGE_SELECT_DEFAULT = "Thôn, Tổ dân phố";
 
+function init() {
+    $("#information-dropdown").css("display", "block");
+    $("#list-citizen-page").css("color", "deepskyblue");
+}
+
+init();
 
 function createLocationSelect(upperLocations) {
 

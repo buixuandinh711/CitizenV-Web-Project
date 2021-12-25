@@ -53,9 +53,9 @@
                 <b class="caret sidebar-caret"></b>
             </div>
             <div class="dropdown-container" id="information-dropdown">
-                <a class="sidebar-nav" href='general-info'>Số liệu dân số</a>
-                <a class="sidebar-nav" href='info-citizen'>Thông tin công dân</a>
-                <a class="sidebar-nav" href='list-citizen'>Danh sách dân số</a>
+                <a class="sidebar-nav" id="general-info-page" href='general-info'>Số liệu dân số</a>
+                <a class="sidebar-nav" id="search-citizen-page" href='info-citizen'>Thông tin công dân</a>
+                <a class="sidebar-nav" id="list-citizen-page" href='list-citizen'>Danh sách dân số</a>
             </div>
         </aside>
         <div class="content-container">

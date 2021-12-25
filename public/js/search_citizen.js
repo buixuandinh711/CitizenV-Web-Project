@@ -1,5 +1,13 @@
+function init() {
+    $("#information-dropdown").css("display", "block");
+    $("#search-citizen-page").css("color", "deepskyblue");
+}
+
+init();
+
+
 $("#search-citizen-button").click(submitSearch);
-$("#search-citizen-id").keydown(function(e) {
+$("#search-citizen-id").keydown(function (e) {
     setInputError("");
     if (e.which === 13) {
         submitSearch();
@@ -37,16 +45,16 @@ function loadCitizenInfo(citizenId) {
     }).then(function (data) {
         if (data.resp === "success") {
             setCitizenInfo(data)
-            $("#info-container").css("display", "flex");      
-            $("#no-info-container").css("display", "none");        
+            $("#info-container").css("display", "flex");
+            $("#no-info-container").css("display", "none");
         } else {
-            $("#info-container").css("display", "none");        
-            $("#no-info-container").css("display", "block");   
+            $("#info-container").css("display", "none");
+            $("#no-info-container").css("display", "block");
 
             if (data.resp !== "error") {
-                $("#no-info-container").html(data.resp);   
+                $("#no-info-container").html(data.resp);
             } else {
-                $("#no-info-container").html("Không thể xem thông tin!");   
+                $("#no-info-container").html("Không thể xem thông tin!");
             }
         }
     });
