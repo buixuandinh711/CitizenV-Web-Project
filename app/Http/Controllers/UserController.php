@@ -350,10 +350,11 @@ class UserController extends Controller
 
     public function EditPassword(Request $request) {
         if (session('user')) {
-            if ($request->password == '') {
+            $user = DB::table('users')->where('username', session('user')->username)->first();            
+            if ($request->oldPassword == '' || $request->newPassword == '' || $request->oldPassword != $user->password) {
                 return response()->json(['resp' => 'error']);
             }
-            DB::table('users')->where('username', session('user')->username)->update(['password' => $request->password]);
+            DB::table('users')->where('username', session('user')->username)->update(['password' => $request->newPassword]);
             return response()->json(['resp' => 'success']);
         }
         return response()->json(['resp' => 'error']);
