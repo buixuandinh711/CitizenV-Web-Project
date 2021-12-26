@@ -49,8 +49,6 @@ Route::get('current-local-info','App\Http\Controllers\DeclareLocationController@
 
 Route::post('update-new-location','App\Http\Controllers\DeclareLocationController@UpdateNewLocation');
 
-Route::post('edit-location','App\Http\Controllers\DeclareLocationController@EditLocation');
-
 Route::post('delete-location','App\Http\Controllers\DeclareLocationController@DeleteLocation');
 
 Route::get('get-city','App\Http\Controllers\DeclareLocationController@GetCity');
@@ -73,8 +71,6 @@ Route::post('add-new-user','App\Http\Controllers\UserController@AddNewUser');
 
 Route::get('account-location-info','App\Http\Controllers\UserController@AccountLocationInfo');
 
-Route::post('edit-account','App\Http\Controllers\UserController@EditUser');
-
 Route::post('delete-account','App\Http\Controllers\UserController@DeleteAccount');
 
 Route::post('edit-password','App\Http\Controllers\UserController@EditPassword');
@@ -87,8 +83,6 @@ Route::post('submit-declared-permission','App\Http\Controllers\AccessController@
 
 Route::get('declare-permission-location-info','App\Http\Controllers\AccessController@DeclarePermissionLocationInfo');
 
-Route::post('edit-permission', 'App\Http\Controllers\AccessController@EditAccess');
-
 Route::post('delete-permission', 'App\Http\Controllers\AccessController@DeletePermission');
 
 Route::get('get-permission-location', 'App\Http\Controllers\AccessController@GetPermissionLocation');
@@ -98,8 +92,6 @@ Route::get('get-permission-location', 'App\Http\Controllers\AccessController@Get
 Route::post('submit-new-citizen', 'App\Http\Controllers\DeclarePopulationController@AddPerson');
 
 Route::post('delete-person', 'App\Http\Controllers\DeclarePopulationController@DeletePerson');
-
-Route::post('edit-person', 'App\Http\Controllers\DeclarePopulationController@EditPerson');
 
 Route::get('get-declare-status', 'App\Http\Controllers\DeclarePopulationController@GetDeclareStatus');
 
