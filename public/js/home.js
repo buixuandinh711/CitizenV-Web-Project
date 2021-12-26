@@ -36,9 +36,5 @@ function parseDate(s) {
 }
 $(".menu-icon").click(function() {
     let $aside = $("aside");
-    if ($aside.css("display") == "none") {
-        $aside.css("display", "block");
-    } else {
-        $aside.css("display", "none");
-    }
+    $aside.toggle("sidebar")
 })

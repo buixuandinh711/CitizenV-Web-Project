@@ -17,6 +17,7 @@ aside {
     position: fixed;
     width: 200px;
     height: 100%;
+    display: block;
 }
 .content-container {
     margin-left: 200px;
@@ -101,12 +102,15 @@ aside {
 a {
     text-decoration: none;
 }
-
+.sidebar {
+    display: block;
+}
 @media (max-width:800px) {
 
-    aside {
-        display: none;
-    }
+   .sidebar {
+       display: none;
+   }
+
     .content-container {
         margin-left: 0px;
         padding-left: 20px;
@@ -133,3 +137,4 @@ a {
     }
 
 }
+

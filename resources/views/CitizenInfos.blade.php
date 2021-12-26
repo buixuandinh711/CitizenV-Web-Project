@@ -37,7 +37,7 @@
                 </div>
             </div>
         </header>
-        <aside>
+        <aside class="sidebar">
             <div class="sidebar-row" id="management">
                 <span class="sidebar-nav">Khai báo dân số</span>
                 <b class="caret sidebar-caret"></b>
