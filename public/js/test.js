@@ -361,6 +361,20 @@
 // .then(response => response.json())
 // .then(data => console.log(data));
 
-fetch('get-age-chart')
-.then(response => response.json())
-.then(data => console.log(data));
+// fetch('get-age-chart')
+// .then(response => response.json())
+// .then(data => console.log(data));
+
+// var csrfToken = $("meta[name='csrf-token']").attr("content");  
+// fetch('edit-password', {
+//     method: 'post',
+//     headers: {
+//         "Content-Type": "application/json",
+//         "X-CSRF-Token": csrfToken
+//     },
+//     body: JSON.stringify({password: 'admin'})
+//   }).then(function(response) {
+//     return response.json();
+//   }).then(function(data) {
+//     console.log(data);
+//   });

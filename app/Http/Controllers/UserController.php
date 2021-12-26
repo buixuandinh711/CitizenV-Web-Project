@@ -347,4 +347,15 @@ class UserController extends Controller
         }
         return response()->json(['resp' => 'error']);
     }
+
+    public function EditPassword(Request $request) {
+        if (session('user')) {
+            if ($request->password == '') {
+                return response()->json(['resp' => 'error']);
+            }
+            DB::table('users')->where('username', session('user')->username)->update(['password' => $request->password]);
+            return response()->json(['resp' => 'success']);
+        }
+        return response()->json(['resp' => 'error']);
+    }
 }
