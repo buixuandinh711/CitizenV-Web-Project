@@ -45,3 +45,16 @@
     max-height: 90%;
     padding: 10px;
 }
+
+@media (max-width:800px) {
+    .info-row {
+        display: block;
+        height: auto;
+    }
+    #location-info, #age-chart-container {
+        margin-right: 0;
+    }
+    #location-chart-container, #gender-chart-container {
+        margin-top: 50px;
+    }
+}

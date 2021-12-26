@@ -68,8 +68,10 @@
         <div class="content-container">
             <h2 class="content-title">Tìm kiếm thông tin công dân</h2>
             <div class="search-citizen-container">
-                <label for="search-citizen-id" class="input-label">Mã số định danh cá nhân</label>
-                <input id="search-citizen-id" type="text" class="input-item border-input-item search-citizen-input">
+                <div class="id-container">
+                    <label for="search-citizen-id" class="input-label">Mã số định danh cá nhân</label>
+                    <input id="search-citizen-id" type="text" class="input-item border-input-item search-citizen-input">
+                </div>
                 <button class="input-item confirm-button" id="search-citizen-button">Tìm kiếm</button>
             </div>
             <div class="error-hint" id="search-citizen-error">This is an error</div>

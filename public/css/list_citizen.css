@@ -25,3 +25,31 @@ tbody tr {
 #list-citizen-error {
     visibility: hidden;
 }
+
+@media (max-width:1000px) {
+    .select-location-row {
+        display:block; 
+        margin: 50px auto 0;
+    }
+    #search-button {
+        display: block;
+        width: 100%;
+    }
+    #select-city, #select-district, #select-ward, #select-village, #search-button {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width:600px) {
+    .select-location-row {
+        display:block; 
+        width: 100%;
+    }
+    #search-button {
+        display: block;
+        width: 100%;
+    }
+    #select-city, #select-district, #select-ward, #select-village, #search-button {
+        margin-bottom: 10px;
+    }
+}
