@@ -33,7 +33,7 @@
                     <b class="caret" id="account-caret"></b>
                 </span>
                 <div class="account-dropdown">
-                    <a>Thông tin tài khoản</a>
+                    <a href="modify-password">Đổi mật khẩu</a>
                     <a href='logout'>Đăng xuất</a>
                 </div>
             </div>

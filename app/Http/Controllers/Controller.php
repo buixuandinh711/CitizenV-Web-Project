@@ -139,4 +139,15 @@ class Controller extends BaseController
         }
         return redirect('login');
     }
+
+    public function ModifyPassword() {
+        if (session('user')) {
+            if (strlen(session('user')->username) != 8) {
+                return view('modifypassword');
+            } else {
+                return view('modifypasswords');
+            }
+        }
+        return redirect('login');
+    }
 }

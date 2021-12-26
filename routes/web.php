@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Controller
+
 Route::get('login','App\Http\Controllers\Controller@ShowLogin');
 
 Route::post('login','App\Http\Controllers\Controller@CheckLogin');
@@ -39,7 +41,9 @@ Route::get('info-citizen','App\Http\Controllers\Controller@InfoCitizen');
 
 Route::get('general-info','App\Http\Controllers\Controller@GeneralInfo');
 
-//Declare Location
+Route::get('modify-password','App\Http\Controllers\Controller@ModifyPassword');
+
+//Declare Location Controller
 
 Route::get('current-local-info','App\Http\Controllers\DeclareLocationController@CurrentLocalInfo');
 
@@ -63,7 +67,7 @@ Route::get('get-location-chart','App\Http\Controllers\DeclareLocationController@
 
 Route::get('get-general-info','App\Http\Controllers\DeclareLocationController@GetGeneralInfo');
 
-//User
+//User Controller
 
 Route::post('add-new-user','App\Http\Controllers\UserController@AddNewUser');
 
@@ -73,7 +77,9 @@ Route::post('edit-account','App\Http\Controllers\UserController@EditUser');
 
 Route::post('delete-account','App\Http\Controllers\UserController@DeleteAccount');
 
-//Access
+Route::post('edit-password','App\Http\Controllers\UserController@EditPassword');
+
+//Access Controller
 
 Route::get('load-declared-permission','App\Http\Controllers\AccessController@LoadDeclaredPermission');
 
@@ -87,7 +93,7 @@ Route::post('delete-permission', 'App\Http\Controllers\AccessController@DeletePe
 
 Route::get('get-permission-location', 'App\Http\Controllers\AccessController@GetPermissionLocation');
 
-//Declare Population
+//Declare Population Controller
 
 Route::post('submit-new-citizen', 'App\Http\Controllers\DeclarePopulationController@AddPerson');
 
