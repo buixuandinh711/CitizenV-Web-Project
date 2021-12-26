@@ -68,7 +68,7 @@ function createGrantedPermissionTable(grantedList) {
         grantedTable.append(tableHeader);
         grantedTable.append('<tbody>');
         grantedPermissionContainer.append(grantedTable);
-        $(".content-container").append(grantedPermissionContainer);
+        $(".display-content").append(grantedPermissionContainer);
     }
 
     if (grantedList.length == 0) {

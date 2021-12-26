@@ -12,8 +12,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
     <script src="js/home.js" defer></script>
+    <script src="js/check_permission.js" defer></script>
     <script src="js/declare_location.js" defer></script>
-    <script src="js/test.js" defer></script>
 </head>
 
 <body>
@@ -67,22 +67,25 @@
         </aside>
         <div class="content-container">
             <h2 class="content-title"></h2>
-            <div class="add-location-container">
-                <h2>Thêm địa phương mới</h2>
-                <div class="location-input-container">
-                    <div class="code-container">
-                        <input type="text" class="input-item border-input-item " id="declare-location-code" placeholder="Mã địa phương">
+            <div class="display-content">
+                <div class="add-location-container">
+                    <h2>Thêm địa phương mới</h2>
+                    <div class="location-input-container">
+                        <div class="code-container">
+                            <input type="text" class="input-item border-input-item " id="declare-location-code" placeholder="Mã địa phương">
+                        </div>
+                        <div class="name-container">
+                            <input type="text" class="input-item border-input-item" id="declare-location-name" placeholder="Tên địa phương">
+                        </div>
+                        <div class="button-container">
+                            <button class="input-item confirm-button half-button" id="submit-new-location">Xác nhận</button>
+                            <button class="input-item cancel-button half-button" id="cancel-new-location">Hủy</button>
+                        </div>
                     </div>
-                    <div class="name-container">
-                        <input type="text" class="input-item border-input-item" id="declare-location-name" placeholder="Tên địa phương">
-                    </div>
-                    <div class="button-container">
-                        <button class="input-item confirm-button half-button" id="submit-new-location">Xác nhận</button>
-                        <button class="input-item cancel-button half-button" id="cancel-new-location">Hủy</button>
-                    </div>
+                    <div class="error-hint" id="location-input-error">This is an error</div>
                 </div>
-                <div class="error-hint" id="location-input-error">This is an error</div>
             </div>
+            <h2 class="subtitle non-permission-title">Quyền khai báo chưa được cấp!</h2>
         </div>
     </div>
 </body>
