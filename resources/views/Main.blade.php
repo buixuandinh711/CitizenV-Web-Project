@@ -34,7 +34,7 @@
                 </div>
             </div>
         </header>
-        <aside>
+        <aside class="sidebar">
             <div class="sidebar-row" id="management">
                 <span class="sidebar-nav">Quản lý địa phương</span>
                 <b class="caret sidebar-caret"></b>
