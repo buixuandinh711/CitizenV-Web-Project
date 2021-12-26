@@ -1,5 +1,5 @@
 .add-location-container {
-    margin-top: 50px;
+    margin: 50px auto 0;
 }
 .location-input-container {
     display: flex;
@@ -16,7 +16,7 @@
 .name-container {
     flex: 5;
     margin-right: 5px;
-    min-width: 100px;
+    min-width: 250px;
 }
 .button-container {
     flex: 3;
@@ -27,7 +27,16 @@
     visibility: hidden;
 }
 
-@media (max-width:800px) {
+@media (max-width:1000px) {
+    .location-input-container {
+        width: 90%;
+    }
+    .code-container, .name-container, .button-container {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width:600px) {
     .location-input-container {
         display:block; 
         width: 100%;

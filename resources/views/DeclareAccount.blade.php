@@ -79,11 +79,11 @@
                     </div>
                 </div>
 
-                <div class="password-input">
+                <div class="password-container">
                     <label class="input-label">Mật khẩu</label>
                     <input type="password" class="input-item border-input-item add-account-input" id="add-account-password">
                 </div>
-                <div class="password-input">
+                <div class="password-container">
                     <label class="input-label">Nhập lại mật khẩu</label>
                     <input type="password" class="input-item border-input-item add-account-input" id="add-account-repassword">
                 </div>

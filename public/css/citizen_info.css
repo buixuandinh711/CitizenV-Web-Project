@@ -40,3 +40,16 @@
     flex: 3;
     margin-right: 5px;
 }
+
+@media (max-width:1400px) {
+    .citizen-info-container {
+        width: 80%;
+    }
+}
+
+@media (max-width:600px) {
+    .citizen-info-container {
+        width: 90%;
+        padding: 20px 10px;
+    }
+}

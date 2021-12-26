@@ -1,16 +1,22 @@
 .search-citizen-container {
     margin-top: 50px;
+    display: flex;
+    align-items: flex-end;
+    width: 30%;
 }
 
 .citizen-info-container {
     margin-top: 30px;
 }
 
-#search-citizen-id {
-    width: 300px;
+.id-container {
+    flex: 8;
+    margin-right: 5px;
+    min-width: 300px;
 }
 #search-citizen-button {
-    width: 100px;
+    flex: 2;
+    min-width: 80px;
 }
 #search-citizen-error {
     visibility: hidden;
@@ -22,4 +28,10 @@
 
 #no-info-container {
     display: none;
+}
+
+@media (max-width:600px) {
+    .search-citizen-container {
+        width: 100%;
+    }
 }
