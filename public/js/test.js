@@ -372,7 +372,7 @@
 //         "Content-Type": "application/json",
 //         "X-CSRF-Token": csrfToken
 //     },
-//     body: JSON.stringify({password: 'admin'})
+//     body: JSON.stringify({oldPassword: 'admin', newPassword: 'admin'})
 //   }).then(function(response) {
 //     return response.json();
 //   }).then(function(data) {
