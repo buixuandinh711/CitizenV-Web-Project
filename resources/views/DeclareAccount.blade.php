@@ -12,6 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
     <script src="js/home.js" defer></script>
+    <script src="js/check_permission.js" defer></script>
     <script src="js/declare_account.js" defer></script>
 </head>
 
@@ -66,34 +67,37 @@
         </aside>
         <div class="content-container">
             <h2 class="content-title"></h2>
-            <div class="add-account-container">
-                <div class="location-select-container">
-                    <div class="select-container">
-                        <label for="account-location-selectt" class="input-label">Địa phương</label>
-                        <select id="account-location-select" class="input-item border-input-item">
-                        </select>
+            <div class="display-content">
+                <div class="add-account-container">
+                    <div class="location-select-container">
+                        <div class="select-container">
+                            <label for="account-location-selectt" class="input-label">Địa phương</label>
+                            <select id="account-location-select" class="input-item border-input-item">
+                            </select>
+                        </div>
+                        <div class="user-container">
+                            <label for="add-account-username" class="input-label">Tài khoản tương ứng</label>
+                            <input id="add-account-username" type="text" disabled class="input-item border-input-item">
+                        </div>
                     </div>
-                    <div class="user-container">
-                        <label for="add-account-username" class="input-label">Tài khoản tương ứng</label>
-                        <input id="add-account-username" type="text" disabled class="input-item border-input-item">
+
+                    <div class="password-container">
+                        <label class="input-label">Mật khẩu</label>
+                        <input type="password" class="input-item border-input-item add-account-input" id="add-account-password">
+                    </div>
+                    <div class="password-container">
+                        <label class="input-label">Nhập lại mật khẩu</label>
+                        <input type="password" class="input-item border-input-item add-account-input" id="add-account-repassword">
+                    </div>
+
+                    <div class="button-container">
+                        <button class="input-item confirm-button half-button" id="submit-account-button">Xác nhận</button>
+                        <button class="input-item cancel-button half-button" id="cancel-account-button">Hủy</button>
                     </div>
                 </div>
-
-                <div class="password-container">
-                    <label class="input-label">Mật khẩu</label>
-                    <input type="password" class="input-item border-input-item add-account-input" id="add-account-password">
-                </div>
-                <div class="password-container">
-                    <label class="input-label">Nhập lại mật khẩu</label>
-                    <input type="password" class="input-item border-input-item add-account-input" id="add-account-repassword">
-                </div>
-
-                <div class="button-container">
-                    <button class="input-item confirm-button half-button" id="submit-account-button">Xác nhận</button>
-                    <button class="input-item cancel-button half-button" id="cancel-account-button">Hủy</button>
-                </div>
+                <div class="error-hint" id="add-account-error">no error</div>
             </div>
-            <div class="error-hint" id="add-account-error">no error</div>
+            <h2 class="subtitle non-permission-title">Quyền khai báo chưa được cấp!</h2>
         </div>
     </div>
 </body>

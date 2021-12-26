@@ -12,8 +12,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
     <script src="js/home.js" defer></script>
+    <script src="js/check_permission.js" defer></script>
     <script src="js/list_citizen_b2.js" defer></script>
-    <script src="js/test.js" defer></script>
 </head>
 
 <body>
@@ -57,12 +57,14 @@
         <div class="content-container">
             <div class="title-complete-container">
                 <h2 class="content-title"></h2>
-                <button class="input-item confirm-button complete-button" id="list-citizen-pending">Đánh dấu là hoàn thành</button>
+                <button class="input-item confirm-button complete-button display-content" id="list-citizen-pending">Đánh dấu là hoàn thành</button>
             </div>
+            <div class="display-content">
+                <div class="citizen-list-container">
 
-            <div class="citizen-list-container">
-
+                </div>
             </div>
+            <h2 class="subtitle non-permission-title">Quyền khai báo chưa được cấp!</h2>
         </div>
     </div>
 </body>

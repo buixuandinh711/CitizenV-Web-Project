@@ -89,6 +89,10 @@
     margin: 15px 0;
 }
 
+.display-content, .non-permission-title {
+    display: none;
+}
+
 @media (max-width:600px) {
     .table-header {
         padding: 0 10px;
