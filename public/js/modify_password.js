@@ -1,6 +1,6 @@
 function postModifyPassword(_oldPassword, _newPassword) {
     let csrfToken = $("meta[name='csrf-token']").attr("content");
-    fetch('delete-account', {
+    fetch('edit-password', {
         method: 'post',
         headers: {
             "Content-Type": "application/json",
@@ -52,7 +52,7 @@ $("#submit-password").click(function() {
     }
 
     setInputError("");
-    console.log(123);
+    postModifyPassword(oldPassword, newPassword);
 
 })
 function setInputError(err) {
